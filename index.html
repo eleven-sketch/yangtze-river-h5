@@ -24,8 +24,7 @@
 /* ===== PHONE-FRAME LAYOUT ===== */
 html{
   scroll-behavior:smooth;
-  background:#1a1a1a;
-  display:flex;justify-content:center;
+  background:var(--bg-ivory);
 }
 body{
   width:100%;max-width:540px;
@@ -36,15 +35,23 @@ body{
   line-height:1.75;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
-  box-shadow:0 0 80px rgba(0,0,0,0.5);
+}
+@media(min-width:541px){
+  html{background:#1a1a1a;display:flex;justify-content:center}
+  body{box-shadow:0 0 80px rgba(0,0,0,0.5)}
 }
 
 /* ===== SECTIONS ===== */
 .section{
   position:relative;width:100%;
   aspect-ratio:9/16;
+  min-height:100vh; /* fallback if aspect-ratio not supported */
+  min-height:100dvh; /* dynamic viewport for mobile */
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;
+}
+@supports not (aspect-ratio:9/16){
+  .section{aspect-ratio:auto;min-height:100vh;min-height:100dvh}
 }
 
 /* Seamless section overlap */
