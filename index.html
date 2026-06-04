@@ -1126,7 +1126,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
     <p class="ending-close" id="endingClose">十年前，我们用一场座谈会立了规矩。<br>十年后，一条大江用鱼跃鸟飞给出了回应。</p>
     <p style="font-size:1.1rem;font-weight:700;color:var(--teal-deep);opacity:0;transition:opacity 0.6s" id="endingNext">下一个十年见。</p>
 
-    <a href="#p1" class="back-top-btn" id="backTopBtn" style="opacity:0;pointer-events:none" onclick="resetP7()">&#x1F4A7; 回到开端</a>
+    <a href="#p1" class="back-top-btn" id="backTopBtn" style="opacity:0;pointer-events:none" onclick="resetAll()">&#x1F4A7; 回到开端</a>
     <p class="ending-source">
       数据来源：国新办、农业农村部、国家发改委、长江水利委员会<br>
       2026 年 5 月
@@ -1169,10 +1169,10 @@ document.querySelectorAll('.reveal').forEach(el=>{
 const revealEls = document.querySelectorAll('.reveal')
 let ticking = false
 
+// Scroll-driven reveal: appear going down, fade back going up
 function updateReveals(){
   const vh = window.innerHeight
   revealEls.forEach(el=>{
-    if(el.classList.contains('revealed')) return // lock once fully shown
     const rect = el.getBoundingClientRect()
     const start = vh * 0.95
     const end = vh * 0.45
@@ -1182,7 +1182,6 @@ function updateReveals(){
     const p = Math.max(0, Math.min(1, (progress - delay) / (1 - delay)))
     el.style.opacity = p
     el.style.transform = `translateY(${(1-p)*40}px)`
-    if(p >= 1){ el.classList.add('revealed'); el.style.opacity='1'; el.style.transform='translateY(0)' }
   })
 }
 
@@ -1255,7 +1254,8 @@ setTimeout(()=>{p1Reveals.forEach(el=>{el.style.transition='';el.style.transitio
 updateAll()
 
 
-function resetP7(){
+function resetAll(){
+  // Reset P7
   lit = false
   document.getElementById('promiseCard').classList.remove('show')
   document.getElementById('dropletStage').classList.remove('show')
@@ -1267,9 +1267,16 @@ function resetP7(){
   document.querySelectorAll('.vision-item').forEach(v=>v.classList.remove('lit'))
   document.getElementById('promiseName').value = ''
   document.getElementById('cardName').textContent = '______'
-  // Remove old ripple rings
   document.querySelectorAll('.ripple-ring').forEach(r=>r.remove())
+  // Reset all reveals so they animate again on next scroll
+  revealEls.forEach(el=>{el.style.opacity='';el.style.transform=''})
+  p3Cards.forEach(c=>{c.style.opacity='';c.style.transform=''})
+  allDots.forEach(d=>{d.style.opacity='';d.style.transform='';d.classList.remove('dot-reveal')})
+  // Scroll to top
+  window.scrollTo({top:0,behavior:'smooth'})
 }
+
+function resetP7(){ resetAll() }
 
 // P7 Plan A: Promise card
 function makePromise(){
