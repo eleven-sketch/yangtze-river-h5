@@ -44,6 +44,7 @@ body{
 /* ===== SECTIONS ===== */
 /* Content-heavy pages: allow growth beyond aspect-ratio */
 .section-tall{aspect-ratio:auto;min-height:100vh;min-height:100dvh}
+.section-tall .section-inner{position:relative;min-height:100vh;min-height:100dvh}
 .section{
   position:relative;width:100%;
   aspect-ratio:9/16;
@@ -125,14 +126,14 @@ body{
   max-width:300px;margin-left:auto;margin-right:auto;
 }
 .scroll-hint{
-  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:4;
-  display:flex;flex-direction:column;align-items:center;gap:4px;
-  font-size:0.92rem;color:var(--gold);font-weight:600;
+  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:4;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  font-size:0.78rem;color:var(--gold);font-weight:600;
   letter-spacing:0.06em;
   animation:scroll-glow 2s infinite;
 }
 .scroll-hint .arrow{
-  font-size:1.4rem;display:block;
+  font-size:1.1rem;display:block;
   animation:scroll-bounce 1.5s infinite;
 }
 .scroll-hint .arrow:nth-child(1){animation-delay:0s}
@@ -147,8 +148,26 @@ body{
 }
 .scroll-hint-sm .arrow{font-size:1rem;display:block;text-align:center}
 .scroll-hint-inline{
-  color:var(--gold);font-size:0.92rem;font-weight:600;
+  color:var(--gold);font-size:0.95rem;font-weight:600;
   letter-spacing:0.08em;
+  animation:scroll-hint-fade 2s infinite;
+}
+/* P2/P4/P5/P6 — absolute position at bottom, unified size */
+#p2 .scroll-hint-inline, #p4 .scroll-hint-inline{
+  position:absolute;bottom:18px;left:0;right:0;text-align:center;z-index:10;
+}
+#p5 .scroll-hint-inline{
+  position:absolute;bottom:10px;left:0;right:0;text-align:center;z-index:10;
+}
+#p6 .scroll-hint-inline{
+  position:absolute;bottom:14px;left:0;right:0;text-align:center;z-index:10;
+  font-size:1.15rem;
+}
+/* All inline hints — unified styling */
+.scroll-hint-inline{
+  color:#E8C97A;font-size:1rem;font-weight:600;
+  letter-spacing:0.08em;
+  text-shadow:0 1px 4px rgba(0,0,0,0.7),0 0 10px rgba(0,0,0,0.4);
   animation:scroll-hint-fade 2s infinite;
 }
 @keyframes scroll-hint-fade{
@@ -247,12 +266,12 @@ body{
 /* Popup — positioned by JS next to clicked dot */
 .map-popup{
   position:absolute;z-index:8;
-  max-width:175px;
-  padding:8px 10px;
+  max-width:200px;
+  padding:6px 9px;
   background:rgba(253,251,247,0.96);
   border-radius:7px;
   box-shadow:0 3px 14px rgba(0,0,0,0.18);
-  font-size:0.72rem;color:var(--text);line-height:1.4;
+  font-size:0.68rem;color:var(--text);line-height:1.35;
   opacity:0;pointer-events:none;
   transition:opacity 0.6s;
 }
@@ -265,11 +284,11 @@ body{
   line-height:1;
 }
 .map-popup .popup-title{
-  font-family:var(--font-serif);font-weight:700;color:var(--teal-deep);margin-bottom:2px;
-  font-size:0.76rem;padding-right:14px;line-height:1.3;
+  font-family:var(--font-serif);font-weight:700;color:var(--teal-deep);margin-bottom:1px;
+  font-size:0.7rem;padding-right:12px;line-height:1.25;
 }
 .map-popup .popup-quote{
-  color:var(--red);margin-top:2px;font-size:0.68rem;line-height:1.3;
+  color:var(--red);margin-top:1px;font-size:0.64rem;line-height:1.25;
 }
 
 /* ===== P3 · FLIP CARDS ===== */
@@ -359,14 +378,14 @@ body{
 /* ===== P4 · MAP MARKERS (reuses P2 styles) ===== */
 
 /* ===== P5 · CHAT BUBBLES ===== */
-.chat-list{display:flex;flex-direction:column;gap:10px}
+.chat-list{display:flex;flex-direction:column;gap:7px}
 .chat-msg{
-  display:flex;gap:10px;align-items:flex-start;
+  display:flex;gap:8px;align-items:flex-start;
   cursor:pointer;transition:opacity 0.3s;
 }
 .chat-msg.dimmed{opacity:0.45}
 .chat-msg .chat-avatar{
-  width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  width:34px;height:34px;border-radius:50%;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
   font-family:var(--font-serif);font-size:1rem;color:#fff;font-weight:700;
 }
@@ -380,8 +399,8 @@ body{
 }
 .chat-msg .chat-bubble{
   display:inline-block;max-width:100%;
-  padding:10px 14px;border-radius:14px 14px 14px 3px;
-  font-size:0.82rem;color:var(--text);line-height:1.5;
+  padding:8px 12px;border-radius:12px 12px 12px 3px;
+  font-size:0.8rem;color:var(--text);line-height:1.45;
   transition:all 0.35s;
 }
 .chat-msg:nth-child(1) .chat-bubble{background:rgba(91,158,148,0.13)}
@@ -403,7 +422,7 @@ body{
   padding-left:4px;border-left:2px solid transparent;
 }
 .chat-msg.expanded .chat-story{
-  max-height:180px;margin-top:8px;
+  max-height:140px;margin-top:6px;
   border-left-color:var(--gold);
 }
 
@@ -415,18 +434,18 @@ body{
 .chat-msg.expanded .tap-hint{display:none}
 
 .people-footer{
-  text-align:center;margin-top:12px;
-  font-family:var(--font-serif);font-size:0.85rem;font-weight:700;color:var(--teal-deep);line-height:1.5;
+  text-align:center;margin-top:6px;margin-bottom:50px;
+  font-family:var(--font-serif);font-size:0.78rem;font-weight:700;color:var(--teal-deep);line-height:1.4;
 }
 
 /* ===== P6 · FLOATING COMMENTS ===== */
 .float-stage{
-  position:relative;flex:1;overflow:hidden;margin:6px 0;
+  position:relative;flex:0 0 auto;height:280px;overflow:hidden;margin:6px 0;
 }
 .float-bubble{
   position:absolute;bottom:-60px;
-  max-width:72%;padding:9px 13px;border-radius:10px;
-  font-size:0.76rem;line-height:1.4;
+  max-width:64%;padding:8px 12px;border-radius:10px;
+  font-size:0.72rem;line-height:1.35;
   animation:floatDrift linear infinite;
   white-space:normal;
 }
@@ -472,7 +491,8 @@ body{
 /* P6 layout override */
 #p6 .section-inner{justify-content:flex-start;padding-top:8vw;padding-bottom:2vw}
 #p6 .comment-input-area{padding-bottom:12px}
-.comment-prompt{font-size:0.68rem;color:var(--text-faint);text-align:center;margin-top:auto;margin-bottom:6px}
+#p7 .section-inner{justify-content:flex-start}
+.comment-prompt{font-size:0.68rem;color:var(--text-faint);text-align:center;margin-top:12px;margin-bottom:6px}
 
 /* ===== P7 · ENDING ===== */
 .ending{text-align:center}
@@ -658,7 +678,7 @@ body{
 
 <!-- ======== P2 · MAP MARKERS ======== -->
 <section class="section" id="p2">
-  <div class="section-bg"><video src="assets/p2.mp4" poster="assets/p2.webp" autoplay loop muted playsinline></video></div>
+  <div class="section-bg"><img src="assets/p2.webp" alt=""></div>
 
   <!-- Intro overlay -->
   <div class="p2-intro reveal">
@@ -685,7 +705,7 @@ body{
   </div>
 
   <!-- 南昌 · 滕王阁位置 -->
-  <div class="map-dot dot-hidden" data-city="nanchang" style="top:76%;left:46%">
+  <div class="map-dot dot-hidden" data-city="nanchang" style="top:72%;left:46%">
     <div class="landmark-icon">赣</div>
     <span class="city-label">南昌 · 2023</span>
   </div>
@@ -715,12 +735,12 @@ body{
     <p class="popup-title">2023.10.12 · 南昌<br>进一步推动长江经济带高质量发展座谈会</p>
     <p>强调<strong>"谋长远之势、行长久之策、建久安之基"</strong>。提出五个关键词：生态优先、创新引领、战略支撑、协同融通、安全发展。</p>
   </div>
-  <div class="scroll-hint"><span class="arrow">&#8595;</span><span class="arrow">&#8595;</span><span class="arrow">&#8595;</span><span>向下滑动</span></div>
+  <span class="scroll-hint-inline">&#8595; 向下滑动 &#8595;</span>
 </section>
 
 <!-- ======== P3 · FLIP CARDS ======== -->
 <section class="section section-tall" id="p3">
-  <div class="section-bg"><video src="assets/p3.mp4" poster="assets/p3.webp" autoplay loop muted playsinline></video></div>
+  <div class="section-bg"><img src="assets/p3.webp" alt=""></div>
   <div class="section-inner">
     <div class="reveal"><div class="p3-header">
       <span class="report-tag">十年对比</span>
@@ -917,7 +937,7 @@ body{
 
 <!-- ======== P4 · MAP MARKERS ======== -->
 <section class="section" id="p4">
-  <div class="section-bg"><video src="assets/p4.mp4" poster="assets/p4.webp" autoplay loop muted playsinline></video></div>
+  <div class="section-bg"><img src="assets/p4.webp" alt=""></div>
 
   <div class="p2-intro reveal">
     <p class="lead">四个地方，四种转身。从化工围江到绿色新城，从砂石码头到候鸟天堂。</p>
@@ -972,12 +992,12 @@ body{
     <p class="popup-title">苏州吴江 · 科技护江</p>
     <p>"天-空-地-水"立体感知，<strong>5万条</strong>监测数据实时跳动。工业污水"一企一管一策"，中水回用率<strong>85%</strong>。太浦河连续7年稳定达&#8545;类水。全国仅7个入选"长江大保护优秀实践案例"。</p>
   </div>
-  <div class="scroll-hint"><span class="arrow">&#8595;</span><span class="arrow">&#8595;</span><span class="arrow">&#8595;</span><span>向下滑动</span></div>
+  <span class="scroll-hint-inline">&#8595; 向下滑动 &#8595;</span>
 </section>
 
 <!-- ======== P5 · CHAT BUBBLES ======== -->
 <section class="section" id="p5">
-  <div class="section-bg"><video src="assets/p5.mp4" poster="assets/p5.webp" autoplay loop muted playsinline></video></div>
+  <div class="section-bg"><img src="assets/p5.webp" alt=""></div>
   <div class="section-inner">
     <div class="reveal"><div class="section-label">VOICES</div></div>
     <div class="reveal reveal-d1"><h2 class="section-heading">守护者面孔</h2></div>
@@ -1041,12 +1061,12 @@ body{
       九旬院士，六旬渔民队长，<br>上岸创业的女性，坚守野外的青年科研者<br>——四种声音，同一条江。
     </p></div>
   </div>
-  <div class="scroll-hint"><span class="arrow">&#8595;</span><span class="arrow">&#8595;</span><span class="arrow">&#8595;</span><span>向下滑动</span></div>
+  <span class="scroll-hint-inline">&#8595; 向下滑动 &#8595;</span>
 </section>
 
 <!-- ======== P6 · FLOATING COMMENTS ======== -->
 <section class="section" id="p6">
-  <div class="section-bg"><video src="assets/p6.mp4" poster="assets/p6.webp" autoplay loop muted playsinline></video></div>
+  <div class="section-bg"><img src="assets/p6.webp" alt=""></div>
   <div class="section-inner">
     <div class="reveal"><div class="section-label">VOICES</div></div>
     <div class="reveal reveal-d1"><h2 class="section-heading">网友声音</h2></div>
@@ -1058,14 +1078,15 @@ body{
       <input type="text" id="commentInput" placeholder="写下我和长江的故事..." maxlength="200">
       <button id="commentBtn">发布</button>
     </div>
-    <div class="scroll-hint" style="position:relative;bottom:auto;margin-top:6px">&#8595; 向下滑动</div>
+    <p style="text-align:center;font-size:0.92rem;color:var(--teal-deep);margin-top:20px;font-weight:600">每一个声音，都是长江未来的一部分</p>
+    <span class="scroll-hint-inline">&#8595; 向下滑动 &#8595;</span>
   </div>
 </section>
 
 <!-- ======== P7 · ENDING ======== -->
-<section class="section" id="p7">
-  <div class="section-bg"><video src="assets/p7.mp4" poster="assets/p7.webp" autoplay loop muted playsinline></video></div>
-  <div class="section-inner ending" style="padding-top:12vw">
+<section class="section section-tall" id="p7">
+  <div class="section-bg"><img src="assets/p7.webp" alt=""></div>
+  <div class="section-inner ending" style="padding-top:16vw">
     <div class="reveal"><div class="section-label">FORWARD</div></div>
     <div class="reveal reveal-d1"><h2 class="ending-heading">从一个十年<br>走向下一个十年</h2></div>
     <div class="reveal reveal-d2"><p style="font-size:0.78rem;color:var(--text-sub);margin-top:4px">
@@ -1322,7 +1343,7 @@ document.querySelectorAll('.map-dot').forEach(dot=>{
     popup.style.left = ''; popup.style.right = ''
     popup.style.borderLeft = ''; popup.style.borderRight = ''
     const minTop = section.id === 'p4' ? 18 : 16
-    popup.style.top = Math.max(minTop, Math.min(78, topPct - 6)) + '%'
+    popup.style.top = Math.max(minTop, Math.min(72, topPct - 6)) + '%'
 
     if(side === 'right'){
       popup.style.left = ((dRect.right - sRect.left) / sRect.width * 100 + 2) + '%'
@@ -1363,7 +1384,7 @@ const stage = document.getElementById('floatStage')
 
 function spawnBubble(comment, isNew){
   // Cap total bubbles to avoid DOM bloat
-  while(stage.children.length > 12) stage.firstChild.remove()
+  while(stage.children.length > 6) stage.firstChild.remove()
 
   const b = document.createElement('div')
   b.className = 'float-bubble '+(isNew?'user-posted':comment.type)
@@ -1372,8 +1393,8 @@ function spawnBubble(comment, isNew){
   const offset = comment.type==='pos' ? 3 : 3
   const spread = Math.random()*18
   b.style[comment.type==='pos'?'left':'right'] = (offset+spread)+'%'
-  b.style.animationDuration = (8+Math.random()*8)+'s'
-  b.style.animationDelay = isNew?'0s':(Math.random()*10)+'s'
+  b.style.animationDuration = (12+Math.random()*8)+'s'
+  b.style.animationDelay = isNew?'0s':(Math.random()*12)+'s'
   stage.appendChild(b)
 
   // Infinite loop — no cleanup needed, stage naturally manages bubbles
@@ -1383,13 +1404,13 @@ function spawnBubble(comment, isNew){
 function initFloats(){
   if(!stage){setTimeout(initFloats,200);return}
   presetComments.forEach((c,i)=>{
-    setTimeout(()=>spawnBubble(c,false),i*4000)
+    setTimeout(()=>spawnBubble(c,false),i*6000)
   })
-  // Cycle new bubbles less frequently to avoid crowding
+  // Cycle new bubbles slowly to avoid crowding
   setInterval(()=>{
     const c = presetComments[Math.floor(Math.random()*presetComments.length)]
     spawnBubble(c,false)
-  },7000)
+  },10000)
 }
 initFloats()
 
