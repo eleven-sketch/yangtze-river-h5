@@ -659,7 +659,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 </head>
 <body>
 
-<audio id="bgm" src="bgm.mp3" autoplay muted loop playsinline preload="metadata"></audio>
+<audio id="bgm" src="bgm.mp3" autoplay muted loop playsinline preload="auto"></audio>
 <button class="bgm-btn" id="bgmBtn" onclick="toggleBgm()">&#x1F3B5;</button>
 
 <!-- ======== P1 · COVER ======== -->
@@ -1151,6 +1151,11 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 // Background music — auto play, manual close, always loop
 const bgmEl = document.getElementById('bgm')
 const bgmBtnEl = document.getElementById('bgmBtn')
+
+// Ensure bgm plays on load (even if autoplay blocked initially)
+bgmEl.addEventListener('canplay',()=>{
+  bgmEl.play().catch(()=>{})
+})
 
 // First touch anywhere unmutes (browser autoplay policy workaround)
 document.addEventListener('touchstart',()=>{
