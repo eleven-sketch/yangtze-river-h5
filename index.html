@@ -654,19 +654,12 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 .bgm-btn.paused{background:rgba(0,0,0,0.55);opacity:0.6}
 </style>
-<!-- Preload critical assets -->
-<link rel="preload" as="image" href="assets/p1.webp">
-<link rel="preload" as="image" href="assets/p2.webp">
-<link rel="preload" as="audio" href="bgm.mp3">
 <style>
-/* Hide body until first bg image loads */
-body.preload{opacity:0;transition:opacity 0.4s}
-body.ready{opacity:1}
 </style>
 </head>
-<body class="preload">
+<body>
 
-<audio id="bgm" src="bgm.mp3" autoplay muted loop playsinline preload="auto"></audio>
+<audio id="bgm" src="bgm.mp3" autoplay muted loop playsinline preload="metadata"></audio>
 <button class="bgm-btn" id="bgmBtn" onclick="toggleBgm()">&#x1F3B5;</button>
 
 <!-- ======== P1 · COVER ======== -->
@@ -1149,15 +1142,6 @@ body.ready{opacity:1}
 </section>
 
 <script>
-// Preloader — wait for first bg image before showing page
-var preloadImg = new Image()
-preloadImg.src = 'assets/p1.webp'
-preloadImg.onload = function(){
-  document.body.classList.add('ready')
-  updateAll()
-}
-setTimeout(function(){ document.body.classList.add('ready') },2000)
-
 // Background music — auto play, manual close, always loop
 const bgmEl = document.getElementById('bgm')
 const bgmBtnEl = document.getElementById('bgmBtn')
