@@ -1286,7 +1286,11 @@ function resetAll(){
   document.getElementById('promiseName').value = ''
   document.getElementById('cardName').textContent = '______'
   document.querySelectorAll('.ripple-ring').forEach(r=>r.remove())
-  // Scroll to top — bidirectional animation will re-render everything naturally
+  // Close all open popups, chat bubbles, flipped cards
+  document.querySelectorAll('.map-popup').forEach(p=>p.classList.remove('open'))
+  document.querySelectorAll('.map-dot').forEach(d=>d.classList.remove('active'))
+  document.querySelectorAll('.chat-msg').forEach(m=>{m.classList.remove('expanded');m.classList.remove('dimmed')})
+  document.querySelectorAll('.flip-card').forEach(c=>c.classList.remove('flipped'))
   window.scrollTo({top:0,behavior:'smooth'})
   setTimeout(updateAll,100)
 }
