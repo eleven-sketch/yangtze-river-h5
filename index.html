@@ -629,7 +629,7 @@ body{
 <body>
 
 <audio id="bgm" src="bgm.mp3" autoplay muted loop playsinline preload="auto"></audio>
-<button class="bgm-btn paused" id="bgmBtn" onclick="toggleBgm()">&#x1F534;</button>
+<button class="bgm-btn" id="bgmBtn" onclick="toggleBgm()">&#x1F3B5;</button>
 
 <!-- ======== P1 · COVER ======== -->
 <section class="section" id="p1">
@@ -1110,29 +1110,23 @@ body{
 </section>
 
 <script>
-// Background music — starts muted, unmutes on first touch
+// Background music — auto play, manual close, always loop
 const bgmEl = document.getElementById('bgm')
 const bgmBtnEl = document.getElementById('bgmBtn')
-let musicReady = false
 
-function startMusic(){
-  if(musicReady) return
+// First touch anywhere unmutes (browser autoplay policy workaround)
+document.addEventListener('touchstart',()=>{
   bgmEl.muted = false
-  bgmEl.play().catch(()=>{})
-  bgmBtnEl.classList.remove('paused')
-  bgmBtnEl.innerHTML = '&#x1F3B5;'
-  musicReady = true
-}
-
-// First touch or click → unmute and play instantly
-document.addEventListener('touchstart',startMusic,{once:true,passive:true})
+},{once:true,passive:true})
 
 function toggleBgm(){
-  startMusic()
   if(bgmEl.paused){
-    bgmEl.play();bgmBtnEl.classList.remove('paused');bgmBtnEl.innerHTML='&#x1F3B5;'
+    bgmEl.muted = false
+    bgmEl.play().catch(()=>{})
+    bgmBtnEl.innerHTML = '&#x1F3B5;'
   } else {
-    bgmEl.pause();bgmBtnEl.classList.add('paused');bgmBtnEl.innerHTML='&#x1F534;'
+    bgmEl.pause()
+    bgmBtnEl.innerHTML = '&#x1F534;'
   }
 }
 
