@@ -1263,12 +1263,9 @@ function resetAll(){
   document.getElementById('promiseName').value = ''
   document.getElementById('cardName').textContent = '______'
   document.querySelectorAll('.ripple-ring').forEach(r=>r.remove())
-  // Reset all reveals so they animate again on next scroll
-  revealEls.forEach(el=>{el.style.opacity='';el.style.transform=''})
-  p3Cards.forEach(c=>{c.style.opacity='';c.style.transform=''})
-  allDots.forEach(d=>{d.style.opacity='';d.style.transform='';d.classList.remove('dot-reveal')})
-  // Scroll to top
-  window.scrollTo({top:0,behavior:'smooth'})
+  // Scroll to top — bidirectional animation will re-render everything naturally
+  window.scrollTo({top:0,behavior:'instant'})
+  setTimeout(updateAll,100)
 }
 
 function resetP7(){ resetAll() }
