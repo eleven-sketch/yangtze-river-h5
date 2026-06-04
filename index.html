@@ -43,8 +43,8 @@ body{
 
 /* ===== SECTIONS ===== */
 /* Content-heavy pages: allow growth beyond aspect-ratio */
-.section-tall{aspect-ratio:auto;min-height:100vh;min-height:100dvh}
-.section-tall .section-inner{position:relative;min-height:100vh;min-height:100dvh}
+.section-tall{aspect-ratio:auto;min-height:100vh;min-height:100dvh;overflow:visible}
+.section-tall .section-inner{position:relative;min-height:auto;padding-bottom:12vw}
 .section{
   position:relative;width:100%;
   aspect-ratio:9/16;
@@ -1086,7 +1086,7 @@ body{
 <!-- ======== P7 · ENDING ======== -->
 <section class="section section-tall" id="p7">
   <div class="section-bg"><img src="assets/p7.webp" alt=""></div>
-  <div class="section-inner ending" style="padding-top:16vw">
+  <div class="section-inner ending" style="padding-top:20vw">
     <div class="reveal"><div class="section-label">FORWARD</div></div>
     <div class="reveal reveal-d1"><h2 class="ending-heading">从一个十年<br>走向下一个十年</h2></div>
     <div class="reveal reveal-d2"><p style="font-size:0.78rem;color:var(--text-sub);margin-top:4px">
