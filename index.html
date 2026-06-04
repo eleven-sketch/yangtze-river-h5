@@ -1269,7 +1269,7 @@ function resetAll(){
   document.getElementById('cardName').textContent = '______'
   document.querySelectorAll('.ripple-ring').forEach(r=>r.remove())
   // Scroll to top — bidirectional animation will re-render everything naturally
-  window.scrollTo({top:0,behavior:'instant'})
+  window.scrollTo({top:0,behavior:'smooth'})
   setTimeout(updateAll,100)
 }
 
