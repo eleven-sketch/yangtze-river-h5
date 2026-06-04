@@ -1190,7 +1190,6 @@ const p3Cards = document.querySelectorAll('#p3 .flip-card')
 function updateCards(){
   const vh = window.innerHeight
   p3Cards.forEach((card,i)=>{
-    if(card.classList.contains('revealed')) return
     const rect = card.getBoundingClientRect()
     const start = vh * 0.95
     const end = vh * 0.45
@@ -1199,7 +1198,6 @@ function updateCards(){
     const progress = Math.max(0, Math.min(1, ((start - rect.top) / range) - rowDelay))
     card.style.opacity = progress
     card.style.transform = `translateY(${(1-progress)*24}px)`
-    if(progress >= 1){ card.classList.add('revealed'); card.style.opacity='1'; card.style.transform='translateY(0)' }
   })
 }
 
@@ -1208,7 +1206,6 @@ const allDots = document.querySelectorAll('.dot-hidden')
 function updateDots(){
   const vh = window.innerHeight
   allDots.forEach((dot,i)=>{
-    if(dot.classList.contains('revealed')) return
     const rect = dot.getBoundingClientRect()
     const start = vh * 0.95
     const end = vh * 0.45
@@ -1217,8 +1214,6 @@ function updateDots(){
     const progress = Math.max(0, Math.min(1, ((start - rect.top) / range) - dotDelay))
     dot.style.opacity = progress
     dot.style.transform = `translate(-50%,${-30 + progress*30}%)`
-    if(progress > 0.8) dot.classList.add('dot-reveal')
-    if(progress >= 1){ dot.classList.add('revealed'); dot.style.opacity='1'; dot.style.transform='translate(-50%,0)' }
   })
 }
 
