@@ -42,16 +42,13 @@ body{
 }
 
 /* ===== SECTIONS ===== */
+/* Content-heavy pages: allow growth beyond aspect-ratio */
+.section-tall{aspect-ratio:auto;min-height:100vh;min-height:100dvh}
 .section{
   position:relative;width:100%;
   aspect-ratio:9/16;
-  min-height:100vh; /* fallback if aspect-ratio not supported */
-  min-height:100dvh; /* dynamic viewport for mobile */
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;
-}
-@supports not (aspect-ratio:9/16){
-  .section{aspect-ratio:auto;min-height:100vh;min-height:100dvh}
 }
 
 /* Seamless section overlap */
@@ -722,7 +719,7 @@ body{
 </section>
 
 <!-- ======== P3 · FLIP CARDS ======== -->
-<section class="section" id="p3">
+<section class="section section-tall" id="p3">
   <div class="section-bg"><video src="assets/p3.mp4" poster="assets/p3.webp" autoplay loop muted playsinline></video></div>
   <div class="section-inner">
     <div class="reveal"><div class="p3-header">
