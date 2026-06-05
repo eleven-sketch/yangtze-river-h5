@@ -1149,18 +1149,34 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 </section>
 
 <script>
-// Background music — auto play, manual close, always loop
+// Background music — aggressive autoplay on mobile
 const bgmEl = document.getElementById('bgm')
 const bgmBtnEl = document.getElementById('bgmBtn')
 
-// Ensure bgm plays on load (even if autoplay blocked initially)
-bgmEl.addEventListener('canplay',()=>{
-  bgmEl.play().catch(()=>{})
+function playBgm(){
+  bgmEl.muted = false
+  bgmEl.play().then(()=>{
+    bgmBtnEl.innerHTML = '&#x1F3B5;'
+  }).catch(()=>{})
+}
+
+// Try immediately
+bgmEl.play().catch(()=>{})
+
+// Try when audio data is ready
+bgmEl.addEventListener('canplay',()=>{ bgmEl.play().catch(()=>{}) })
+bgmEl.addEventListener('loadeddata',()=>{ bgmEl.play().catch(()=>{}) })
+
+// Retry on DOM ready
+document.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(()=>bgmEl.play().catch(()=>{}),300)
+  setTimeout(()=>bgmEl.play().catch(()=>{}),1000)
 })
 
-// First touch anywhere unmutes (browser autoplay policy workaround)
+// First touch unmutes
 document.addEventListener('touchstart',()=>{
   bgmEl.muted = false
+  bgmEl.play().catch(()=>{})
 },{once:true,passive:true})
 
 function toggleBgm(){
