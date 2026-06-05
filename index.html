@@ -1173,11 +1173,13 @@ document.addEventListener('DOMContentLoaded',()=>{
   setTimeout(()=>bgmEl.play().catch(()=>{}),1000)
 })
 
-// First touch unmutes
-document.addEventListener('touchstart',()=>{
+// First interaction (touch or scroll) unmutes and plays
+function startOnInteract(){
   bgmEl.muted = false
   bgmEl.play().catch(()=>{})
-},{once:true,passive:true})
+}
+document.addEventListener('touchstart',startOnInteract,{once:true,passive:true})
+document.addEventListener('scroll',startOnInteract,{once:true,passive:true})
 
 function toggleBgm(){
   if(bgmEl.paused){
