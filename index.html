@@ -672,8 +672,8 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
 <div id="preloader"><div class="loader-ring"></div><div class="loader-text">长江奔涌，正在加载…</div></div>
 
-<audio id="bgm" src="bgm.mp3" autoplay muted loop playsinline preload="auto"></audio>
-<button class="bgm-btn" id="bgmBtn" onclick="toggleBgm()">&#x1F3B5;</button>
+<audio id="bgm" src="bgm.mp3" loop playsinline preload="auto"></audio>
+<button class="bgm-btn" id="bgmBtn" onclick="toggleBgm()">&#x1F534;</button>
 
 <!-- ======== P1 · COVER ======== -->
 <section class="section" id="p1">
@@ -1162,51 +1162,24 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 </section>
 
 <script>
-// Background music — aggressive autoplay on mobile
+// Background music — start on first touch/scroll from beginning
 const bgmEl = document.getElementById('bgm')
 const bgmBtnEl = document.getElementById('bgmBtn')
 
-function playBgm(){
-  bgmEl.muted = false
-  bgmEl.play().then(()=>{
-    bgmBtnEl.innerHTML = '&#x1F3B5;'
-  }).catch(()=>{})
+function startMusic(){
+  if(bgmEl.paused || bgmEl.muted){
+    bgmEl.currentTime = 0
+    bgmEl.play().then(()=>{
+      bgmBtnEl.innerHTML = '&#x1F3B5;'
+    }).catch(()=>{})
+  }
 }
-
-// iOS Safari audio unlock trick
-var AudioContext = window.AudioContext || window.webkitAudioContext
-if(AudioContext){
-  var unlockCtx = new AudioContext()
-  document.addEventListener('touchstart',function(){
-    if(unlockCtx.state === 'suspended') unlockCtx.resume()
-    bgmEl.currentTime = 0; bgmEl.muted = false; bgmEl.play().catch(()=>{})
-  },{once:true,passive:true})
-}
-
-// Try immediately
-bgmEl.play().catch(()=>{})
-
-// Try when audio data is ready
-bgmEl.addEventListener('canplay',()=>{ bgmEl.play().catch(()=>{}) })
-bgmEl.addEventListener('loadeddata',()=>{ bgmEl.play().catch(()=>{}) })
-
-// Retry on DOM ready
-if(document.readyState==='complete'){ bgmEl.play().catch(()=>{}) }
-else { window.addEventListener('load',()=>{ bgmEl.play().catch(()=>{}) }) }
-
-// First interaction (touch or scroll) unmutes and plays
-function startOnInteract(){
-  bgmEl.currentTime = 0
-  bgmEl.muted = false
-  bgmEl.play().catch(()=>{})
-}
-document.addEventListener('touchstart',startOnInteract,{once:true,passive:true})
-document.addEventListener('scroll',startOnInteract,{once:true,passive:true})
+document.addEventListener('touchstart',startMusic,{once:true,passive:true})
+document.addEventListener('scroll',startMusic,{once:true,passive:true})
 
 function toggleBgm(){
   if(bgmEl.paused){
     bgmEl.currentTime = 0
-    bgmEl.muted = false
     bgmEl.play().catch(()=>{})
     bgmBtnEl.innerHTML = '&#x1F3B5;'
   } else {
