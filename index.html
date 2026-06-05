@@ -1173,6 +1173,16 @@ function playBgm(){
   }).catch(()=>{})
 }
 
+// iOS Safari audio unlock trick
+var AudioContext = window.AudioContext || window.webkitAudioContext
+if(AudioContext){
+  var unlockCtx = new AudioContext()
+  document.addEventListener('touchstart',function(){
+    if(unlockCtx.state === 'suspended') unlockCtx.resume()
+    bgmEl.currentTime = 0; bgmEl.muted = false; bgmEl.play().catch(()=>{})
+  },{once:true,passive:true})
+}
+
 // Try immediately
 bgmEl.play().catch(()=>{})
 
@@ -1181,13 +1191,12 @@ bgmEl.addEventListener('canplay',()=>{ bgmEl.play().catch(()=>{}) })
 bgmEl.addEventListener('loadeddata',()=>{ bgmEl.play().catch(()=>{}) })
 
 // Retry on DOM ready
-document.addEventListener('DOMContentLoaded',()=>{
-  setTimeout(()=>bgmEl.play().catch(()=>{}),300)
-  setTimeout(()=>bgmEl.play().catch(()=>{}),1000)
-})
+if(document.readyState==='complete'){ bgmEl.play().catch(()=>{}) }
+else { window.addEventListener('load',()=>{ bgmEl.play().catch(()=>{}) }) }
 
 // First interaction (touch or scroll) unmutes and plays
 function startOnInteract(){
+  bgmEl.currentTime = 0
   bgmEl.muted = false
   bgmEl.play().catch(()=>{})
 }
@@ -1196,6 +1205,7 @@ document.addEventListener('scroll',startOnInteract,{once:true,passive:true})
 
 function toggleBgm(){
   if(bgmEl.paused){
+    bgmEl.currentTime = 0
     bgmEl.muted = false
     bgmEl.play().catch(()=>{})
     bgmBtnEl.innerHTML = '&#x1F3B5;'
