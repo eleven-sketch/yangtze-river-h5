@@ -56,6 +56,7 @@ body{
 /* Content-heavy pages: allow growth beyond aspect-ratio */
 section.section-tall{aspect-ratio:auto;min-height:100vh;min-height:100dvh;overflow:visible}
 section.section-tall .section-inner{position:relative;min-height:auto;padding-bottom:12vw}
+#p3 .section-inner{margin-top:-20px}
 .section{
   position:relative;width:100%;
   aspect-ratio:9/16;
@@ -127,22 +128,29 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   text-shadow:0 1px 4px rgba(0,0,0,0.5);
 }
 .cover .intro-text{
-  font-size:0.82rem;color:#D5CFC5;line-height:1.65;
+  font-size:0.86rem;color:#fff;line-height:1.65;
   text-shadow:0 1px 3px rgba(0,0,0,0.5);
   max-width:320px;margin:0 auto;
 }
 .cover .cover-note{
-  font-size:0.7rem;color:#B0A898;margin-top:16px;
+  font-size:0.86rem;color:#fff;margin-top:72px;
   text-shadow:0 1px 3px rgba(0,0,0,0.5);
   max-width:300px;margin-left:auto;margin-right:auto;
+  animation:breathe 3s ease-in-out infinite;
+}
+@keyframes breathe{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.08)}
 }
 .scroll-hint{
-  position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:4;
+  position:absolute;bottom:54px;left:50%;transform:translateX(-50%);z-index:4;
   display:flex;flex-direction:column;align-items:center;gap:2px;
   font-size:0.78rem;color:var(--gold);font-weight:600;
   letter-spacing:0.06em;
-  animation:scroll-glow 2s infinite;
+  opacity:0;
+  animation:hint-fade-in 0.6s 3s ease-out forwards, scroll-glow 2s 3.6s infinite;
 }
+@keyframes hint-fade-in{to{opacity:1}}
 .scroll-hint .arrow{
   font-size:1.1rem;display:block;
   animation:scroll-bounce 1.5s infinite;
@@ -164,12 +172,21 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   animation:scroll-hint-fade 2s infinite;
 }
 /* P2/P4/P5/P6 — absolute position at bottom, unified size */
-#p2 .scroll-hint-inline, #p4 .scroll-hint-inline{
+#p2 .scroll-hint-inline{
+  position:absolute;bottom:48px;left:0;right:0;text-align:center;z-index:10;
+}
+#p4 .scroll-hint-inline{
   position:absolute;bottom:18px;left:0;right:0;text-align:center;z-index:10;
 }
 #p5 .scroll-hint-inline{
-  position:absolute;bottom:10px;left:0;right:0;text-align:center;z-index:10;
+  position:absolute;bottom:30px;left:0;right:0;text-align:center;z-index:10;
 }
+#p6 .section-heading{font-size:clamp(1.5rem,5.5vw,2rem);line-height:1.4}
+#p6 .comment-card{font-size:0.86rem}
+#p6 .comment-card .card-user{font-size:0.68rem}
+#p6 .comment-prompt{font-size:0.88rem}
+#p6 .comment-input-area input{font-size:0.8rem}
+#p6 .comment-input-area button{font-size:0.8rem}
 #p6 .scroll-hint-inline{
   position:absolute;bottom:14px;left:0;right:0;text-align:center;z-index:10;
   font-size:1.15rem;
@@ -207,20 +224,24 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 .section-subhead{
   font-size:0.9rem;color:var(--text-sub);margin-bottom:16px;line-height:1.4;
 }
+/* P5 text size */
+#p5 .section-inner{justify-content:center;padding-top:6vw;padding-bottom:6vw;transform:translateY(-50px)}
+#p5 .section-heading{font-size:clamp(1.5rem,5.5vw,2rem)}
+#p5 .section-subhead{font-size:1rem}
 
 /* ===== P2 · MAP-STYLE CITY MARKERS ===== */
 .p2-intro{
-  position:absolute;top:3%;left:6%;right:6%;z-index:10;text-align:center;
+  position:absolute;top:calc(3% + 30px);left:6%;right:6%;z-index:10;text-align:center;
 }
 .p2-intro .lead{
   font-family:var(--font-serif);
-  font-size:clamp(0.85rem,3.5vw,1.15rem);
-  color:#EDE4D3;font-weight:600;line-height:1.5;
-  text-shadow:0 2px 8px rgba(0,0,0,0.6);
+  font-size:clamp(0.95rem,4vw,1.3rem);
+  color:#fff;font-weight:600;line-height:1.5;
+  text-shadow:0 1px 4px rgba(0,0,0,0.85),0 2px 12px rgba(0,0,0,0.5);
   max-width:390px;margin:0 auto;
 }
 /* P4 intro — slightly lower than P2 */
-#p4 .p2-intro{top:5%}
+#p4 .p2-intro{top:calc(5% + 10px)}
 .p2-intro .hint{
   display:inline-block;
   font-size:0.68rem;color:var(--gold);font-weight:600;margin-top:8px;
@@ -277,18 +298,18 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 /* Popup — positioned by JS next to clicked dot */
 .map-popup{
   position:absolute;z-index:8;
-  max-width:200px;
+  max-width:250px;
   padding:6px 9px;
   background:rgba(253,251,247,0.96);
   border-radius:7px;
   box-shadow:0 3px 14px rgba(0,0,0,0.18);
-  font-size:0.68rem;color:var(--text);line-height:1.35;
-  opacity:0;pointer-events:none;
-  transition:opacity 0.6s;
+  font-size:0.86rem;color:var(--text);line-height:1.35;text-align:justify;
+  opacity:0;pointer-events:none;transform:scale(0.96);
+  transition:opacity 0.3s ease-out,transform 0.3s ease-out;
 }
 .map-popup p{margin:0}
 .map-popup p+p{margin-top:2px}
-.map-popup.open{opacity:1;pointer-events:auto}
+.map-popup.open{opacity:1;pointer-events:auto;transform:scale(1)}
 .map-popup .close-btn{
   position:absolute;top:5px;right:9px;
   font-size:1rem;color:var(--text-faint);cursor:pointer;
@@ -296,28 +317,32 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 .map-popup .popup-title{
   font-family:var(--font-serif);font-weight:700;color:var(--teal-deep);margin-bottom:1px;
-  font-size:0.7rem;padding-right:12px;line-height:1.25;
+  font-size:0.9rem;padding-right:12px;line-height:1.25;
 }
 .map-popup .popup-quote{
   color:var(--red);margin-top:1px;font-size:0.64rem;line-height:1.25;
 }
+
+/* Offset specific popups */
+#popup-maanshan,#popup-suzhou{margin-top:-40px}
+#popup-wuhan,#popup-nanchang{margin-top:-20px}
 
 /* ===== P3 · FLIP CARDS ===== */
 .p3-header{
   text-align:center;margin-bottom:8px;
 }
 .p3-header .report-tag{
-  display:inline-block;font-size:0.58rem;color:var(--red);font-weight:600;
+  display:inline-block;font-size:0.66rem;color:var(--red);font-weight:600;
   border:1px solid var(--red);padding:2px 10px;border-radius:10px;
   letter-spacing:0.08em;margin-bottom:4px;
 }
 .p3-header .report-title{
   font-family:var(--font-serif);
-  font-size:clamp(1.15rem,4vw,1.5rem);
+  font-size:clamp(1.3rem,4.5vw,1.7rem);
   color:var(--teal-deep);font-weight:700;
 }
 .p3-header .report-sub{
-  font-size:0.62rem;color:var(--text-faint);margin-top:2px;
+  font-size:0.78rem;color:var(--text-faint);margin-top:2px;
 }
 
 .flip-grid{
@@ -349,11 +374,12 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   background:rgba(139,133,128,0.15);
   border:1px solid rgba(139,133,128,0.2);
 }
-.flip-front .flip-icon{font-size:1.5rem;margin-bottom:3px}
-.flip-front .flip-label{font-size:0.72rem;color:var(--text-faint);letter-spacing:0.04em}
+.flip-front .flip-icon{font-size:1.15rem;position:absolute;top:3px;left:5px;opacity:0.55}
+.flip-front .flip-icon-br{font-size:1.15rem;position:absolute;bottom:3px;right:5px;opacity:0.55}
+.flip-front .flip-label{font-size:0.8rem;color:var(--text-faint);letter-spacing:0.04em}
 .flip-front .flip-num{
   font-family:var(--font-en);
-  font-size:1.3rem;font-weight:700;color:#8B8580;line-height:1.15;
+  font-size:1.5rem;font-weight:700;color:#8B8580;line-height:1.15;
 }
 /* Back: After / teal + gold */
 .flip-back{
@@ -361,19 +387,21 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   border:1.5px solid var(--teal-soft);
   transform:rotateY(180deg);
 }
-.flip-back .flip-icon{font-size:1.5rem;margin-bottom:3px}
-.flip-back .flip-label{font-size:0.72rem;color:var(--teal-deep);font-weight:600;letter-spacing:0.04em}
+.flip-back .flip-icon{font-size:1.15rem;position:absolute;top:3px;right:5px;opacity:0.55}
+.flip-back .flip-icon-br{font-size:1.15rem;position:absolute;bottom:3px;left:5px;opacity:0.55}
+.flip-back .flip-label{font-size:0.8rem;color:var(--teal-deep);font-weight:600;letter-spacing:0.04em}
 .flip-back .flip-num{
   font-family:var(--font-en);
-  font-size:1.3rem;font-weight:700;color:var(--teal-deep);line-height:1.15;
+  font-size:1.5rem;font-weight:700;color:var(--teal-deep);line-height:1.15;
 }
 .flip-back .flip-delta{
-  font-size:0.66rem;color:var(--gold);margin-top:1px;font-weight:600;
+  font-size:0.82rem;color:var(--gold);margin-top:1px;font-weight:600;
+  animation:breathe 3s ease-in-out infinite;
 }
 
 /* Flip hint badge */
 .flip-hint-badge{
-  display:inline-block;font-size:0.5rem;color:var(--text-faint);
+  display:inline-block;font-size:0.58rem;color:var(--text-faint);
   border:1px dashed rgba(160,152,144,0.4);padding:0 6px;border-radius:6px;
   margin-top:2px;
 }
@@ -381,7 +409,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
 .p3-highlight{
   margin-top:6px;text-align:center;
-  font-size:0.65rem;color:var(--red);line-height:1.4;
+  font-size:1rem;color:var(--red);line-height:1.4;
   padding:0 8px 20px;
 }
 .p3-highlight strong{color:var(--red)}
@@ -389,7 +417,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 /* ===== P4 · MAP MARKERS (reuses P2 styles) ===== */
 
 /* ===== P5 · CHAT BUBBLES ===== */
-.chat-list{display:flex;flex-direction:column;gap:7px}
+.chat-list{display:flex;flex-direction:column;gap:20px}
 .chat-msg{
   display:flex;gap:8px;align-items:flex-start;
   cursor:pointer;transition:opacity 0.3s;
@@ -411,7 +439,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 .chat-msg .chat-bubble{
   display:inline-block;max-width:100%;
   padding:8px 12px;border-radius:12px 12px 12px 3px;
-  font-size:0.8rem;color:var(--text);line-height:1.45;
+  font-size:0.94rem;color:var(--text);line-height:1.45;
   transition:all 0.35s;
 }
 .chat-msg:nth-child(1) .chat-bubble{background:rgba(91,158,148,0.13)}
@@ -420,16 +448,16 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 .chat-msg:nth-child(4) .chat-bubble{background:rgba(91,141,158,0.13)}
 
 .chat-msg .chat-name{
-  font-size:0.76rem;font-weight:700;color:var(--teal-deep);margin-bottom:2px;
+  font-size:0.9rem;font-weight:700;color:var(--teal-deep);margin-bottom:2px;
 }
 .chat-msg .chat-quote{
-  font-size:0.88rem;color:var(--red);line-height:1.45;
+  font-size:1.05rem;color:var(--red);line-height:1.45;
 }
 
 .chat-msg .chat-story{
   max-height:0;overflow:hidden;
   transition:max-height 0.45s cubic-bezier(0.22,1,0.36,1),margin 0.35s;
-  margin-top:0;font-size:0.82rem;color:var(--text-sub);line-height:1.55;
+  margin-top:0;font-size:1rem;color:var(--text-sub);line-height:1.55;
   padding-left:4px;border-left:2px solid transparent;
 }
 .chat-msg.expanded .chat-story{
@@ -439,8 +467,9 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
 /* Typing dots hint */
 .chat-msg .tap-hint{
-  font-size:0.55rem;color:var(--text-faint);margin-top:3px;
+  font-size:0.68rem;color:var(--text-sub);margin-top:3px;
   display:inline-block;
+  animation:breathe 3s ease-in-out infinite;
 }
 .chat-msg.expanded .tap-hint{display:none}
 
@@ -449,39 +478,23 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   font-family:var(--font-serif);font-size:0.78rem;font-weight:700;color:var(--teal-deep);line-height:1.4;
 }
 
-/* ===== P6 · FLOATING COMMENTS ===== */
-.float-stage{
-  position:relative;flex:0 0 auto;height:280px;overflow:hidden;margin:6px 0;
+/* ===== P6 · COMMENT STAGE ===== */
+.comment-stage{
+  position:relative;width:100%;height:300px;
+  overflow-y:auto;overflow-x:hidden;
+  display:flex;flex-direction:column;gap:12px;
+  padding:12px 0;margin:8px 0;
 }
-.float-bubble{
-  position:absolute;bottom:-60px;
-  max-width:64%;padding:8px 12px;border-radius:10px;
-  font-size:0.72rem;line-height:1.35;
-  animation:floatDrift linear infinite;
-  white-space:normal;
+.stage-item{
+  opacity:0;transform:translateY(40px);
+  transition:opacity 0.5s ease-out,transform 0.5s ease-out;
 }
-.float-bubble.pos{
-  background:rgba(91,158,148,0.12);color:var(--text);
-  border-bottom-left-radius:2px;left:4%;
-}
-.float-bubble.con{
-  background:rgba(197,61,61,0.08);color:var(--text-sub);
-  border-bottom-right-radius:2px;right:4%;
-}
-.float-bubble .float-user{font-size:0.55rem;color:var(--text-faint);margin-top:2px;text-align:right}
-
-@keyframes floatDrift{
-  0%{bottom:-50px;opacity:0}
-  8%{bottom:0;opacity:1}
-  85%{opacity:1}
-  100%{bottom:100%;opacity:0}
-}
-
-/* New user-posted bubble pops in */
-.float-bubble.user-posted{
-  background:linear-gradient(135deg,rgba(91,158,148,0.22),rgba(212,163,89,0.18));
-  animation:floatDrift linear infinite;
-}
+.stage-item.in{opacity:1;transform:translateY(0)}
+.comment-card{padding:10px 14px;border-radius:8px;font-size:0.8rem;line-height:1.5}
+.comment-card.pos{background:rgba(91,158,148,0.1);border-left:3px solid var(--teal-soft)}
+.comment-card.con{background:rgba(197,61,61,0.06);border-left:3px solid var(--red)}
+.comment-card .card-user{font-size:0.62rem;color:var(--text-faint);margin-top:4px;text-align:right}
+.comment-card .card-user .card-tag{color:var(--gold);margin-left:6px}
 
 .comment-input-area{display:flex;gap:6px;align-items:center}
 .comment-input-area input{
@@ -500,16 +513,16 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 .comment-input-area button:active{transform:scale(0.95);opacity:0.85}
 /* P6 layout override */
-#p6 .section-inner{justify-content:flex-start;padding-top:8vw;padding-bottom:2vw}
+#p6 .section-inner{justify-content:flex-start;padding-top:8vw;transform:translateY(-15px)}
 #p6 .comment-input-area{padding-bottom:12px}
-#p7 .section-inner{justify-content:flex-start}
+#p7 .section-inner{justify-content:flex-start;transform:translateY(-30px)}
 .comment-prompt{font-size:0.68rem;color:var(--text-faint);text-align:center;margin-top:12px;margin-bottom:6px}
 
 /* ===== P7 · ENDING ===== */
 .ending{text-align:center}
 .ending-heading{
   font-family:var(--font-serif);
-  font-size:clamp(1.2rem,4.2vw,1.6rem);
+  font-size:clamp(1.5rem,5.5vw,2rem);
   color:var(--teal-deep);font-weight:700;line-height:1.35;
 }
 
@@ -519,7 +532,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 .promise-input input{
   padding:10px 16px;border:1.5px solid rgba(91,158,148,0.4);
-  border-radius:20px;font-size:0.78rem;font-family:inherit;
+  border-radius:20px;font-size:0.8rem;font-family:inherit;
   background:rgba(253,251,247,0.8);color:var(--text);
   outline:none;max-width:160px;text-align:center;
   transition:border-color 0.3s;
@@ -528,7 +541,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 .promise-input button{
   padding:10px 20px;border:none;border-radius:20px;
   background:linear-gradient(135deg,var(--teal-deep),var(--teal-soft));
-  color:#fff;font-size:0.78rem;font-weight:600;cursor:pointer;
+  color:#fff;font-size:0.8rem;font-weight:600;cursor:pointer;
 }
 .promise-input button:active{opacity:0.85;transform:scale(0.96)}
 
@@ -550,21 +563,21 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   font-size:0.9rem;color:#fff;
 }
 .promise-card .card-name{
-  font-family:var(--font-serif);font-size:0.85rem;font-weight:700;color:var(--teal-deep);
+  font-family:var(--font-serif);font-size:1rem;font-weight:700;color:var(--teal-deep);
 }
 .promise-card .card-msg{
-  font-size:0.62rem;color:var(--text-sub);margin:3px 0 6px;line-height:1.35;
+  font-size:0.78rem;color:var(--text-sub);margin:3px 0 6px;line-height:1.35;
 }
 .promise-card .card-stamp{
-  display:inline-block;font-size:0.48rem;color:var(--red);font-weight:600;
+  display:inline-block;font-size:0.6rem;color:var(--red);font-weight:600;
   border:1px solid var(--red);border-radius:6px;padding:1px 8px;
   letter-spacing:0.04em;
 }
 .promise-card .card-date{
-  font-size:0.48rem;color:var(--text-faint);margin-top:4px;
+  font-size:0.6rem;color:var(--text-faint);margin-top:4px;
 }
 .promise-card .card-save{
-  font-size:0.48rem;color:var(--text-faint);margin-top:4px;
+  font-size:0.6rem;color:var(--text-faint);margin-top:4px;
 }
 
 /* Droplet + ripple (Plan B) */
@@ -608,15 +621,15 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
 .vision-list{display:flex;flex-direction:column;gap:3px;margin:6px 0}
 .vision-item{
-  display:flex;align-items:center;gap:6px;
+  display:flex;align-items:center;justify-content:center;gap:6px;
   padding:7px 12px;background:rgba(253,251,247,0.4);
-  border-radius:6px;text-align:left;
+  border-radius:6px;
   opacity:0;transform:translateY(12px);
   transition:all 0.5s cubic-bezier(0.22,1,0.36,1);
 }
 .vision-item.lit{opacity:1;transform:translateY(0);background:rgba(253,251,247,0.85)}
-.vision-item .v-icon{font-size:1rem;width:26px;text-align:center;flex-shrink:0}
-.vision-item .v-text{font-size:0.78rem;color:var(--text);line-height:1.3}
+.vision-item .v-icon{font-size:1rem;flex-shrink:0}
+.vision-item .v-text{font-size:0.92rem;color:var(--text);line-height:1.3;text-align:center;flex:0 0 auto}
 .vision-item .v-text strong{color:var(--teal-deep)}
 
 .ending-close{
@@ -637,7 +650,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 .back-top-btn:active{transform:scale(0.94)}
 
-.ending-source{margin-top:12px;font-size:0.62rem;color:var(--text-faint);line-height:1.5}
+.ending-source{margin-top:-18px;font-size:0.74rem;color:var(--text-faint);line-height:1.5;max-width:100%;overflow-wrap:break-word}
 
 /* ===== DIVIDER ===== */
 .section-divider{
@@ -680,11 +693,13 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <div class="section-bg"><img src="assets/p1.webp" alt=""></div>
   <div class="section-inner cover">
     <div class="reveal"><div class="section-label">THE YANGTZE RIVER · A DECADE OF RENEWAL</div></div>
-    <div class="reveal reveal-d1"><h1 class="main-title">2016 → 2026</h1></div>
-    <div class="reveal reveal-d2"><p class="sub-title">我们用十年，换长江一个转身</p></div>
+    <div class="reveal reveal-d1"><h1 class="main-title">一条大江的十年答案</h1></div>
+    <div class="reveal reveal-d2"><p class="sub-title">2016 → 2026</p></div>
     <div class="reveal reveal-d3"><p class="en-title">A RIVER'S TURN</p></div>
     <div class="reveal reveal-d4" style="margin-top:20px">
-      <p class="intro-text">十年前，长江病了。<br>十年后，江豚回来了。</p>
+      <p class="intro-text">2016 年，长江给我们出了一道题。<br>我们用十年作答，水清鱼跃就是我们的答案。</p>
+    </div>
+    <div class="reveal reveal-d5">
       <p class="cover-note">2016年1月5日，重庆。一句话改变了一条大江的命运："共抓大保护、不搞大开发"。</p>
     </div>
   </div>
@@ -733,27 +748,26 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <!-- Popup cards -->
   <div class="map-popup" id="popup-chongqing">
     <span class="close-btn">&times;</span>
-    <p class="popup-title">2016.01.05 · 重庆<br>推动长江经济带发展座谈会</p>
+    <p class="popup-title">2016·01·05 · 重庆<br>推动长江经济带发展座谈会</p>
     <p>首提<strong>"共抓大保护、不搞大开发"</strong>。立规矩，划红线。把修复长江生态环境摆在压倒性位置。同年9月，《长江经济带发展规划纲要》正式印发。</p>
-    <p class="popup-quote">"当前和今后相当长一个时期，要把修复长江生态环境摆在压倒性位置。"</p>
   </div>
 
   <div class="map-popup" id="popup-wuhan">
     <span class="close-btn">&times;</span>
-    <p class="popup-title">2018.04.26 · 武汉<br>深入推动长江经济带发展座谈会</p>
+    <p class="popup-title">2018·04·26 · 武汉<br>深入推动长江经济带发展座谈会</p>
     <p>提出正确把握<strong>"五个关系"</strong>：整体推进与重点突破、生态环境保护与经济发展、总体谋划与久久为功、破除旧动能与培育新动能、自身发展与协同发展。</p>
   </div>
 
   <div class="map-popup" id="popup-nanjing">
     <span class="close-btn">&times;</span>
-    <p class="popup-title">2020.11.14 · 南京<br>全面推动长江经济带发展座谈会</p>
+    <p class="popup-title">2020·11·14 · 南京<br>全面推动长江经济带发展座谈会</p>
     <p>赋予长江经济带<strong>三大战略定位</strong>：生态优先绿色发展主战场、畅通国内国际双循环主动脉、引领经济高质量发展主力军。</p>
   </div>
 
   <div class="map-popup" id="popup-nanchang">
     <span class="close-btn">&times;</span>
-    <p class="popup-title">2023.10.12 · 南昌<br>进一步推动长江经济带高质量发展座谈会</p>
-    <p>强调<strong>"谋长远之势、行长久之策、建久安之基"</strong>。提出五个关键词：生态优先、创新引领、战略支撑、协同融通、安全发展。</p>
+    <p class="popup-title">2023·10·12 · 南昌<br>进一步推动长江经济带高质量发展座谈会</p>
+    <p>强调<strong>"谋长远之势、行长久之策、建久安之基"</strong>。提出<strong>高质量发展新格局</strong>：生态优先、创新引领、战略支撑、协同融通、安全发展。</p>
   </div>
   <span class="scroll-hint-inline">&#8595; 向下滑动 &#8595;</span>
 </section>
@@ -811,13 +825,13 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
           <div class="flip-front">
             <span class="flip-icon">&#x1F42C;</span>
             <span class="flip-label">长江江豚</span>
-            <span class="flip-num">1,012头</span>
+            <span class="flip-num">1012头</span>
             <span class="flip-hint-badge">点击翻转</span>
           </div>
           <div class="flip-back">
             <span class="flip-icon">&#x1F42C;</span>
             <span class="flip-label">长江江豚</span>
-            <span class="flip-num">1,426头</span>
+            <span class="flip-num">1426头</span>
             <span class="flip-delta">+414头 (+41%)</span>
           </div>
         </div>
@@ -871,7 +885,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
           <div class="flip-back">
             <span class="flip-icon">&#x1F3D7;</span>
             <span class="flip-label">非法码头整改</span>
-            <span class="flip-num">1,361座</span>
+            <span class="flip-num">1361座</span>
             <span class="flip-delta">岸线修复162km</span>
           </div>
         </div>
@@ -951,9 +965,9 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
     </div>
 
     <div class="reveal reveal-d2"><p class="p3-highlight">
-      <strong>最令人振奋的——</strong><br>
-      曾被宣布"野外灭绝"的<strong>长江鲟</strong>，在赤水河首次观测到自然产卵。<br>
-      中华鲟连续两年增殖放流突破<strong>100万尾</strong>。
+      <strong>2017年</strong><br>
+      曾被宣布"野外灭绝"的<strong>长江鲟</strong>，<br>在赤水河首次观测到自然产卵。<br>
+      中华鲟连续两年增殖放流突破<strong>100万尾</strong>！
     </p></div>
     <div class="reveal reveal-d3" style="text-align:center;margin-top:8px">
       <span class="scroll-hint-inline">&#8595; 向下滑动 &#8595;</span>
@@ -966,7 +980,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <div class="section-bg"><img src="assets/p4.webp" alt=""></div>
 
   <div class="p2-intro reveal">
-    <p class="lead">四个地方，四种转身。从化工围江到绿色新城，从砂石码头到候鸟天堂。</p>
+    <p class="lead">从化工围江到绿色新城，从砂石码头到候鸟天堂。四个地方，四种转身。</p>
     <p class="hint">点击地图上的城市，查看转型故事</p>
   </div>
 
@@ -979,7 +993,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <!-- 岳阳君山 -->
   <div class="map-dot dot-hidden" data-city="yueyang" style="top:42%;left:62%">
     <div class="landmark-icon">岳</div>
-    <span class="city-label">岳阳君山</span>
+    <span class="city-label">岳阳</span>
   </div>
 
   <!-- 马鞍山薛家洼 -->
@@ -991,32 +1005,32 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <!-- 苏州吴江 -->
   <div class="map-dot dot-hidden" data-city="suzhou" style="top:78%;left:52%">
     <div class="landmark-icon">苏</div>
-    <span class="city-label">苏州吴江</span>
+    <span class="city-label">苏州</span>
   </div>
 
   <!-- Popups -->
   <div class="map-popup" id="popup-yichang">
     <span class="close-btn">&times;</span>
     <p class="popup-title">宜昌 · 腾笼换鸟</p>
-    <p>兴发集团率先拆除沿江<strong>32套</strong>生产装置，资产价值<strong>13.58亿</strong>。全市134家化工企业全部"关改搬转"。磷矿石从"论吨卖"变成了黑磷晶体"<strong>论克卖</strong>"。GDP没有垮——2024年突破<strong>6,191亿</strong>，比2016年翻了一番。</p>
+    <p>全市134家化工企业全部"关改搬转"。磷矿石从"论吨卖"变成了黑磷晶体"<strong>论克卖</strong>"。<br>GDP没有垮？2024年突破<strong>6191亿</strong>，比2016年<strong>翻了一番</strong>。</p>
   </div>
 
   <div class="map-popup" id="popup-yueyang">
     <span class="close-btn">&times;</span>
-    <p class="popup-title">岳阳君山 · 化茧成蝶</p>
-    <p>660米长江岸线，曾年吞吐砂石30余万吨。如今<strong>39处</strong>砂石码头全部拆除。江豚从绝迹恢复到<strong>近60头</strong>常驻，麋鹿从65头增至<strong>320头以上</strong>。现在是<strong>国家AAAA级景区</strong>。</p>
+    <p class="popup-title">岳阳 · 化茧成蝶</p>
+    <p>码头660米长江岸线，曾年吞吐砂石30余万吨。如今<strong>39处</strong>砂石码头全部拆除。<br>江豚数量从几乎绝迹恢复到常年观测值<strong>近60头</strong>，麋鹿从65头增至<strong>320头以上</strong>。</p>
   </div>
 
   <div class="map-popup" id="popup-maanshan">
     <span class="close-btn">&times;</span>
-    <p class="popup-title">马鞍山薛家洼 · 还江于民</p>
-    <p><strong>986亩</strong>区域，曾集中散乱污企业7家、非法码头3处。2019年一夜整治。在全国率先完成全面禁捕，拆解渔船<strong>5,651艘</strong>。现在，这里是市民周末带孩子亲江的打卡地。</p>
+    <p class="popup-title">马鞍山 · 还江于民</p>
+    <p>薛家洼<strong>986亩</strong>区域，曾集中散乱污企业7家、非法码头3处。2019年一夜整治。马鞍山市在全国率先完成全面禁捕，拆解渔船<strong>5651艘</strong>。<br>现在，这里是市民周末带孩子亲江的打卡地。</p>
   </div>
 
   <div class="map-popup" id="popup-suzhou">
     <span class="close-btn">&times;</span>
-    <p class="popup-title">苏州吴江 · 科技护江</p>
-    <p>"天-空-地-水"立体感知，<strong>5万条</strong>监测数据实时跳动。工业污水"一企一管一策"，中水回用率<strong>85%</strong>。太浦河连续7年稳定达&#8545;类水。全国仅7个入选"长江大保护优秀实践案例"。</p>
+    <p class="popup-title">苏州 · 科技护江</p>
+    <p>吴江区构建了"天-空-地-水"立体感知水务系统，<strong>5万条</strong>监测数据实时跳动。<br>工业污水"一企一管一策"，中水回用率<strong>85%</strong>。<br>太浦河连续7年稳定达<strong>&#8545;类水</strong>。<br>吴江治水模式入选全国<strong>"长江大保护优秀实践案例"</strong>。</p>
   </div>
   <span class="scroll-hint-inline">&#8595; 向下滑动 &#8595;</span>
 </section>
@@ -1026,7 +1040,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <div class="section-bg"><img src="assets/p5.webp" alt=""></div>
   <div class="section-inner">
     <div class="reveal"><div class="section-label">VOICES</div></div>
-    <div class="reveal reveal-d1"><h2 class="section-heading">守护者面孔</h2></div>
+    <div class="reveal reveal-d1"><h2 class="section-heading">这十年，他们在守护长江</h2></div>
     <div class="reveal reveal-d1"><p class="section-subhead">点开每条留言，听听他们想说的话</p></div>
 
     <div class="chat-list">
@@ -1051,7 +1065,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
           <div class="chat-bubble">
             <span class="chat-quote">"只有保护好资源，子孙后代才能幸福生活。"</span>
           </div>
-          <div class="chat-story">2017年加入全国第一支江豚协助巡护队。总巡护里程16万余公里，观察记录江豚5,200余头次。2024年3月，一只亚成年江豚被渔网缠住尾巴，他跳入江中。救起后，江豚绕船游了好几圈才离去。</div>
+          <div class="chat-story">2017年加入全国第一支江豚协助巡护队。总巡护里程16万余公里，观察记录江豚5200余头次。2024年3月，一只亚成年江豚被渔网缠住尾巴，他跳入江中。救起后，江豚绕船游了好几圈才离去。</div>
           <span class="tap-hint">点击展开故事</span>
         </div>
       </div></div>
@@ -1083,28 +1097,55 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
       </div></div>
     </div>
 
-    <div class="reveal reveal-d5"><p class="people-footer">
-      九旬院士，六旬渔民队长，<br>上岸创业的女性，坚守野外的青年科研者<br>——四种声音，同一条江。
-    </p></div>
   </div>
   <span class="scroll-hint-inline">&#8595; 向下滑动 &#8595;</span>
 </section>
 
-<!-- ======== P6 · FLOATING COMMENTS ======== -->
+<!-- ======== P6 · COMMENT STAGE ======== -->
 <section class="section" id="p6">
   <div class="section-bg"><img src="assets/p6.webp" alt=""></div>
   <div class="section-inner">
     <div class="reveal"><div class="section-label">VOICES</div></div>
-    <div class="reveal reveal-d1"><h2 class="section-heading">网友声音</h2></div>
+    <div class="reveal reveal-d1"><h2 class="section-heading">每一个声音，都是长江的注脚</h2></div>
 
-    <div class="float-stage" id="floatStage"></div>
+    <div class="reveal reveal-d1"><p class="comment-prompt">你在长江边长大吗？这十年间，你看到了什么变化？</p></div>
 
-    <p class="comment-prompt">你在长江边长大吗？这十年间，你看到了什么变化？</p>
-    <div class="comment-input-area">
+    <div class="comment-stage" id="commentStage">
+      <div class="comment-card pos stage-item" data-delay="0">
+        "湖里的鱼多到有时候自己往船板上跳！"<div class="card-user">—— 鄱阳湖老渔民<span class="card-tag">&#x1F331;</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="0.3">
+        "南京对生态的重视程度，让我和孩子亲眼看到过多次江猪子！"<div class="card-user">—— 南京网友<span class="card-tag">&#x1F331;</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="0.6">
+        "江里的鱼肉眼可见地多了，小时候江边的化工厂味道现在没有了。"<div class="card-user">—— 湖北网友<span class="card-tag">&#x1F331;</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="0.9">
+        "安徽黄湓闸百万条大鱼跃龙门，十年前想都不敢想。"<div class="card-user">—— 安徽网友<span class="card-tag">&#x1F331;</span></div>
+      </div>
+      <div class="comment-card con stage-item" data-delay="1.2">
+        "好不容易沅水出现一只江豚，第二天就死在了岸边。"<div class="card-user">—— 湖南网友<span class="card-tag">&#x1F4AD;</span></div>
+      </div>
+      <div class="comment-card con stage-item" data-delay="1.5">
+        "禁渔我们都支持，但执行要公平，别让老实人吃亏。"<div class="card-user">—— 江西网友<span class="card-tag">&#x1F4AD;</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="1.8">
+        "我是宜昌人，小时候江边全是化工厂的味道，现在带孩子去江边散步，空气是甜的。"<div class="card-user">—— 宜昌<span class="card-tag">&#x1F331;</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="2.1">
+        "去年在南京滨江亲眼看到了江豚！第一次！激动得差点掉水里。"<div class="card-user">—— 南京<span class="card-tag">&#x1F331;</span></div>
+      </div>
+      <div class="comment-card con stage-item" data-delay="2.4">
+        "作为一个退捕渔民，说实话上岸那一年很难。但现在回头看，值了。"<div class="card-user">—— 岳阳<span class="card-tag">&#x1F4AD;</span></div>
+      </div>
+    </div>
+
+    <div class="reveal reveal-d1"><div class="comment-input-area">
       <input type="text" id="commentInput" placeholder="写下我和长江的故事..." maxlength="200">
       <button id="commentBtn">发布</button>
-    </div>
-    <p style="text-align:center;font-size:0.92rem;color:var(--teal-deep);margin-top:20px;font-weight:600">每一个声音，都是长江未来的一部分</p>
+    </div></div>
+    <div class="reveal reveal-d1"><p style="text-align:center;font-size:0.92rem;color:var(--teal-deep);margin-top:6px;font-weight:600">这些声音，有骄傲，有遗憾，也有期待。<br>从九旬院士到退捕渔民，从巡护队长到青年科研者&hellip;&hellip;<br>长江的十年，<br>是政策推动的十年，<br>更是每一个普通人用脚步丈量、用眼睛见证的十年。<br>每一个人，都是长江未来的一部分！</p>
+    <p style="text-align:center;font-size:1.1rem;color:var(--teal-deep);margin-top:8px;font-weight:700">这，就是一条大江的十年答案！</p></div>
     <span class="scroll-hint-inline">&#8595; 向下滑动 &#8595;</span>
   </div>
 </section>
@@ -1115,7 +1156,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <div class="section-inner ending" style="padding-top:20vw">
     <div class="reveal"><div class="section-label">FORWARD</div></div>
     <div class="reveal reveal-d1"><h2 class="ending-heading">从一个十年<br>走向下一个十年</h2></div>
-    <div class="reveal reveal-d2"><p style="font-size:0.78rem;color:var(--text-sub);margin-top:4px">
+    <div class="reveal reveal-d2"><p style="font-size:0.88rem;color:var(--text-sub);margin-top:4px">
       写下你的名字，生成一张专属的长江承诺卡
     </p></div>
 
@@ -1131,7 +1172,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
       <div class="card-msg">我承诺，<br>守护长江的每一条鱼、每一滴水、<br>每一头江豚的微笑。<br>从一个十年，走向下一个十年。</div>
       <div class="card-stamp">长江大保护 · 见证者</div>
       <div class="card-date" id="cardDate">2026 年 5 月</div>
-      <div class="card-save">&#x1F4F7; 长按或截图保存你的承诺卡</div>
+      <div class="card-save">&#x1F4F7; 截图保存你的承诺卡</div>
     </div>
 
     <!-- Plan B: Droplet + visions (hidden until card appears) -->
@@ -1139,24 +1180,23 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
       <div class="droplet-wrap" id="dropletWrap">
         <button class="droplet-btn" id="dropletBtn" onclick="lightUp()">&#x1F4A7;</button>
       </div>
-      <p style="font-size:0.62rem;color:var(--text-faint)">点亮一滴江水，看见长江的未来</p>
+      <p style="font-size:0.74rem;color:var(--text-faint)">点亮一滴江水，看见长江的未来</p>
 
       <div class="vision-list">
         <div class="vision-item" id="v1"><span class="v-icon">&#x1F4A7;</span><span class="v-text"><strong>&#8545; 类水</strong> 成为常态，干流全线稳定</span></div>
-        <div class="vision-item" id="v2"><span class="v-icon">&#x1F42C;</span><span class="v-text"><strong>2,000 头</strong> 长江江豚种群数量目标</span></div>
+        <div class="vision-item" id="v2"><span class="v-icon">&#x1F42C;</span><span class="v-text"><strong>2000 头</strong> 长江江豚种群数量目标</span></div>
         <div class="vision-item" id="v3"><span class="v-icon">&#x1F41F;</span><span class="v-text"><strong>中华鲟</strong> 实现稳定野外自然繁殖</span></div>
         <div class="vision-item" id="v4"><span class="v-icon">&#x1F33F;</span><span class="v-text"><strong>GEP 核算</strong> 纳入政绩考核体系</span></div>
       </div>
+      <p class="ending-close" id="endingClose">十年前，一场座谈会为长江定下基调。<br>十年后，鱼跃鸟飞为答案写下了注脚。</p>
     </div>
 
-    <p class="ending-close" id="endingClose">十年前，我们用一场座谈会立了规矩。<br>十年后，一条大江用鱼跃鸟飞给出了回应。</p>
-    <p style="font-size:1.1rem;font-weight:700;color:var(--teal-deep);opacity:0;transition:opacity 0.6s" id="endingNext">下一个十年见。</p>
+
+    <p style="font-size:1.1rem;font-weight:700;color:var(--teal-deep);opacity:0;transition:opacity 0.6s" id="endingNext">我们下一个十年见！</p>
 
     <a href="#p1" class="back-top-btn" id="backTopBtn" style="opacity:0;pointer-events:none" onclick="resetAll()">&#x1F4A7; 回到开端</a>
     <p class="ending-source">
-      策划：雷浩宇<br>
-      数据来源：国新办、农业农村部、国家发改委、长江水利委员会<br>
-      2026 年 5 月
+      数据来源：国务院新闻办公室、农业农村部、国家发展和改革委员会、长江水利委员会等
     </p>
   </div>
 </section>
@@ -1287,6 +1327,13 @@ window.addEventListener('scroll',()=>{
   }
 },{passive:true})
 
+// Clone flip icons to bottom-right corner
+document.querySelectorAll('.flip-front .flip-icon, .flip-back .flip-icon').forEach(icon=>{
+  const clone = icon.cloneNode(true)
+  clone.className = 'flip-icon-br'
+  icon.parentElement.appendChild(clone)
+})
+
 // P1 title auto-animate on page load
 const p1Reveals = document.querySelectorAll('#p1 .reveal')
 p1Reveals.forEach((el,i)=>{
@@ -1318,10 +1365,14 @@ function resetAll(){
   document.getElementById('cardName').textContent = '______'
   document.querySelectorAll('.ripple-ring').forEach(r=>r.remove())
   // Close all open popups, chat bubbles, flipped cards
-  document.querySelectorAll('.map-popup').forEach(p=>p.classList.remove('open'))
+  document.querySelectorAll('.map-popup').forEach(p=>{p.classList.remove('open');p.style.opacity='0';p.style.transition='none'})
   document.querySelectorAll('.map-dot').forEach(d=>d.classList.remove('active'))
   document.querySelectorAll('.chat-msg').forEach(m=>{m.classList.remove('expanded');m.classList.remove('dimmed')})
   document.querySelectorAll('.flip-card').forEach(c=>c.classList.remove('flipped'))
+  // Reset P6
+  stageTriggered = false
+  document.querySelectorAll('.stage-item').forEach(s=>s.classList.remove('in'))
+  document.getElementById('commentInput').value = ''
   window.scrollTo({top:0,behavior:'smooth'})
   setTimeout(updateAll,100)
 }
@@ -1337,8 +1388,6 @@ function makePromise(){
   document.getElementById('promiseCard').classList.add('show')
   // Reveal droplet stage after card
   setTimeout(()=>document.getElementById('dropletStage').classList.add('show'),600)
-  // Show closing text
-  setTimeout(()=>document.getElementById('endingClose').classList.add('show'),1000)
 }
 
 // P7 Plan B: Droplet ripple + vision light-up
@@ -1359,6 +1408,7 @@ function lightUp(){
   visions.forEach((v,i)=>{
     setTimeout(()=>v.classList.add('lit'),500+i*400)
   })
+  setTimeout(()=>document.getElementById('endingClose').classList.add('show'),500+4*400-100)
   setTimeout(()=>document.getElementById('endingNext').style.opacity='1',500+4*400+300)
   setTimeout(()=>{
     const btn = document.getElementById('backTopBtn')
@@ -1402,6 +1452,7 @@ document.querySelectorAll('.map-dot').forEach(dot=>{
     const topPct = ((dRect.top + dRect.height/2 - sRect.top) / sRect.height * 100)
     const side = popupSide[city]
 
+    popup.style.opacity = ''; popup.style.transition = ''
     popup.style.top = ''; popup.style.bottom = ''
     popup.style.left = ''; popup.style.right = ''
     popup.style.borderLeft = ''; popup.style.borderRight = ''
@@ -1434,58 +1485,39 @@ document.querySelectorAll('.map-popup .close-btn').forEach(btn=>{
   })
 })
 
-// Floating comment system
-const presetComments = [
-  {text:'"湖里的鱼多到有时候自己往船板上跳！"',user:'鄱阳湖老渔民',type:'pos'},
-  {text:'"南京对生态的重视程度，让我和孩子亲眼看到过多次江猪子！"',user:'南京网友',type:'pos'},
-  {text:'"江里的鱼肉眼可见地多了，小时候江边的化工厂味道现在没有了。"',user:'湖北网友',type:'pos'},
-  {text:'"安徽黄湓闸百万条大鱼跃龙门，十年前想都不敢想。"',user:'安徽网友',type:'pos'},
-  {text:'"好不容易沅水出现一只江豚，第二天就死在了岸边。"',user:'湖南网友',type:'con'},
-  {text:'"禁渔我们都支持，但执行要公平，别让老实人吃亏。"',user:'江西网友',type:'con'},
-]
-const stage = document.getElementById('floatStage')
-
-function spawnBubble(comment, isNew){
-  // Cap total bubbles to avoid DOM bloat
-  while(stage.children.length > 6) stage.firstChild.remove()
-
-  const b = document.createElement('div')
-  b.className = 'float-bubble '+(isNew?'user-posted':comment.type)
-  b.innerHTML = comment.text+'<div class="float-user">—— '+comment.user+'</div>'
-  // Randomize: horizontal offset, duration, delay
-  const offset = comment.type==='pos' ? 3 : 3
-  const spread = Math.random()*18
-  b.style[comment.type==='pos'?'left':'right'] = (offset+spread)+'%'
-  b.style.animationDuration = (12+Math.random()*8)+'s'
-  b.style.animationDelay = isNew?'0s':(Math.random()*12)+'s'
-  stage.appendChild(b)
-
-  // Infinite loop — no cleanup needed, stage naturally manages bubbles
+// Comment stage — trigger items to animate in when stage enters viewport
+let stageTriggered = false
+function checkStage(){
+  if(stageTriggered) return
+  const stage = document.getElementById('commentStage')
+  if(!stage) return
+  const r = stage.getBoundingClientRect()
+  if(r.top < window.innerHeight * 0.85){
+    stageTriggered = true
+    document.querySelectorAll('.stage-item').forEach(item=>{
+      const d = parseFloat(item.dataset.delay || '0')
+      setTimeout(()=>item.classList.add('in'), d*1000)
+    })
+  }
 }
+// Hook into existing scroll
+const origUpdateAll = updateAll
+updateAll = function(){ origUpdateAll(); checkStage() }
 
-// Init: spawn preset comments in staggered loop
-function initFloats(){
-  if(!stage){setTimeout(initFloats,200);return}
-  presetComments.forEach((c,i)=>{
-    setTimeout(()=>spawnBubble(c,false),i*6000)
-  })
-  // Cycle new bubbles slowly to avoid crowding
-  setInterval(()=>{
-    const c = presetComments[Math.floor(Math.random()*presetComments.length)]
-    spawnBubble(c,false)
-  },10000)
-}
-initFloats()
-
-// User posting
+// User comment posting
 document.getElementById('commentBtn').addEventListener('click',postComment)
 document.getElementById('commentInput').addEventListener('keydown',e=>{if(e.key==='Enter')postComment()})
 function postComment(){
   const input = document.getElementById('commentInput')
   const text = input.value.trim()
   if(!text) return
-  const c = {text:'"'+text+'"',user:'刚刚',type:'pos'}
-  spawnBubble(c,true)
+  const stage = document.getElementById('commentStage')
+  const card = document.createElement('div')
+  card.className = 'comment-card pos stage-item in'
+  card.style.cssText = 'background:linear-gradient(135deg,rgba(91,158,148,0.18),rgba(212,163,89,0.12));border-left:3px solid var(--gold)'
+  card.innerHTML = '"'+text+'"<div class="card-user">—— 刚刚<span class="card-tag">&#x1F331;</span></div>'
+  stage.appendChild(card)
+  stage.scrollTop = stage.scrollHeight
   input.value = ''
 }
 </script>

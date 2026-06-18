@@ -248,6 +248,52 @@ A small, clean Chinese gongbi line-drawing icon (200x200, transparent background
 
 ## 使用说明
 
+---
+
+## 补充素材：二维码推广海报（图片+Prompt 一起发）
+
+**用途**：融合二维码的推广海报。**注意使用方式——把 `qrcode.png` 图片+下面文字 prompt 一起发给 ChatGPT**，GPT 会看到真实的二维码，并将其自然融入画面设计。
+
+**尺寸**：1080 × 1920 px（竖屏）
+
+**⚠️ 重要**：二维码必须保持可扫描！不能扭曲、变形、遮挡二维码的关键定位图案（三个角上的方块）。
+
+---
+
+**英文 Prompt**（附上 qrcode.png 图片一起发送）：
+
+```
+I'm uploading a QR code image (qrcode.png). Please look at this QR code carefully. I need you to create a vertical promotional poster (1080x1920) where this actual QR code is seamlessly integrated into the artwork as a natural design element — NOT just slapped on top.
+
+Key requirements:
+- The QR code must remain recognizable and scannable — do NOT distort, warp, rotate, or cover the three corner positioning squares of the QR code
+- Integrate it creatively into a New Chinese Style composition. Ideas (pick the one that works best): (1) The QR code sits inside a classical Chinese moon gate (circular frame with golden borders) on an ancient scroll, like a seal on a painting; (2) The QR code is embedded in a golden plaque or stele by the riverside, with ink-wash mountains behind it; (3) The QR code floats on the surface of a calm river like a reflection, with soft ripples around its edges; (4) The QR code is mounted on an elegant scroll unfurling from a traditional Chinese window ledge, with the Yangtze landscape visible beyond the window
+- The QR code's black-and-white pattern should be color-toned to blend with the poster's palette — replace pure black with deep teal-green (#145243) and pure white with the poster's warm ivory (#FDFBF7), with subtle warm golden (#D4A359) decorative elements around it
+- Above and around the QR code: a beautiful New Chinese Style illustration — the Yangtze River winding through green-blue mountains in bird's-eye view, warm golden dawn light, a crimson-red ribbon river (#C53D3D), white cranes in flight, subtle gongbi line-drawn Yellow Crane Tower and bridge silhouettes
+- Below the QR code: one elegant line of Chinese text "扫码见证·长江十年之变" in small seal-script or Song-style type, integrated like an ancient inscription
+- Overall feeling: an elegant invitation card from ancient China that happens to contain a modern QR code — the fusion should feel intentional and beautiful, not jarring
+- Style: New Chinese Style digital illustration, gongbi linework + ink-wash. Color: teal-green (#145243), warm gold (#D4A359), crimson-red (#C53D3D), warm ivory (#FDFBF7). No English text besides what's in the QR code itself. No 3D rendering. No cartoon style.
+```
+
+**中文 Prompt**（附上 qrcode.png 图片一起发送）：
+
+```
+我上传了一张二维码图片(qrcode.png)，请仔细看这个二维码。我需要你创作一张竖版推广海报(1080×1920)，把这个真实的二维码自然融入画面——不是简单贴上去，而是成为设计的一部分。
+
+关键要求：
+- 二维码必须保持可识别可扫描——不要扭曲、变形、旋转、或遮挡二维码三个角上的定位方块
+- 创造性地融入新国风构图。以下方案选一个最合适的：(1) 二维码嵌在古典月亮门（圆形金色边框）中，置于一幅古画手卷之上，像画上的收藏印章；(2) 二维码嵌入一块金色碑刻或牌匾中，立于江边，背后是水墨远山；(3) 二维码如倒影般浮在静谧江面上，边缘泛起柔波微澜；(4) 二维码装裱在一幅从传统中式窗棂展开的卷轴上，窗外可见长江山水
+- 二维码的黑白色调要与海报整体色板融合——纯黑改为深青绿(#145243)，纯白改为米白(#FDFBF7)，周围用暖金色(#D4A359)装饰元素点缀
+- 二维码上方和周围：精美的新国风插画——鸟瞰长江蜿蜒穿行于青绿山水之间，暖金色晨曦光，朱砂红丝带长江(#C53D3D)斜贯画面，白鹤飞翔，工笔线描黄鹤楼飞檐和长江大桥剪影
+- 二维码下方：一行优雅中文小字"扫码见证·长江十年之变"，印章或宋体风格，如古碑题记般自然融入
+- 整体感受：一张来自古代中国的优雅邀请函，恰好包含一个现代二维码——融合是有意为之的美，而非生硬拼贴
+- 画风：新国风数字插画，工笔线描+水墨晕染。色调：青绿#145243、暖金#D4A359、朱砂红#C53D3D、米白#FDFBF7。不留英文（二维码内部的除外）。严禁3D渲染。严禁卡通风格。
+```
+
+文件命名：`poster_qr.png`
+
+---
+
 1. 每条 prompt 可**独立**发给 ChatGPT 出图
 2. 每条 prompt 末尾都包含了"全局风格锁"的关键约束（新国风、工笔+水墨、色板）
 3. 英文 prompt + 中文 prompt 两条都发可以增加准确性，选其一也可
