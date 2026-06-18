@@ -34,9 +34,7 @@
 
 /* ===== PHONE-FRAME LAYOUT ===== */
 html{
-  scroll-behavior:smooth;
   background:var(--bg-ivory);
-  overflow-x:hidden;
 }
 body{
   width:100%;max-width:540px;
@@ -666,8 +664,6 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   opacity:0;transform:translateY(40px);
   will-change:opacity,transform;
 }
-.flip-card{will-change:opacity,transform}
-.dot-hidden{will-change:opacity,transform}
 </style>
 <!-- Background music -->
 <style>
@@ -687,6 +683,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 <body>
 
 <div id="preloader"><div class="loader-ring"></div><div class="loader-text">长江奔涌，正在加载…</div></div>
+
 <audio id="bgm" src="bgm.mp3" loop playsinline preload="auto"></audio>
 <button class="bgm-btn" id="bgmBtn" onclick="toggleBgm()">&#x1F534;</button>
 
@@ -1263,41 +1260,60 @@ document.querySelectorAll('.reveal').forEach(el=>{
 
 // Scroll-linked reveal — animation progress follows scroll position
 const revealEls = document.querySelectorAll('.reveal')
-const p3Cards = document.querySelectorAll('#p3 .flip-card')
-const allDots = document.querySelectorAll('.dot-hidden')
 let ticking = false
 
-function updateAll(){
+// Scroll-driven reveal: appear going down, fade back going up
+function updateReveals(){
   const vh = window.innerHeight
-
   revealEls.forEach(el=>{
-    const r = el.getBoundingClientRect()
-    const progress = Math.max(0, Math.min(1, (vh*0.95 - r.top) / (vh*0.5)))
+    const rect = el.getBoundingClientRect()
+    const start = vh * 0.95
+    const end = vh * 0.45
+    const range = start - end
+    const progress = Math.max(0, Math.min(1, (start - rect.top) / range))
     const delay = parseFloat(el.dataset.delay || '0')
     const p = Math.max(0, Math.min(1, (progress - delay) / (1 - delay)))
     el.style.opacity = p
     el.style.transform = `translateY(${(1-p)*40}px)`
   })
+}
 
+// P3 flip cards — scroll-linked row by row reveal
+const p3Cards = document.querySelectorAll('#p3 .flip-card')
+function updateCards(){
+  const vh = window.innerHeight
   p3Cards.forEach((card,i)=>{
-    const r = card.getBoundingClientRect()
-    const progress = Math.max(0, Math.min(1, (vh*0.95 - r.top) / (vh*0.5)))
+    const rect = card.getBoundingClientRect()
+    const start = vh * 0.95
+    const end = vh * 0.45
+    const range = start - end
     const rowDelay = Math.floor(i/2) * 0.12
-    const p = Math.max(0, Math.min(1, progress - rowDelay))
-    card.style.opacity = p
-    card.style.transform = `translateY(${(1-p)*24}px)`
+    const progress = Math.max(0, Math.min(1, ((start - rect.top) / range) - rowDelay))
+    card.style.opacity = progress
+    card.style.transform = `translateY(${(1-progress)*24}px)`
   })
+}
 
+// Dot entrance — scroll-linked
+const allDots = document.querySelectorAll('.dot-hidden')
+function updateDots(){
+  const vh = window.innerHeight
   allDots.forEach((dot,i)=>{
-    const r = dot.getBoundingClientRect()
-    const progress = Math.max(0, Math.min(1, (vh*0.95 - r.top) / (vh*0.5)))
+    const rect = dot.getBoundingClientRect()
+    const start = vh * 0.95
+    const end = vh * 0.45
+    const range = start - end
     const dotDelay = i % 4 * 0.08
-    const p = Math.max(0, Math.min(1, progress - dotDelay))
-    dot.style.opacity = p
-    dot.style.transform = `translate(-50%,${-30 + p*30}%)`
+    const progress = Math.max(0, Math.min(1, ((start - rect.top) / range) - dotDelay))
+    dot.style.opacity = progress
+    dot.style.transform = `translate(-50%,${-30 + progress*30}%)`
   })
+}
 
-  if(typeof checkStage === 'function') checkStage()
+function updateAll(){
+  updateReveals()
+  updateCards()
+  updateDots()
 }
 
 window.addEventListener('scroll',()=>{
@@ -1356,7 +1372,7 @@ function resetAll(){
   stageTriggered = false
   document.querySelectorAll('.stage-item').forEach(s=>s.classList.remove('in'))
   document.getElementById('commentInput').value = ''
-  window.scrollTo({top:0,behavior:'smooth'})
+  window.scrollTo({top:0,behavior:'instant'})
   setTimeout(updateAll,100)
 }
 
