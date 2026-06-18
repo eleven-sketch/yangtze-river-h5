@@ -667,7 +667,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   will-change:opacity,transform;
 }
 .flip-card{will-change:opacity,transform}
-.dot-hidden{will-change:opacity,transform;contain:layout style paint}
+.dot-hidden{will-change:opacity,transform}
 </style>
 <!-- Background music -->
 <style>
@@ -1261,57 +1261,42 @@ document.querySelectorAll('.reveal').forEach(el=>{
   else el.dataset.delay='0'
 })
 
-// Scroll-linked reveal — optimized for smooth 60fps
+// Scroll-linked reveal — animation progress follows scroll position
 const revealEls = document.querySelectorAll('.reveal')
 const p3Cards = document.querySelectorAll('#p3 .flip-card')
 const allDots = document.querySelectorAll('.dot-hidden')
-let ticking = false, vhCache = window.innerHeight
-
-// Update viewport height on resize (rarely changes)
-window.addEventListener('resize',()=>{ vhCache = window.innerHeight },{passive:true})
-
-// Shared visibility calculation — only process elements near viewport
-function calcVis(rect, delay){
-  const start = vhCache * 0.95, end = vhCache * 0.45, range = start - end
-  const progress = Math.max(0, Math.min(1, (start - rect.top) / range))
-  return Math.max(0, Math.min(1, (progress - delay) / (1 - delay)))
-}
+let ticking = false
 
 function updateAll(){
-  const vh = vhCache
-  const margin = vh * 0.5 // only update elements within 1.5x viewport
-  const top = -margin, bottom = vh + margin
+  const vh = window.innerHeight
 
-  // Reveals
   revealEls.forEach(el=>{
     const r = el.getBoundingClientRect()
-    if(r.bottom < top || r.top > bottom) return // skip out-of-view
-    const p = calcVis(r, parseFloat(el.dataset.delay || '0'))
-    const t = (1-p)*40
+    const progress = Math.max(0, Math.min(1, (vh*0.95 - r.top) / (vh*0.5)))
+    const delay = parseFloat(el.dataset.delay || '0')
+    const p = Math.max(0, Math.min(1, (progress - delay) / (1 - delay)))
     el.style.opacity = p
-    if(p <= 0 || p >= 1) el.style.transform = `translateY(${t}px)`
-    else el.style.transform = `translateY(${t}px)` // still set for smooth fade
+    el.style.transform = `translateY(${(1-p)*40}px)`
   })
 
-  // P3 flip cards
   p3Cards.forEach((card,i)=>{
     const r = card.getBoundingClientRect()
-    if(r.bottom < top || r.top > bottom) return
-    const p = calcVis(r, Math.floor(i/2) * 0.12)
+    const progress = Math.max(0, Math.min(1, (vh*0.95 - r.top) / (vh*0.5)))
+    const rowDelay = Math.floor(i/2) * 0.12
+    const p = Math.max(0, Math.min(1, progress - rowDelay))
     card.style.opacity = p
     card.style.transform = `translateY(${(1-p)*24}px)`
   })
 
-  // Dots
   allDots.forEach((dot,i)=>{
     const r = dot.getBoundingClientRect()
-    if(r.bottom < top || r.top > bottom) return
-    const p = calcVis(r, i % 4 * 0.08)
+    const progress = Math.max(0, Math.min(1, (vh*0.95 - r.top) / (vh*0.5)))
+    const dotDelay = i % 4 * 0.08
+    const p = Math.max(0, Math.min(1, progress - dotDelay))
     dot.style.opacity = p
     dot.style.transform = `translate(-50%,${-30 + p*30}%)`
   })
 
-  // Stage check (lightweight: only runs until triggered)
   if(typeof checkStage === 'function') checkStage()
 }
 
