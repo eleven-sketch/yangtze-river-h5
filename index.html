@@ -458,7 +458,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   max-height:0;overflow:hidden;
   transition:max-height 0.45s cubic-bezier(0.22,1,0.36,1),margin 0.35s;
   margin-top:0;font-size:1rem;color:var(--text-sub);line-height:1.55;
-  padding-left:4px;border-left:2px solid transparent;
+  padding-left:4px;border-left:2px solid transparent;text-align:justify;
 }
 .chat-msg.expanded .chat-story{
   max-height:140px;margin-top:6px;
@@ -1315,10 +1315,23 @@ function updateDots(){
   })
 }
 
+// Stage items scroll-linked fade
+function updateStage(){
+  const stage = document.getElementById('commentStage')
+  if(!stage) return
+  const r = stage.getBoundingClientRect()
+  const vh = window.innerHeight
+  const vis = Math.max(0, Math.min(1, (vh*0.8 - r.top) / (vh*0.4)))
+  stage.querySelectorAll('.stage-item.in').forEach(item=>{
+    item.style.opacity = vis
+    item.style.transform = `translateY(${(1-vis)*20}px)`
+  })
+}
 function updateAll(){
   updateReveals()
   updateCards()
   updateDots()
+  updateStage()
 }
 
 window.addEventListener('scroll',()=>{
