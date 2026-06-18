@@ -36,9 +36,10 @@
 html{
   scroll-behavior:smooth;
   background:var(--bg-ivory);
+  overflow-x:hidden;
 }
 body{
-  width:430px;
+  width:100%;max-width:540px;
   margin:0 auto;
   font-family:var(--font-sans);
   color:var(--text);
@@ -46,11 +47,10 @@ body{
   line-height:1.75;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
-  transform-origin:top center;
 }
 @media(min-width:541px){
   html{background:#1a1a1a;display:flex;justify-content:center}
-  body{box-shadow:0 0 80px rgba(0,0,0,0.5);transform:none !important;height:auto !important}
+  body{box-shadow:0 0 80px rgba(0,0,0,0.5)}
 }
 
 /* ===== SECTIONS ===== */
@@ -326,7 +326,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
 /* Offset specific popups */
 #popup-maanshan,#popup-suzhou{margin-top:-40px}
-#popup-wuhan,#popup-nanchang{margin-top:-20px}
+#popup-wuhan,#popup-nanchang{margin-top:-40px}
 
 /* ===== P3 · FLIP CARDS ===== */
 .p3-header{
@@ -685,23 +685,6 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 <body>
 
 <div id="preloader"><div class="loader-ring"></div><div class="loader-text">长江奔涌，正在加载…</div></div>
-
-<script>
-// Scale body to fit any mobile viewport — layout identical across all devices
-(function(){
-  const DESIGN_W = 430
-  function scaleBody(){
-    const vw = window.innerWidth
-    if(vw > 540) return // Desktop: no scaling
-    const s = vw / DESIGN_W
-    document.body.style.transform = 'scale(' + s + ')'
-    document.body.style.height = (window.innerHeight / s) + 'px'
-  }
-  window.addEventListener('resize', scaleBody, {passive:true})
-  scaleBody()
-})();
-</script>
-
 <audio id="bgm" src="bgm.mp3" loop playsinline preload="auto"></audio>
 <button class="bgm-btn" id="bgmBtn" onclick="toggleBgm()">&#x1F534;</button>
 
