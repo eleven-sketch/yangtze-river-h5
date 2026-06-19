@@ -1294,7 +1294,7 @@ document.querySelectorAll('.reveal').forEach(el=>{
 
 // Scroll-linked reveal — animation progress follows scroll position
 const revealEls = document.querySelectorAll('.reveal')
-let ticking = false, frameSkip = 0
+let ticking = false
 
 // Scroll-driven reveal: appear going down, fade back going up
 function updateReveals(){
@@ -1380,8 +1380,7 @@ function updateAll(){
 window.addEventListener('scroll',()=>{
   if(!ticking){
     requestAnimationFrame(()=>{
-      frameSkip = (frameSkip + 1) % 2
-      if(frameSkip === 0) updateAll()
+      updateAll()
       ticking = false
     })
     ticking = true
