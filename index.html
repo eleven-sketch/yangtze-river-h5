@@ -45,6 +45,7 @@ body.loading{overflow:hidden;position:fixed;width:100%}
 }
 
 img{-webkit-touch-callout:none;pointer-events:none;-webkit-user-select:none;user-select:none}
+*{-webkit-tap-highlight-color:transparent}
 /* ===== PHONE-FRAME LAYOUT ===== */
 html{
   background:var(--bg-ivory);
@@ -92,6 +93,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 /* Background — fills section exactly, no crop no gap, DO NOT CHANGE */
 .section-bg{
   position:absolute;inset:0;z-index:0;
+  transform:translateZ(0);-webkit-transform:translateZ(0);
 }
 .section-bg img,.section-bg video{
   width:100%;height:100%;object-fit:fill;
@@ -120,10 +122,9 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 .cover .main-title{
   font-family:"方正小标宋","方正小标宋_GBK",var(--font-serif);
-  font-size:clamp(2rem,7.5vw,3.4rem);
+  font-size:clamp(1.6rem,6vw,2.8rem);
   color:#fff;
-  font-weight:700;letter-spacing:0.08em;line-height:1.1;
-  white-space:nowrap;
+  font-weight:700;letter-spacing:0.04em;line-height:1.2;
   text-shadow:0 2px 4px rgba(0,0,0,0.5),0 4px 20px rgba(0,0,0,0.4);
 }
 .cover .sub-title{
@@ -1295,7 +1296,7 @@ document.querySelectorAll('.reveal').forEach(el=>{
 
 // Scroll-linked reveal — animation progress follows scroll position
 const revealEls = document.querySelectorAll('.reveal')
-let ticking = false
+let ticking = false, frameSkip = 0
 
 // Scroll-driven reveal: appear going down, fade back going up
 function updateReveals(){
@@ -1367,7 +1368,8 @@ function updateAll(){
 window.addEventListener('scroll',()=>{
   if(!ticking){
     requestAnimationFrame(()=>{
-      updateAll()
+      frameSkip = (frameSkip + 1) % 2
+      if(frameSkip === 0) updateAll()
       ticking = false
     })
     ticking = true
