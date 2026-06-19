@@ -2,7 +2,13 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+<!-- WeChat X5 browser optimizations -->
+<meta name="x5-orientation" content="portrait">
+<meta name="x5-fullscreen" content="true">
+<meta name="x5-page-mode" content="app">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>长江大保护十周年</title>
 <link rel="preload" as="image" href="assets/p1.webp">
 <link rel="preload" as="image" href="assets/p2.webp">
@@ -33,11 +39,12 @@ body.loading{overflow:hidden;position:fixed;width:100%}
   --text:#2C2420;
   --text-sub:#6B625B;
   --text-faint:#A09890;
-  --font-serif:"Noto Serif SC","Source Han Serif SC","SimSun","STSong",serif;
-  --font-sans:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+  --font-serif:"STSong","SimSun","Songti SC",serif;
+  --font-sans:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;
   --font-en:"Georgia","Times New Roman",serif;
 }
 
+img{-webkit-touch-callout:none;pointer-events:none;-webkit-user-select:none;user-select:none}
 /* ===== PHONE-FRAME LAYOUT ===== */
 html{
   background:var(--bg-ivory);
@@ -1210,6 +1217,11 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 const bgmEl = document.getElementById('bgm')
 const bgmBtnEl = document.getElementById('bgmBtn')
 
+// WeChat audio unlock
+document.addEventListener('WeixinJSBridgeReady',function(){
+  bgmEl.play().catch(()=>{})
+  bgmEl.pause()
+})
 function startMusic(){
   if(bgmEl.paused || bgmEl.muted){
     bgmEl.currentTime = 0
