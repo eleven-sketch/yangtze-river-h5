@@ -11,7 +11,7 @@
 <link rel="preload" as="image" href="assets/p5.webp">
 <link rel="preload" as="image" href="assets/p6.webp">
 <link rel="preload" as="image" href="assets/p7.webp">
-<link rel="preload" as="audio" href="bgm.opus">
+<link rel="preload" as="audio" href="bgm.mp3">
 <style>
 /* Loading overlay — blocks all interaction */
 body.loading{overflow:hidden;position:fixed;width:100%}
@@ -690,7 +690,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
 <div id="preloader"><div class="loader-ring"></div><div class="loader-text">长江奔涌，正在加载…</div></div>
 
-<audio id="bgm" src="bgm.opus" loop playsinline preload="auto"></audio>
+<audio id="bgm" src="bgm.mp3" loop playsinline preload="auto"></audio>
 <button class="bgm-btn" id="bgmBtn" onclick="toggleBgm()">&#x1F534;</button>
 
 <!-- ======== P1 · COVER ======== -->
@@ -1233,7 +1233,7 @@ function toggleBgm(){
 // === PRELOADER: wait for all assets, block interaction during loading ===
 (function(){
   document.body.classList.add('loading')
-  var assets = ['assets/p1.webp','assets/p2.webp','assets/p3.webp','assets/p4.webp','assets/p5.webp','assets/p6.webp','assets/p7.webp','bgm.opus']
+  var assets = ['assets/p1.webp','assets/p2.webp','assets/p3.webp','assets/p4.webp','assets/p5.webp','assets/p6.webp','assets/p7.webp','bgm.mp3']
   var total = assets.length, loaded = 0
   var preloader = document.getElementById('preloader')
   var text = preloader.querySelector('.loader-text')
