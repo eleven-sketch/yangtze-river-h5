@@ -107,7 +107,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   text-shadow:0 1px 6px rgba(0,0,0,0.6);
 }
 .cover .main-title{
-  font-family:var(--font-serif);
+  font-family:"方正小标宋","方正小标宋_GBK",var(--font-serif);
   font-size:clamp(2rem,7.5vw,3.4rem);
   color:#fff;
   font-weight:700;letter-spacing:0.08em;line-height:1.1;
@@ -128,7 +128,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   text-shadow:0 1px 4px rgba(0,0,0,0.5);
 }
 .cover .intro-text{
-  font-size:0.86rem;color:#fff;line-height:1.65;
+  font-size:0.94rem;color:#fff;line-height:1.65;
   text-shadow:0 1px 3px rgba(0,0,0,0.5);
   max-width:320px;margin:0 auto;
 }
@@ -140,7 +140,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 @keyframes breathe{
   0%,100%{transform:scale(1)}
-  50%{transform:scale(1.08)}
+  50%{transform:scale(1.12)}
 }
 .scroll-hint{
   position:absolute;bottom:54px;left:50%;transform:translateX(-50%);z-index:4;
@@ -225,9 +225,9 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   font-size:0.9rem;color:var(--text-sub);margin-bottom:16px;line-height:1.4;
 }
 /* P5 text size */
-#p5 .section-inner{justify-content:center;padding-top:6vw;padding-bottom:6vw;transform:translateY(-50px)}
+#p5 .section-inner{justify-content:center;padding-top:0;padding-bottom:0;transform:translateY(-20px)}
 #p5 .section-heading{font-size:clamp(1.5rem,5.5vw,2rem)}
-#p5 .section-subhead{font-size:1rem}
+#p5 .section-subhead{font-size:0.9rem}
 
 /* ===== P2 · MAP-STYLE CITY MARKERS ===== */
 .p2-intro{
@@ -395,7 +395,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   font-size:1.5rem;font-weight:700;color:var(--teal-deep);line-height:1.15;
 }
 .flip-back .flip-delta{
-  font-size:0.82rem;color:var(--gold);margin-top:1px;font-weight:600;
+  font-size:0.9rem;color:var(--gold);margin-top:1px;font-weight:600;
   animation:breathe 3s ease-in-out infinite;
 }
 
@@ -439,7 +439,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 .chat-msg .chat-bubble{
   display:inline-block;max-width:100%;
   padding:8px 12px;border-radius:12px 12px 12px 3px;
-  font-size:0.94rem;color:var(--text);line-height:1.45;
+  font-size:0.86rem;color:var(--text);line-height:1.45;
   transition:all 0.35s;
 }
 .chat-msg:nth-child(1) .chat-bubble{background:rgba(91,158,148,0.13)}
@@ -448,16 +448,16 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 .chat-msg:nth-child(4) .chat-bubble{background:rgba(91,141,158,0.13)}
 
 .chat-msg .chat-name{
-  font-size:0.9rem;font-weight:700;color:var(--teal-deep);margin-bottom:2px;
+  font-size:0.82rem;font-weight:700;color:var(--teal-deep);margin-bottom:2px;
 }
 .chat-msg .chat-quote{
-  font-size:1.05rem;color:var(--red);line-height:1.45;
+  font-size:0.96rem;color:var(--red);line-height:1.45;
 }
 
 .chat-msg .chat-story{
   max-height:0;overflow:hidden;
   transition:max-height 0.45s cubic-bezier(0.22,1,0.36,1),margin 0.35s;
-  margin-top:0;font-size:1rem;color:var(--text-sub);line-height:1.55;
+  margin-top:0;font-size:0.9rem;color:var(--text-sub);line-height:1.55;
   padding-left:4px;border-left:2px solid transparent;text-align:justify;
 }
 .chat-msg.expanded .chat-story{
@@ -467,7 +467,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
 /* Typing dots hint */
 .chat-msg .tap-hint{
-  font-size:0.68rem;color:var(--text-sub);margin-top:3px;
+  font-size:0.6rem;color:var(--text-sub);margin-top:3px;
   display:inline-block;
   animation:breathe 3s ease-in-out infinite;
 }
@@ -644,9 +644,9 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   display:inline-block;padding:8px 22px;
   background:linear-gradient(135deg,var(--teal-soft),var(--teal-deep));
   color:#fff;font-size:0.78rem;font-weight:600;border-radius:20px;
-  text-decoration:none;
+  border:none;text-decoration:none;
   transition:opacity 0.8s,transform 0.2s;
-  margin:8px 0 16px;
+  margin:8px 0 16px;cursor:pointer;font-family:inherit;
 }
 .back-top-btn:active{transform:scale(0.94)}
 
@@ -693,11 +693,11 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <div class="section-bg"><img src="assets/p1.webp" alt=""></div>
   <div class="section-inner cover">
     <div class="reveal"><div class="section-label">THE YANGTZE RIVER · A DECADE OF RENEWAL</div></div>
-    <div class="reveal reveal-d1"><h1 class="main-title">一条大江的十年答案</h1></div>
+    <div class="reveal reveal-d1"><h1 class="main-title">长江的十年，我们的答卷</h1></div>
     <div class="reveal reveal-d2"><p class="sub-title">2016 → 2026</p></div>
     <div class="reveal reveal-d3"><p class="en-title">A RIVER'S TURN</p></div>
     <div class="reveal reveal-d4" style="margin-top:20px">
-      <p class="intro-text">2016 年，长江给我们出了一道题。<br>我们用十年作答，水清鱼跃就是我们的答案。</p>
+      <p class="intro-text">2016 年，长江给我们出了一道题。<br>我们用十年作答，水清鱼跃就是我们的答卷。</p>
     </div>
     <div class="reveal reveal-d5">
       <p class="cover-note">2016年1月5日，重庆。一句话改变了一条大江的命运："共抓大保护、不搞大开发"。</p>
@@ -965,7 +965,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
     </div>
 
     <div class="reveal reveal-d2"><p class="p3-highlight">
-      <strong>2017年</strong><br>
+      <strong>2017年，</strong><br>
       曾被宣布"野外灭绝"的<strong>长江鲟</strong>，<br>在赤水河首次观测到自然产卵。<br>
       中华鲟连续两年增殖放流突破<strong>100万尾</strong>！
     </p></div>
@@ -1012,13 +1012,13 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <div class="map-popup" id="popup-yichang">
     <span class="close-btn">&times;</span>
     <p class="popup-title">宜昌 · 腾笼换鸟</p>
-    <p>全市134家化工企业全部"关改搬转"。磷矿石从"论吨卖"变成了黑磷晶体"<strong>论克卖</strong>"。<br>GDP没有垮？2024年突破<strong>6191亿</strong>，比2016年<strong>翻了一番</strong>。</p>
+    <p>全市134家化工企业全部"关改搬转"。GDP呢？<br>没有垮！2024年突破<strong>6191亿</strong>，比2016年<strong>翻了一番</strong>。</p>
   </div>
 
   <div class="map-popup" id="popup-yueyang">
     <span class="close-btn">&times;</span>
     <p class="popup-title">岳阳 · 化茧成蝶</p>
-    <p>码头660米长江岸线，曾年吞吐砂石30余万吨。如今<strong>39处</strong>砂石码头全部拆除。<br>江豚数量从几乎绝迹恢复到常年观测值<strong>近60头</strong>，麋鹿从65头增至<strong>320头以上</strong>。</p>
+    <p>岳阳君山码头660米长江岸线，曾年吞吐砂石30余万吨。如今<strong>39处</strong>砂石码头全部拆除。<br>江豚数量从几乎绝迹恢复到常年观测值<strong>近60头</strong>，麋鹿从65头增至<strong>320头以上</strong>。</p>
   </div>
 
   <div class="map-popup" id="popup-maanshan">
@@ -1144,8 +1144,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
       <input type="text" id="commentInput" placeholder="写下我和长江的故事..." maxlength="200">
       <button id="commentBtn">发布</button>
     </div></div>
-    <div class="reveal reveal-d1"><p style="text-align:center;font-size:0.92rem;color:var(--teal-deep);margin-top:6px;font-weight:600">这些声音，有骄傲，有遗憾，也有期待。<br>从九旬院士到退捕渔民，从巡护队长到青年科研者&hellip;&hellip;<br>长江的十年，<br>是政策推动的十年，<br>更是每一个普通人用脚步丈量、用眼睛见证的十年。<br>每一个人，都是长江未来的一部分！</p>
-    <p style="text-align:center;font-size:1.1rem;color:var(--teal-deep);margin-top:8px;font-weight:700">这，就是一条大江的十年答案！</p></div>
+    <div class="reveal reveal-d1"><p style="text-align:center;font-size:0.92rem;color:var(--teal-deep);margin-top:6px;font-weight:600">这些声音，有骄傲，有遗憾，也有期待。<br>从九旬院士到退捕渔民，<br>从巡护队长到青年科研者&hellip;&hellip;<br>长江的十年，<br>是政策推动的十年，<br>更是每一个普通人用脚步丈量、用眼睛见证的十年。<br>每一个人，都是长江未来的一部分！<br>这，就是我们的答卷！</p></div>
     <span class="scroll-hint-inline">&#8595; 向下滑动 &#8595;</span>
   </div>
 </section>
@@ -1194,7 +1193,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
     <p style="font-size:1.1rem;font-weight:700;color:var(--teal-deep);opacity:0;transition:opacity 0.6s" id="endingNext">我们下一个十年见！</p>
 
-    <a href="#p1" class="back-top-btn" id="backTopBtn" style="opacity:0;pointer-events:none" onclick="resetAll()">&#x1F4A7; 回到开端</a>
+    <button class="back-top-btn" id="backTopBtn" style="opacity:0;pointer-events:none" onclick="resetAll()">&#x1F4A7; 回到开端</button>
     <p class="ending-source">
       数据来源：国务院新闻办公室、农业农村部、国家发展和改革委员会、长江水利委员会等
     </p>
@@ -1233,16 +1232,28 @@ function toggleBgm(){
   var total = assets.length, loaded = 0
   var preloader = document.getElementById('preloader')
   var text = preloader.querySelector('.loader-text')
+  var doneFlag = false
   function done(){
+    if(doneFlag) return; doneFlag = true
     preloader.classList.add('done')
     document.body.classList.remove('loading')
     window.scrollTo(0,0)
     if(typeof updateAll === 'function') setTimeout(updateAll,200)
-    // Start music on first user interaction after load
-    document.addEventListener('touchstart',startMusic,{once:true,passive:true})
-    document.addEventListener('scroll',startMusic,{once:true,passive:true})
+    // Start music on first user interaction, but only after bgm is playable
+    function bindMusicStart(){
+      if(bgmEl.readyState >= 2){ // HAVE_CURRENT_DATA or better
+        document.addEventListener('touchstart',startMusic,{once:true,passive:true})
+        document.addEventListener('scroll',startMusic,{once:true,passive:true})
+      } else {
+        bgmEl.addEventListener('canplay',function onReady(){
+          bgmEl.removeEventListener('canplay',onReady)
+          document.addEventListener('touchstart',startMusic,{once:true,passive:true})
+          document.addEventListener('scroll',startMusic,{once:true,passive:true})
+        })
+      }
+    }
+    bindMusicStart()
   }
-  setTimeout(done,10000) // fallback after 10s
   assets.forEach(function(src){
     var isAudio = src.indexOf('.mp3')>-1
     var el = isAudio ? new Audio() : new Image()
@@ -1390,7 +1401,16 @@ function resetAll(){
   stageTriggered = false
   document.querySelectorAll('.stage-item').forEach(s=>s.classList.remove('in'))
   document.getElementById('commentInput').value = ''
-  window.scrollTo({top:0,behavior:'instant'})
+  // Quick flip-back scroll animation
+  const startY = window.scrollY, duration = 600, startT = performance.now()
+  function flipBack(now){
+    const elapsed = now - startT
+    const progress = Math.min(1, elapsed / duration)
+    const ease = 1 - Math.pow(1 - progress, 3) // ease-out
+    window.scrollTo(0, startY * (1 - ease))
+    if(progress < 1) requestAnimationFrame(flipBack)
+  }
+  requestAnimationFrame(flipBack)
   setTimeout(updateAll,100)
 }
 
