@@ -1250,8 +1250,10 @@ function toggleBgm(){
   var preloader = document.getElementById('preloader')
   var text = preloader.querySelector('.loader-text')
   var doneFlag = false
+  var fallback = setTimeout(function(){ done() },12000) // safety timeout
   function done(){
     if(doneFlag) return; doneFlag = true
+    clearTimeout(fallback)
     preloader.classList.add('done')
     document.body.classList.remove('loading')
     window.scrollTo(0,0)
@@ -1276,7 +1278,7 @@ function toggleBgm(){
     var el = isAudio ? new Audio() : new Image()
     function mark(){ loaded++; text.textContent='长江奔涌，正在加载… ('+loaded+'/'+total+')'; if(loaded>=total) done() }
     el.onload = el.onerror = mark
-    if(isAudio){ el.preload='auto'; el.addEventListener('canplaythrough',mark,{once:true}) }
+    if(isAudio){ el.preload='auto'; el.oncanplaythrough=mark; el.onerror=mark }
     el.src = src
   })
 })();
