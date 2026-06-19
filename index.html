@@ -1155,7 +1155,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
       <input type="text" id="commentInput" placeholder="写下我和长江的故事..." maxlength="200">
       <button id="commentBtn">发布</button>
     </div></div>
-    <div class="reveal reveal-d1"><p style="text-align:center;font-size:0.92rem;color:var(--teal-deep);margin-top:6px;font-weight:600">这些声音，有骄傲，有遗憾，也有期待。<br>从九旬院士到退捕渔民，<br>从巡护队长到青年科研者&hellip;&hellip;<br>长江的十年，<br>是政策推动的十年，<br>更是每一个普通人用脚步丈量、用眼睛见证的十年。<br>每一个人，都是长江未来的一部分！<br>这，就是我们的答卷！</p></div>
+    <div class="reveal reveal-d1"><p style="text-align:center;font-size:0.92rem;color:var(--teal-deep);margin-top:1px;font-weight:600">这些声音，有骄傲，有遗憾，也有期待。<br>从九旬院士到退捕渔民，<br>从巡护队长到青年科研者&hellip;&hellip;<br>长江的十年，<br>是政策推动的十年，<br>更是每一个普通人用脚步丈量、用眼睛见证的十年。<br>每一个人，都是长江未来的一部分！<br>这，就是我们的答卷！</p></div>
     <span class="scroll-hint-inline">&#8595; 向下滑动 &#8595;</span>
   </div>
 </section>
@@ -1356,16 +1356,17 @@ function updateStage(){
     item.style.transform = `translateY(${(1-vis)*20}px)`
   })
 }
-// Popup fade — only when scrolling UP (going back), stays visible scrolling down
-let _lastSY = window.scrollY
+// Popup follows dot's scroll-linked visibility
 function updatePopups(){
   const vh = window.innerHeight
-  const goingUp = window.scrollY < _lastSY
-  _lastSY = window.scrollY
   document.querySelectorAll('.map-popup.open').forEach(p=>{
-    if(!goingUp){ p.style.opacity = ''; return }
-    const r = p.getBoundingClientRect()
-    p.style.opacity = Math.max(0, Math.min(1, r.bottom / (vh*0.3)))
+    const dot = document.querySelector('.map-dot[data-city="'+(p.id.replace('popup-',''))+'"]')
+    if(!dot){ p.style.opacity = ''; return }
+    const r = dot.getBoundingClientRect()
+    const progress = Math.max(0, Math.min(1, (vh*0.95 - r.top) / (vh*0.5)))
+    const p2 = Math.max(0, Math.min(1, progress))
+    p.style.opacity = p2
+    p.style.transform = `scale(${0.96 + p2*0.04})`
   })
 }
 function updateAll(){
