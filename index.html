@@ -1358,11 +1358,23 @@ function updateStage(){
     item.style.transform = `translateY(${(1-vis)*20}px)`
   })
 }
+// Popup scroll-linked fade
+function updatePopups(){
+  const vh = window.innerHeight
+  document.querySelectorAll('.map-popup.open').forEach(p=>{
+    const sec = p.closest('.section')
+    if(!sec) return
+    const r = sec.getBoundingClientRect()
+    const vis = Math.max(0, Math.min(1, r.bottom / (vh*0.5)))
+    p.style.opacity = vis
+  })
+}
 function updateAll(){
   updateReveals()
   updateCards()
   updateDots()
   updateStage()
+  updatePopups()
 }
 
 window.addEventListener('scroll',()=>{
