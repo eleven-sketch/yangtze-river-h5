@@ -1356,10 +1356,14 @@ function updateStage(){
     item.style.transform = `translateY(${(1-vis)*20}px)`
   })
 }
-// Popup scroll-linked fade — fades when popup itself scrolls out of viewport
+// Popup fade — only when scrolling UP (going back), stays visible scrolling down
+let _lastSY = window.scrollY
 function updatePopups(){
   const vh = window.innerHeight
+  const goingUp = window.scrollY < _lastSY
+  _lastSY = window.scrollY
   document.querySelectorAll('.map-popup.open').forEach(p=>{
+    if(!goingUp){ p.style.opacity = ''; return }
     const r = p.getBoundingClientRect()
     p.style.opacity = Math.max(0, Math.min(1, r.bottom / (vh*0.3)))
   })
