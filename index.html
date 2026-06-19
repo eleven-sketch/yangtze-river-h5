@@ -1401,9 +1401,7 @@ p1Reveals.forEach((el,i)=>{
   },100)
 })
 // Remove transitions so scroll-driven takes over
-setTimeout(()=>{p1Reveals.forEach(el=>{el.style.transition='';el.style.transitionDelay=''})},3500)
-
-updateAll()
+setTimeout(()=>{p1Reveals.forEach(el=>{el.style.transition='';el.style.transitionDelay='';el.style.opacity='';el.style.transform=''})},3500)
 
 
 function resetAll(){
