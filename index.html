@@ -1250,7 +1250,7 @@ function toggleBgm(){
   var preloader = document.getElementById('preloader')
   var text = preloader.querySelector('.loader-text')
   var doneFlag = false
-  var fallback = setTimeout(function(){ done() },12000) // safety timeout
+  var fallback = setTimeout(function(){ done() },6000) // safety timeout
   function done(){
     if(doneFlag) return; doneFlag = true
     clearTimeout(fallback)
