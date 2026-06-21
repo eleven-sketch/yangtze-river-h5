@@ -732,25 +732,25 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   </div>
 
   <!-- 重庆 · 朝天门位置 -->
-  <div class="map-dot" data-city="chongqing" style="top:22%;left:32%">
+  <div class="map-dot dot-hidden" data-city="chongqing" style="top:22%;left:32%">
     <div class="landmark-icon">渝</div>
     <span class="city-label">重庆 · 2016</span>
   </div>
 
   <!-- 武汉 · 黄鹤楼位置 -->
-  <div class="map-dot" data-city="wuhan" style="top:44%;left:52%">
+  <div class="map-dot dot-hidden" data-city="wuhan" style="top:44%;left:52%">
     <div class="landmark-icon">鄂</div>
     <span class="city-label">武汉 · 2018</span>
   </div>
 
   <!-- 南京 · 长江大桥位置 -->
-  <div class="map-dot" data-city="nanjing" style="top:58%;left:55%">
+  <div class="map-dot dot-hidden" data-city="nanjing" style="top:58%;left:55%">
     <div class="landmark-icon">宁</div>
     <span class="city-label">南京 · 2020</span>
   </div>
 
   <!-- 南昌 · 滕王阁位置 -->
-  <div class="map-dot" data-city="nanchang" style="top:72%;left:46%">
+  <div class="map-dot dot-hidden" data-city="nanchang" style="top:72%;left:46%">
     <div class="landmark-icon">赣</div>
     <span class="city-label">南昌 · 2023</span>
   </div>
@@ -990,25 +990,25 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   </div>
 
   <!-- 宜昌 -->
-  <div class="map-dot" data-city="yichang" style="top:20%;left:25%">
+  <div class="map-dot dot-hidden" data-city="yichang" style="top:20%;left:25%">
     <div class="landmark-icon">宜</div>
     <span class="city-label">宜昌</span>
   </div>
 
   <!-- 岳阳君山 -->
-  <div class="map-dot" data-city="yueyang" style="top:42%;left:62%">
+  <div class="map-dot dot-hidden" data-city="yueyang" style="top:42%;left:62%">
     <div class="landmark-icon">岳</div>
     <span class="city-label">岳阳</span>
   </div>
 
   <!-- 马鞍山薛家洼 -->
-  <div class="map-dot" data-city="maanshan" style="top:60%;left:68%">
+  <div class="map-dot dot-hidden" data-city="maanshan" style="top:60%;left:68%">
     <div class="landmark-icon">马</div>
     <span class="city-label">马鞍山</span>
   </div>
 
   <!-- 苏州吴江 -->
-  <div class="map-dot" data-city="suzhou" style="top:78%;left:52%">
+  <div class="map-dot dot-hidden" data-city="suzhou" style="top:78%;left:52%">
     <div class="landmark-icon">苏</div>
     <span class="city-label">苏州</span>
   </div>
@@ -1505,8 +1505,6 @@ function toggleChat(el){
       popup.style.borderRight = '2.5px solid var(--gold)'
     }
   })
-  // Activate all dots
-  document.querySelectorAll('.map-dot').forEach(d=>d.classList.add('active'))
 })()
 
 // Comment stage — trigger items to animate in when stage enters viewport
