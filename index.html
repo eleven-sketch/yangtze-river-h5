@@ -426,7 +426,9 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 .chat-list{display:flex;flex-direction:column;gap:20px}
 .chat-msg{
   display:flex;gap:8px;align-items:flex-start;
-  cursor:pointer;transition:opacity 0.3s;
+  cursor:pointer;touch-action:manipulation;
+  -webkit-tap-highlight-color:rgba(212,163,89,0.25);
+  transition:opacity 0.3s;
 }
 .chat-msg.dimmed{opacity:0.45}
 .chat-msg .chat-avatar{
@@ -1465,7 +1467,7 @@ function playAudio(id){
       bgmWasPlaying = true
       fadeBGM('out')
     }
-    a.play()
+    a.play().catch(function(e){console.log('audio play error:',e)})
     a.onended = function(){
       if(bgmWasPlaying){
         fadeBGM('in')
