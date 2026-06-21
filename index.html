@@ -1202,10 +1202,12 @@ function startMusic(){
 function toggleBgm(){
   if(bgmEl.paused){
     bgmEl.currentTime = 0
+    bgmEl.volume = 1
     bgmEl.play().catch(()=>{})
     bgmBtnEl.innerHTML = '&#x1F3B5;'
   } else {
     bgmEl.pause()
+    bgmWasPlaying = false
     bgmBtnEl.innerHTML = '&#x1F534;'
   }
 }
@@ -1449,7 +1451,51 @@ function lightUp(){
 }
 
 // Chat bubbles — expand one at a time
-function playAudio(id){var a=document.getElementById(id);if(a.paused){document.querySelectorAll("audio").forEach(function(el){if(el!==a){el.pause();el.currentTime=0}});a.play()}else{a.pause();a.currentTime=0}}
+var bgmWasPlaying = false
+function playAudio(id){
+  var a = document.getElementById(id)
+  if(a.paused){
+    // Stop other story audios
+    document.querySelectorAll('audio').forEach(function(el){
+      if(el!==a && el!==bgmEl){el.pause();el.currentTime=0}
+    })
+    // If BGM is playing, fade it out
+    if(!bgmEl.paused){
+      bgmWasPlaying = true
+      fadeBGM('out')
+    }
+    a.play()
+    a.onended = function(){
+      if(bgmWasPlaying){
+        fadeBGM('in')
+        bgmWasPlaying = false
+      }
+    }
+  } else {
+    a.pause(); a.currentTime = 0
+    if(bgmWasPlaying){
+      fadeBGM('in')
+      bgmWasPlaying = false
+    }
+  }
+}
+function fadeBGM(dir){
+  var step = 0.02, interval = 40, vol = dir==='out' ? 1 : 0, target = dir==='out' ? 0 : 1
+  clearInterval(bgmEl._fadeTimer)
+  bgmEl.volume = vol
+  bgmEl._fadeTimer = setInterval(function(){
+    if(dir==='out'){
+      vol = Math.max(target, vol - step)
+      bgmEl.volume = vol
+      if(vol <= target){ clearInterval(bgmEl._fadeTimer); bgmEl.pause() }
+    } else {
+      if(bgmEl.paused) bgmEl.play().catch(function(){})
+      vol = Math.min(target, vol + step)
+      bgmEl.volume = vol
+      if(vol >= target) clearInterval(bgmEl._fadeTimer)
+    }
+  }, interval)
+}
 function toggleChat(el){
   const isExpanded = el.classList.contains('expanded')
   // Close all others, dim all
