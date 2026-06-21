@@ -1483,6 +1483,31 @@ function toggleChat(el){
 }
 
 // Map dots & popups — always visible, no click interaction
+// Init: position all popups next to their dots on load
+(function initPopups(){
+  const popupSide = {chongqing:'right', wuhan:'left', nanjing:'right', nanchang:'left', yichang:'right', yueyang:'left', maanshan:'right', suzhou:'left'}
+  document.querySelectorAll('.map-popup').forEach(popup=>{
+    const city = popup.id.replace('popup-','')
+    const dot = document.querySelector('.map-dot[data-city="'+city+'"]')
+    if(!dot) return
+    const section = dot.closest('.section')
+    const sRect = section.getBoundingClientRect()
+    const dRect = dot.getBoundingClientRect()
+    const topPct = ((dRect.top + dRect.height/2 - sRect.top) / sRect.height * 100)
+    const side = popupSide[city]
+    const minTop = section.id === 'p4' ? 18 : 16
+    popup.style.top = Math.max(minTop, Math.min(72, topPct - 6)) + '%'
+    if(side === 'right'){
+      popup.style.left = ((dRect.right - sRect.left) / sRect.width * 100 + 2) + '%'
+      popup.style.borderLeft = '2.5px solid var(--gold)'
+    } else {
+      popup.style.right = ((sRect.right - dRect.left) / sRect.width * 100 + 2) + '%'
+      popup.style.borderRight = '2.5px solid var(--gold)'
+    }
+  })
+  // Activate all dots
+  document.querySelectorAll('.map-dot').forEach(d=>d.classList.add('active'))
+})()
 
 // Comment stage — trigger items to animate in when stage enters viewport
 let stageTriggered = false
