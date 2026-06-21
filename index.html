@@ -1303,11 +1303,14 @@ function updateReveals(){
     const p = Math.max(0, Math.min(1, (progress - delay) / (1 - delay)))
     el.style.opacity = p
     el.style.transform = `translateY(${(1-p)*40}px)`
-    // Lazy-load data-src images when first visible
+    // Lazy-load & autoplay when first visible
     if(p>0.5 && !el._loaded){
       el._loaded=true
       el.querySelectorAll('img[data-src]').forEach(function(img){
         img.src=img.getAttribute('data-src')+'?t='+Date.now()
+      })
+      el.querySelectorAll('video').forEach(function(v){
+        v.play().catch(function(){})
       })
     }
   })
@@ -1425,6 +1428,7 @@ function resetAll(){
   // Reset lazy-loaded images so they replay from start
   document.querySelectorAll('.reveal').forEach(function(el){el._loaded=false})
   document.querySelectorAll('img[data-src]').forEach(function(img){img.src=''})
+  document.querySelectorAll('.reveal video').forEach(function(v){v.pause();v.currentTime=0})
   // Close all chat bubbles, flipped cards (popups stay open)
   document.querySelectorAll('.chat-msg').forEach(m=>{m.classList.remove('expanded');m.classList.remove('dimmed')})
   document.querySelectorAll('.flip-card').forEach(c=>c.classList.remove('flipped'))
