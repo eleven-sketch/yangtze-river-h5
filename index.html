@@ -10,13 +10,13 @@
 <meta name="format-detection" content="telephone=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>长江的十年，我们的答卷</title>
-<link rel="preload" as="image" href="assets/p1.webp">
-<link rel="preload" as="image" href="assets/p2.webp">
+<link rel="preload" as="image" href="assets/p1.webp?v=2">
+<link rel="preload" as="image" href="assets/p2.webp?v=2">
 <link rel="preload" as="image" href="assets/p3.webp">
-<link rel="preload" as="image" href="assets/p4.webp">
+<link rel="preload" as="image" href="assets/p4.webp?v=2">
 <link rel="preload" as="image" href="assets/p5.webp">
 <link rel="preload" as="image" href="assets/p6.webp">
-<link rel="preload" as="image" href="assets/p7.webp">
+<link rel="preload" as="image" href="assets/p7.webp?v=2">
 <link rel="preload" as="audio" href="bgm.mp3" fetchpriority="high">
 <style>
 /* Loading overlay — blocks all interaction */
@@ -701,7 +701,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
 <!-- ======== P1 · COVER ======== -->
 <section class="section" id="p1">
-  <div class="section-bg"><img src="assets/p1.webp" alt="" fetchpriority="high"></div>
+  <div class="section-bg"><img src="assets/p1.webp?v=2" alt="" fetchpriority="high"></div>
   <div class="section-inner cover">
     <div class="reveal"><div class="section-label">THE YANGTZE RIVER · A DECADE OF RENEWAL</div></div>
     <div class="reveal reveal-d1"><h1 class="main-title">长江的十年，我们的答卷</h1></div>
@@ -724,7 +724,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
 <!-- ======== P2 · MAP MARKERS ======== -->
 <section class="section" id="p2">
-  <div class="section-bg"><img src="assets/p2.webp" alt="" fetchpriority="high"></div>
+  <div class="section-bg"><img src="assets/p2.webp?v=2" alt="" fetchpriority="high"></div>
 
   <!-- Intro overlay -->
   <div class="p2-intro reveal">
@@ -988,7 +988,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
 <!-- ======== P4 · MAP MARKERS ======== -->
 <section class="section" id="p4">
-  <div class="section-bg"><img src="assets/p4.webp" alt="" loading="lazy" decoding="async"></div>
+  <div class="section-bg"><img src="assets/p4.webp?v=2" alt="" loading="lazy" decoding="async"></div>
 
   <div class="p2-intro reveal">
     <p class="lead">从化工围江到绿色新城，从砂石码头到候鸟天堂。四个地方，四种转身。</p>
@@ -1162,7 +1162,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
 <!-- ======== P7 · ENDING ======== -->
 <section class="section section-tall" id="p7">
-  <div class="section-bg"><img src="assets/p7.webp" alt="" loading="lazy" decoding="async"></div>
+  <div class="section-bg"><img src="assets/p7.webp?v=2" alt="" loading="lazy" decoding="async"></div>
   <div class="section-inner ending" style="padding-top:20vw">
     <div class="reveal"><div class="section-label">FORWARD</div></div>
     <div class="reveal reveal-d1"><h2 class="ending-heading">从一个十年<br>走向下一个十年</h2></div>
@@ -1244,7 +1244,7 @@ function toggleBgm(){
 // === PRELOADER: wait for all assets, block interaction during loading ===
 (function(){
   document.body.classList.add('loading')
-  var assets = ['assets/p1.webp','assets/p2.webp','assets/p3.webp','assets/p4.webp','assets/p5.webp','assets/p6.webp','assets/p7.webp','bgm.mp3']
+  var assets = ['assets/p1.webp?v=2','assets/p2.webp?v=2','assets/p3.webp','assets/p4.webp?v=2','assets/p5.webp','assets/p6.webp','assets/p7.webp?v=2','bgm.mp3']
   var total = assets.length, loaded = 0
   var preloader = document.getElementById('preloader')
   var text = preloader.querySelector('.loader-text')
