@@ -710,7 +710,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
       <p class="cover-note">十年后，江豚逐浪，鱼儿洄游，岸绿景美。<br>答案，已经写在奔流的江水里。</p>
     </div>
     <div class="reveal reveal-d7" style="margin-top:5px;text-align:center">
-      <img src="动图.webp" alt="江豚逐浪" style="width:85%;max-width:400px;border-radius:10px">
+      <img data-src="动图.webp" alt="江豚逐浪" style="width:85%;max-width:400px;border-radius:10px">
     </div>
   </div>
   <div class="scroll-hint">
@@ -1303,6 +1303,13 @@ function updateReveals(){
     const p = Math.max(0, Math.min(1, (progress - delay) / (1 - delay)))
     el.style.opacity = p
     el.style.transform = `translateY(${(1-p)*40}px)`
+    // Lazy-load data-src images when first visible
+    if(p>0.5 && !el._loaded){
+      el._loaded=true
+      el.querySelectorAll('img[data-src]').forEach(function(img){
+        img.src=img.getAttribute('data-src')
+      })
+    }
   })
 }
 
@@ -1415,6 +1422,9 @@ function resetAll(){
   document.querySelectorAll('.vision-item').forEach(v=>v.classList.remove('lit'))
   document.getElementById('cardName').textContent = '长江守护者'
   document.querySelectorAll('.ripple-ring').forEach(r=>r.remove())
+  // Reset lazy-loaded images so they replay from start
+  document.querySelectorAll('.reveal').forEach(function(el){el._loaded=false})
+  document.querySelectorAll('img[data-src]').forEach(function(img){img.src=''})
   // Close all chat bubbles, flipped cards (popups stay open)
   document.querySelectorAll('.chat-msg').forEach(m=>{m.classList.remove('expanded');m.classList.remove('dimmed')})
   document.querySelectorAll('.flip-card').forEach(c=>c.classList.remove('flipped'))
