@@ -536,14 +536,6 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 .promise-input{
   display:flex;gap:8px;align-items:center;justify-content:center;margin:16px 0;
 }
-.promise-input input{
-  padding:10px 16px;border:1.5px solid rgba(91,158,148,0.4);
-  border-radius:20px;font-size:0.8rem;font-family:inherit;
-  background:rgba(253,251,247,0.8);color:var(--text);
-  outline:none;max-width:160px;text-align:center;
-  transition:border-color 0.3s;
-}
-.promise-input input:focus{border-color:var(--teal-soft)}
 .promise-input button{
   padding:10px 20px;border:none;border-radius:20px;
   background:linear-gradient(135deg,var(--teal-deep),var(--teal-soft));
@@ -1150,12 +1142,11 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
     <div class="reveal"><div class="section-label">FORWARD</div></div>
     <div class="reveal reveal-d1"><h2 class="ending-heading">从一个十年<br>走向下一个十年</h2></div>
     <div class="reveal reveal-d2"><p style="font-size:0.88rem;color:var(--text-sub);margin-top:4px">
-      写下你的名字，生成一张专属的长江承诺卡
+      点击下方按钮，生成你的长江承诺卡
     </p></div>
 
     <!-- Plan A: Promise card -->
     <div class="reveal reveal-d2"><div class="promise-input">
-      <input type="text" id="promiseName" placeholder="你的名字" maxlength="10">
       <button onclick="makePromise()">生成我的承诺卡</button>
     </div></div>
 
@@ -1402,8 +1393,7 @@ function resetAll(){
   document.getElementById('backTopBtn').style.pointerEvents = 'none'
   document.getElementById('dropletBtn').classList.remove('rippled')
   document.querySelectorAll('.vision-item').forEach(v=>v.classList.remove('lit'))
-  document.getElementById('promiseName').value = ''
-  document.getElementById('cardName').textContent = '______'
+  document.getElementById('cardName').textContent = '长江守护者'
   document.querySelectorAll('.ripple-ring').forEach(r=>r.remove())
   // Close all chat bubbles, flipped cards (popups stay open)
   document.querySelectorAll('.chat-msg').forEach(m=>{m.classList.remove('expanded');m.classList.remove('dimmed')})
@@ -1426,7 +1416,7 @@ function resetAll(){
 }
 // P7 Plan A: Promise card
 function makePromise(){
-  const name = document.getElementById('promiseName').value.trim() || '长江守护者'
+  const name = '长江守护者'
   document.getElementById('cardName').textContent = name
   const d = new Date()
   document.getElementById('cardDate').textContent = d.getFullYear()+' 年 '+(d.getMonth()+1)+' 月'
