@@ -1307,7 +1307,7 @@ function updateReveals(){
     if(p>0.5 && !el._loaded){
       el._loaded=true
       el.querySelectorAll('img[data-src]').forEach(function(img){
-        img.src=img.getAttribute('data-src')
+        img.src=img.getAttribute('data-src')+'?t='+Date.now()
       })
     }
   })
