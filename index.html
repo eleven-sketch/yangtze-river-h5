@@ -709,6 +709,9 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
     <div class="reveal reveal-d5">
       <p class="cover-note">十年后，江豚逐浪，鱼儿洄游，岸绿景美。<br>答案，已经写在奔流的江水里。</p>
     </div>
+    <div class="reveal reveal-d7" style="margin-top:5px;text-align:center">
+      <img src="动图.webp" alt="江豚逐浪" style="width:85%;max-width:400px;border-radius:10px">
+    </div>
   </div>
   <div class="scroll-hint">
     <span class="arrow">↓</span>
@@ -1273,7 +1276,9 @@ function toggleBgm(){
 
 // Map old delay classes to data attributes for scroll-driven stagger
 document.querySelectorAll('.reveal').forEach(el=>{
-  if(el.classList.contains('reveal-d5')) el.dataset.delay='0.35'
+  if(el.classList.contains('reveal-d7')) el.dataset.delay='0.48'
+  else if(el.classList.contains('reveal-d6')) el.dataset.delay='0.42'
+  else if(el.classList.contains('reveal-d5')) el.dataset.delay='0.35'
   else if(el.classList.contains('reveal-d4')) el.dataset.delay='0.26'
   else if(el.classList.contains('reveal-d3')) el.dataset.delay='0.18'
   else if(el.classList.contains('reveal-d2')) el.dataset.delay='0.1'
