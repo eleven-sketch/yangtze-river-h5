@@ -47,23 +47,21 @@ body.loading{overflow:hidden;position:fixed;width:100%}
 img{-webkit-touch-callout:none;pointer-events:none;-webkit-user-select:none;user-select:none}
 *{-webkit-tap-highlight-color:transparent}
 /* ===== PHONE-FRAME LAYOUT ===== */
-html{
-  background:var(--bg-ivory);
-  font-size:clamp(14px,4.1vw,20px);
-}
+html{background:var(--bg-ivory)}
 body{
-  width:100%;max-width:540px;
-  margin:0 auto;
+  width:100%;margin:0;
   font-family:var(--font-sans);
-  color:var(--text);
-  background:var(--bg-ivory);
-  line-height:1.75;
-  -webkit-font-smoothing:antialiased;
+  color:var(--text);background:var(--bg-ivory);
+  line-height:1.75;-webkit-font-smoothing:antialiased;
   overflow-x:hidden;
+}
+#app{
+  width:390px;margin:0 auto;position:relative;
+  transform-origin:top center;
 }
 @media(min-width:541px){
   html{background:#1a1a1a;display:flex;justify-content:center}
-  body{box-shadow:0 0 80px rgba(0,0,0,0.5)}
+  #app{box-shadow:0 0 80px rgba(0,0,0,0.5)}
 }
 
 /* ===== SECTIONS ===== */
@@ -692,6 +690,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 </head>
 <body>
 
+<div id="app">
 <div id="preloader"><div class="loader-ring"></div><div class="loader-text">长江奔涌，正在加载…</div></div>
 
 <audio id="bgm" src="bgm.mp3" loop playsinline preload="auto"></audio>
@@ -1203,6 +1202,15 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 </section>
 
 <script>
+// === Fixed-width scaling: 390px design, scale to fit any screen ===
+(function(){
+  var app=document.getElementById('app'), W=390
+  function scale(){app.style.transform='scale('+(window.innerWidth/W)+')'}
+  scale();window.addEventListener('resize',scale)
+  // On orientation change, recalc after layout
+  window.addEventListener('orientationchange',function(){setTimeout(scale,300)})
+})()
+
 // Background music — start on first touch/scroll from beginning
 const bgmEl = document.getElementById('bgm')
 const bgmBtnEl = document.getElementById('bgmBtn')
@@ -1570,5 +1578,6 @@ function postComment(){
   input.value = ''
 }
 </script>
+</div>
 </body>
 </html>
