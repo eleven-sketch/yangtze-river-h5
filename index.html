@@ -1575,9 +1575,27 @@ function playAudio(id){
 // P3 video: duck BGM on play, restore on pause/end
 (function(){
   var v=document.getElementById('p3Video'); if(!v) return
-  v.addEventListener('play',function(){if(!bgmEl.paused){bgmEl._origVol=bgmEl.volume;fadeVol(bgmEl,0.15)}})
-  v.addEventListener('pause',function(){if(bgmEl._origVol!==undefined){fadeVol(bgmEl,bgmEl._origVol);delete bgmEl._origVol}})
   v.addEventListener('ended',function(){if(bgmEl._origVol!==undefined){fadeVol(bgmEl,bgmEl._origVol);delete bgmEl._origVol}})
+  // Auto pause/play on scroll — don't affect BGM
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        if(v._wasPlaying){v._auto=true;v.play().catch(function(){})}
+      } else {
+        if(!v.paused){v._wasPlaying=true;v._auto=true;v.pause()}
+      }
+    })
+  },{threshold:0.1})
+  observer.observe(v)
+  // Only react to user-triggered play/pause for BGM
+  v.addEventListener('play',function(){
+    if(v._auto){v._auto=false;return}
+    if(!bgmEl.paused){bgmEl._origVol=bgmEl.volume;fadeVol(bgmEl,0.15)}
+  })
+  v.addEventListener('pause',function(){
+    if(v._auto){v._auto=false;return}
+    if(bgmEl._origVol!==undefined){fadeVol(bgmEl,bgmEl._origVol);delete bgmEl._origVol}
+  })
 })()
 
 function fadeVol(el, target){
