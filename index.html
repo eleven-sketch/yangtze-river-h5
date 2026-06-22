@@ -1470,7 +1470,6 @@ function resetAll(){
   document.querySelectorAll('.ripple-ring').forEach(r=>r.remove())
   // Reset lazy-loaded images so they replay from start
   document.querySelectorAll('.reveal').forEach(function(el){el._loaded=false})
-  document.querySelectorAll('img[data-src]').forEach(function(img){img.src=''})
 
   // Close all chat bubbles, flipped cards (popups stay open)
   document.querySelectorAll('.chat-msg').forEach(m=>{m.classList.remove('expanded');m.classList.remove('dimmed')})
