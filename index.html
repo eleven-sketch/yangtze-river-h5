@@ -1498,8 +1498,18 @@ function makePromise(){
   const d = new Date()
   document.getElementById('cardDate').textContent = d.getFullYear()+' 年 '+(d.getMonth()+1)+' 月'
   document.getElementById('promiseCard').classList.add('show')
-  // Reveal droplet stage after card
-  setTimeout(()=>document.getElementById('dropletStage').classList.add('show'),600)
+  // Show droplet stage + dim visions + dim ending text
+  setTimeout(()=>{
+    document.getElementById('dropletStage').classList.add('show')
+    var vs = [v1,v2,v3,v4]
+    vs.forEach(function(v,i){
+      v.style.opacity = '1'
+      v.style.transform = 'translateY(0)'
+      v.style.transitionDelay = (i*0.1)+'s'
+    })
+    document.getElementById('endingClose').style.opacity = '0.4'
+    document.getElementById('endingNext').style.opacity = '0.35'
+  },600)
 }
 
 // P7 Plan B: Droplet ripple + vision light-up
@@ -1520,9 +1530,12 @@ function lightUp(){
   visions.forEach((v,i)=>{
     v.classList.add('lit')
     v.style.transitionDelay = (i*0.15)+'s'
+    v.style.opacity = ''; v.style.transform = ''
   })
-  setTimeout(()=>document.getElementById('endingClose').classList.add('show'),300)
-  setTimeout(()=>document.getElementById('endingNext').style.opacity='1',600)
+  var ec = document.getElementById('endingClose')
+  ec.classList.add('show'); ec.style.opacity = ''
+  var en = document.getElementById('endingNext')
+  en.style.opacity = '1'
   // Show back-top button
   setTimeout(()=>{
     var btn = document.getElementById('backTopBtn')
