@@ -681,6 +681,32 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   opacity:0;transform:translateY(40px);
   will-change:opacity,transform;
 }
+/* ===== DESKTOP ≥1200px ===== */
+@media(min-width:1200px){
+  html{font-size:18px;background:#1a1a1a;display:flex;justify-content:center}
+  body{max-width:100%}
+  #app{width:1200px;max-width:1200px;box-shadow:0 0 120px rgba(0,0,0,0.5);margin:0 auto}
+  .section{aspect-ratio:auto;min-height:auto;overflow:visible;padding:80px 60px;display:flex;flex-direction:column;justify-content:center}
+  .section-bg{position:absolute;inset:0;z-index:0}
+  .section-bg img,.section-bg video{object-fit:cover}
+  .section-inner{position:relative;inset:auto;padding:0;max-width:1000px;margin:0 auto;width:100%;display:flex;flex-direction:column;justify-content:center}
+  .section::before,.section::after{display:none}
+  #p1 .section-inner{padding-top:0}
+  #p3 .section-inner{position:relative;top:auto;padding-bottom:0}
+  #p3{min-height:auto}
+  #p6{min-height:auto}
+  #p4 .p2-intro,#p2 .p2-intro{position:relative;top:auto;left:auto;right:auto;margin-bottom:40px}
+  .map-dot{position:relative;top:auto!important;left:auto!important;transform:none;margin:8px}
+  .map-popup{position:relative;max-width:400px;margin:0 0 12px 0}
+  .cover .main-title{max-width:600px}
+  .cover .intro-text{max-width:500px}
+  .cover .cover-note{max-width:450px}
+  .flip-grid{gap:16px}
+  .chat-list{max-width:900px;margin:0 auto}
+  .comment-stage{height:auto;max-height:500px}
+  .scroll-hint-inline{display:none}
+  .p2-intro .hint{display:none}
+}
 </style>
 <!-- Background music -->
 <style>
@@ -1229,7 +1255,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 // === Fixed-width scaling: 390px design, scale to fit any screen ===
 (function(){
   var app=document.getElementById('app'), W=390
-  function scale(){var s=window.innerWidth/W; if(s<1){app.style.transform='scale('+s.toFixed(4)+')';document.documentElement.style.fontSize='';app.style.width='390px'}else if(window.innerWidth>540){app.style.transform='';document.documentElement.style.fontSize='';app.style.width='540px'}else{app.style.transform='scale('+Math.min(s,1.15).toFixed(4)+')';document.documentElement.style.fontSize=(16/s).toFixed(2)+'px';app.style.width='390px'}}
+  function scale(){var s=window.innerWidth/W; if(window.innerWidth>=1200){app.style.transform='';document.documentElement.style.fontSize='';app.style.width=''}else if(s<1){app.style.transform='scale('+s.toFixed(4)+')';document.documentElement.style.fontSize='';app.style.width='390px'}else if(window.innerWidth>540){app.style.transform='';document.documentElement.style.fontSize='';app.style.width='540px'}else{app.style.transform='scale('+Math.min(s,1.15).toFixed(4)+')';document.documentElement.style.fontSize=(16/s).toFixed(2)+'px';app.style.width='390px'}}
   scale();window.addEventListener('resize',scale)
   // On orientation change, recalc after layout
   window.addEventListener('orientationchange',function(){setTimeout(scale,300)})
