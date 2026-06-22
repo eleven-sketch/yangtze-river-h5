@@ -636,19 +636,22 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 .vision-list{display:flex;flex-direction:column;gap:3px;margin:6px 0}
 .vision-item{
   display:flex;align-items:center;justify-content:center;gap:6px;
-  padding:7px 12px;background:rgba(253,251,247,0.4);
+  padding:7px 12px;background:rgba(253,251,247,0.08);
   border-radius:6px;
   opacity:0;transform:translateY(12px);
   transition:all 0.5s cubic-bezier(0.22,1,0.36,1);
 }
-.vision-item.lit{opacity:1;transform:translateY(0);background:rgba(253,251,247,0.12)}
-.vision-item .v-icon{font-size:1rem;flex-shrink:0;opacity:0.3}
-.vision-item .v-text{font-size:0.92rem;color:rgba(44,36,32,0.35);line-height:1.3;text-align:center;flex:0 0 auto}
-.vision-item .v-text strong{color:rgba(20,82,67,0.3)}
+.vision-item.lit{opacity:1;transform:translateY(0);background:rgba(253,251,247,0.85)}
+.vision-item:not(.lit) .v-icon{opacity:0.2}
+.vision-item:not(.lit) .v-text{color:rgba(44,36,32,0.25)}
+.vision-item:not(.lit) .v-text strong{color:rgba(20,82,67,0.2)}
+.vision-item.lit .v-icon{font-size:1rem;flex-shrink:0}
+.vision-item.lit .v-text{font-size:0.92rem;color:var(--text);line-height:1.3;text-align:center;flex:0 0 auto}
+.vision-item.lit .v-text strong{color:var(--teal-deep)}
 
 .ending-close{
   font-family:var(--font-serif);
-  font-size:0.92rem;font-weight:700;color:rgba(197,61,61,0.55);
+  font-size:0.92rem;font-weight:700;color:var(--red);
   margin:16px 0 8px;line-height:1.5;
   opacity:0;transition:opacity 0.6s;
 }
@@ -1213,7 +1216,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
     </div>
 
 
-    <p style="font-size:1.1rem;font-weight:700;color:rgba(20,82,67,0.55);opacity:0;transition:opacity 0.6s" id="endingNext">我们下一个十年见！</p>
+    <p style="font-size:1.1rem;font-weight:700;color:var(--teal-deep);opacity:0;transition:opacity 0.6s" id="endingNext">我们下一个十年见！</p>
 
     <button class="back-top-btn" id="backTopBtn" style="opacity:0;pointer-events:none" onclick="resetAll()">💧 回到开端</button>
     <p class="ending-source">
@@ -1495,24 +1498,8 @@ function makePromise(){
   const d = new Date()
   document.getElementById('cardDate').textContent = d.getFullYear()+' 年 '+(d.getMonth()+1)+' 月'
   document.getElementById('promiseCard').classList.add('show')
-  // Reveal droplet stage + visions + ending text
-  setTimeout(()=>{
-    document.getElementById('dropletStage').classList.add('show')
-    var visions = [v1,v2,v3,v4]
-    visions.forEach(function(v,i){
-      v.classList.add('lit')
-      v.style.transitionDelay = (i*0.15)+'s'
-    })
-    setTimeout(function(){document.getElementById('endingClose').classList.add('show')},300)
-    setTimeout(function(){document.getElementById('endingNext').style.opacity='1'},600)
-    // Show back-top button
-    setTimeout(function(){
-      var btn = document.getElementById('backTopBtn')
-      btn.style.transition = 'opacity 1.2s cubic-bezier(0.22,1,0.36,1)'
-      btn.style.opacity = '1'
-      btn.style.pointerEvents = 'auto'
-    },900)
-  },600)
+  // Reveal droplet stage after card
+  setTimeout(()=>document.getElementById('dropletStage').classList.add('show'),600)
 }
 
 // P7 Plan B: Droplet ripple + vision light-up
@@ -1536,12 +1523,13 @@ function lightUp(){
   })
   setTimeout(()=>document.getElementById('endingClose').classList.add('show'),300)
   setTimeout(()=>document.getElementById('endingNext').style.opacity='1',600)
+  // Show back-top button
   setTimeout(()=>{
-    const btn = document.getElementById('backTopBtn')
+    var btn = document.getElementById('backTopBtn')
     btn.style.transition = 'opacity 1.2s cubic-bezier(0.22,1,0.36,1)'
     btn.style.opacity = '1'
     btn.style.pointerEvents = 'auto'
-  },500+4*400+600)
+  },600)
 }
 
 // Chat bubbles — narration plays alongside BGM
