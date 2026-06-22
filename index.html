@@ -1522,7 +1522,7 @@ function playAudio(id){
     // Duck BGM if playing
     if(!bgmEl.paused){
       bgmEl._origVol = bgmEl.volume
-      fadeVol(bgmEl, 0.15)
+      fadeVol(bgmEl, 0.3)
     }
     a.play().catch(function(e){console.log('audio play error:',e)})
     a.onended = function(){
