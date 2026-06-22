@@ -1515,14 +1515,31 @@ function lightUp(){
 function playAudio(id){
   var a = document.getElementById(id)
   if(a.paused){
-    // Stop other story audios only
+    // Stop other story audios
     document.querySelectorAll('audio').forEach(function(el){
       if(el!==a && el!==bgmEl){el.pause();el.currentTime=0}
     })
+    // Duck BGM if playing
+    if(!bgmEl.paused){
+      bgmEl._origVol = bgmEl.volume
+      fadeVol(bgmEl, 0.15)
+    }
     a.play().catch(function(e){console.log('audio play error:',e)})
+    a.onended = function(){
+      if(bgmEl._origVol !== undefined) fadeVol(bgmEl, bgmEl._origVol)
+    }
   } else {
     a.pause(); a.currentTime = 0
+    if(bgmEl._origVol !== undefined){ fadeVol(bgmEl, bgmEl._origVol); delete bgmEl._origVol }
   }
+}
+function fadeVol(el, target){
+  var step = (target - el.volume) / 15
+  clearInterval(el._fade)
+  el._fade = setInterval(function(){
+    if(Math.abs(el.volume - target) < 0.02){ el.volume = target; clearInterval(el._fade) }
+    else el.volume += step
+  }, 30)
 }
 function toggleChat(el){
   const isExpanded = el.classList.contains('expanded')
