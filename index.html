@@ -1528,14 +1528,19 @@ function lightUp(){
   }
   const visions = [v1,v2,v3,v4]
   visions.forEach((v,i)=>{
-    v.classList.add('lit')
-    v.style.transitionDelay = (i*0.15)+'s'
-    v.style.opacity = ''; v.style.transform = ''
+    setTimeout(()=>{
+      v.classList.add('lit')
+      v.style.opacity = ''; v.style.transform = ''
+    },i*400)
   })
-  var ec = document.getElementById('endingClose')
-  ec.classList.add('show'); ec.style.opacity = ''
-  var en = document.getElementById('endingNext')
-  en.style.opacity = '1'
+  setTimeout(()=>{
+    var ec = document.getElementById('endingClose')
+    ec.classList.add('show'); ec.style.opacity = ''
+  },4*400)
+  setTimeout(()=>{
+    var en = document.getElementById('endingNext')
+    en.style.opacity = '1'
+  },4*400+600)
   // Show back-top button
   setTimeout(()=>{
     var btn = document.getElementById('backTopBtn')
