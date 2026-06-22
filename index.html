@@ -1213,7 +1213,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
     </div>
 
 
-    <p style="font-size:1.1rem;font-weight:700;color:var(--teal-deep);opacity:0;transition:opacity 0.6s" id="endingNext">我们下一个十年见！</p>
+    <p style="font-size:1.1rem;font-weight:700;color:rgba(20,82,67,0.55);opacity:0;transition:opacity 0.6s" id="endingNext">我们下一个十年见！</p>
 
     <button class="back-top-btn" id="backTopBtn" style="opacity:0;pointer-events:none" onclick="resetAll()">💧 回到开端</button>
     <p class="ending-source">
@@ -1495,8 +1495,24 @@ function makePromise(){
   const d = new Date()
   document.getElementById('cardDate').textContent = d.getFullYear()+' 年 '+(d.getMonth()+1)+' 月'
   document.getElementById('promiseCard').classList.add('show')
-  // Reveal droplet stage after card
-  setTimeout(()=>document.getElementById('dropletStage').classList.add('show'),600)
+  // Reveal droplet stage + visions + ending text
+  setTimeout(()=>{
+    document.getElementById('dropletStage').classList.add('show')
+    var visions = [v1,v2,v3,v4]
+    visions.forEach(function(v,i){
+      v.classList.add('lit')
+      v.style.transitionDelay = (i*0.15)+'s'
+    })
+    setTimeout(function(){document.getElementById('endingClose').classList.add('show')},300)
+    setTimeout(function(){document.getElementById('endingNext').style.opacity='1'},600)
+    // Show back-top button
+    setTimeout(function(){
+      var btn = document.getElementById('backTopBtn')
+      btn.style.transition = 'opacity 1.2s cubic-bezier(0.22,1,0.36,1)'
+      btn.style.opacity = '1'
+      btn.style.pointerEvents = 'auto'
+    },900)
+  },600)
 }
 
 // P7 Plan B: Droplet ripple + vision light-up
