@@ -1302,6 +1302,8 @@ let ticking = false
 function updateReveals(){
   const vh = window.innerHeight
   revealEls.forEach(el=>{
+    // Don't interfere with P1 timed entrance animation
+    if(p1Animating && el.closest('#p1')) return
     const rect = el.getBoundingClientRect()
     const start = vh * 0.95
     const end = vh * 0.45
@@ -1406,6 +1408,7 @@ document.querySelectorAll('.flip-front .flip-icon, .flip-back .flip-icon').forEa
 
 // P1 title auto-animate on page load
 const p1Reveals = document.querySelectorAll('#p1 .reveal')
+let p1Animating = true
 p1Reveals.forEach((el,i)=>{
   el.style.transition = 'opacity 1.2s cubic-bezier(0.22,1,0.36,1), transform 1.2s cubic-bezier(0.22,1,0.36,1)'
   el.style.transitionDelay = (0.3 + i * 0.4) + 's'
@@ -1415,7 +1418,7 @@ p1Reveals.forEach((el,i)=>{
   },100)
 })
 // Remove CSS transitions so scroll-driven can take over smoothly
-setTimeout(()=>{p1Reveals.forEach(el=>{el.style.transition='';el.style.transitionDelay=''})},3500)
+setTimeout(()=>{p1Reveals.forEach(el=>{el.style.transition='';el.style.transitionDelay=''});p1Animating=false},3500)
 
 
 function resetAll(){
