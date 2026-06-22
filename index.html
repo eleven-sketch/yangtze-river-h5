@@ -60,6 +60,8 @@ body{
 #app{
   width:390px;margin:0 auto;position:relative;
   transform-origin:top center;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
 }
 @media(min-width:541px){
   html{background:#1a1a1a;display:flex;justify-content:center}
@@ -1219,7 +1221,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 // === Fixed-width scaling: 390px design, scale to fit any screen ===
 (function(){
   var app=document.getElementById('app'), W=390
-  function scale(){var s=Math.min(window.innerWidth/W,1.5);app.style.transform='scale('+s+')'}
+  function scale(){var s=Math.min(window.innerWidth/W,1.5).toFixed(4);app.style.transform='scale('+s+')'}
   scale();window.addEventListener('resize',scale)
   // On orientation change, recalc after layout
   window.addEventListener('orientationchange',function(){setTimeout(scale,300)})
