@@ -1324,31 +1324,28 @@ const revealEls = document.querySelectorAll('.reveal')
 let ticking = false
 
 // Scroll-driven reveal: appear going down, fade back going up
+var _sectionCache=new Map()
 function updateReveals(){
   const vh = window.innerHeight
+  _sectionCache.clear()
   revealEls.forEach(el=>{
-    // Skip elements far from viewport (>3 screens away)
-    var sr = el.closest('.section'); if(!sr) return
-    var srTop = sr.getBoundingClientRect().top
-    if(srTop > vh*2 || srTop < -vh*3) return
-    // Don't interfere with P1 timed entrance animation
     if(p1Animating && el.closest('#p1')) return
+    var sr = el.closest('.section'); if(!sr) return
+    // Cache section rect per frame
+    var srTop = _sectionCache.get(sr)
+    if(srTop===undefined){srTop=sr.getBoundingClientRect().top;_sectionCache.set(sr,srTop)}
+    if(srTop > vh*2 || srTop < -vh*3) return
     const rect = el.getBoundingClientRect()
-    const start = vh * 0.95
-    const end = vh * 0.45
-    const range = start - end
-    const progress = Math.max(0, Math.min(1, (start - rect.top) / range))
+    const p = Math.max(0, Math.min(1, (vh*0.95 - rect.top) / (vh*0.5)))
     const delay = parseFloat(el.dataset.delay || '0')
-    const p = Math.max(0, Math.min(1, (progress - delay) / (1 - delay)))
-    el.style.opacity = p
-    el.style.transform = `translateY(${(1-p)*40}px)`
-    // Lazy-load & autoplay when first visible
-    if(p>0.5 && !el._loaded){
+    const fp = Math.max(0, Math.min(1, (p - delay) / (1 - delay)))
+    el.style.opacity = fp
+    el.style.transform = `translateY(${(1-fp)*40}px)`
+    if(fp>0.5 && !el._loaded){
       el._loaded=true
       el.querySelectorAll('img[data-src]').forEach(function(img){
         img.src=img.getAttribute('data-src')+'?t='+Date.now()
       })
-
     }
   })
 }
