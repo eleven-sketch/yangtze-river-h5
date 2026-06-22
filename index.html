@@ -1221,7 +1221,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 // === Fixed-width scaling: 390px design, scale to fit any screen ===
 (function(){
   var app=document.getElementById('app'), W=390
-  function scale(){var s=window.innerWidth/W; if(s>=1){app.style.transform=''}else{app.style.transform='scale('+s.toFixed(4)+')'}}
+  function scale(){var s=Math.min(window.innerWidth/W,1.15).toFixed(4);app.style.transform='scale('+s+')'}
   scale();window.addEventListener('resize',scale)
   // On orientation change, recalc after layout
   window.addEventListener('orientationchange',function(){setTimeout(scale,300)})
