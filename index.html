@@ -1578,6 +1578,17 @@ function playAudio(id){
   v.addEventListener('play',function(){if(!bgmEl.paused){bgmEl._origVol=bgmEl.volume;fadeVol(bgmEl,0.15)}})
   v.addEventListener('pause',function(){if(bgmEl._origVol!==undefined){fadeVol(bgmEl,bgmEl._origVol);delete bgmEl._origVol}})
   v.addEventListener('ended',function(){if(bgmEl._origVol!==undefined){fadeVol(bgmEl,bgmEl._origVol);delete bgmEl._origVol}})
+  // Auto pause when scrolled out of view, resume when back
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        if(v._wasPlaying){v.play().catch(function(){});v._wasPlaying=false}
+      } else {
+        if(!v.paused){v._wasPlaying=true;v.pause()}
+      }
+    })
+  },{threshold:0.1})
+  observer.observe(v)
 })()
 
 function fadeVol(el, target){
