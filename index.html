@@ -1531,16 +1531,16 @@ function lightUp(){
     setTimeout(()=>{
       v.classList.add('lit')
       v.style.opacity = ''; v.style.transform = ''
-    },i*400)
+    },i*250)
   })
   setTimeout(()=>{
     var ec = document.getElementById('endingClose')
     ec.classList.add('show'); ec.style.opacity = ''
-  },4*400)
+  },4*250)
   setTimeout(()=>{
     var en = document.getElementById('endingNext')
     en.style.opacity = '1'
-  },4*400+600)
+  },4*250+400)
   // Show back-top button
   setTimeout(()=>{
     var btn = document.getElementById('backTopBtn')
