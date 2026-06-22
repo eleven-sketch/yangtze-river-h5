@@ -1415,6 +1415,10 @@ p1Reveals.forEach((el,i)=>{
   setTimeout(()=>{
     el.style.opacity = '1'
     el.style.transform = 'translateY(0)'
+    // Load data-src images in this reveal
+    el.querySelectorAll('img[data-src]').forEach(function(img){
+      img.src=img.getAttribute('data-src')+'?t='+Date.now()
+    })
   },100)
 })
 // Remove CSS transitions so scroll-driven can take over smoothly
