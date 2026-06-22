@@ -1323,6 +1323,10 @@ let ticking = false
 function updateReveals(){
   const vh = window.innerHeight
   revealEls.forEach(el=>{
+    // Skip elements far from viewport (>3 screens away)
+    var sr = el.closest('.section'); if(!sr) return
+    var srTop = sr.getBoundingClientRect().top
+    if(srTop > vh*2 || srTop < -vh*3) return
     // Don't interfere with P1 timed entrance animation
     if(p1Animating && el.closest('#p1')) return
     const rect = el.getBoundingClientRect()
@@ -1347,8 +1351,10 @@ function updateReveals(){
 
 // P3 flip cards — scroll-linked row by row reveal
 const p3Cards = document.querySelectorAll('#p3 .flip-card')
+const p3Section = document.getElementById('p3')
 function updateCards(){
-  const vh = window.innerHeight
+  var st = p3Section?p3Section.getBoundingClientRect().top:0, vh=window.innerHeight
+  if(st > vh*2 || st < -vh*3) return
   p3Cards.forEach((card,i)=>{
     const rect = card.getBoundingClientRect()
     const start = vh * 0.95
