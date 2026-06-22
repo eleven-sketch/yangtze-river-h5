@@ -73,8 +73,11 @@ body{
   .section{aspect-ratio:auto;min-height:auto;overflow:visible;padding:60px 0}
   .section-inner{position:relative;inset:auto;padding:6vw 8vw}
   .scroll-hint,.scroll-hint-inline,.scroll-hint-sm{display:none}
-  #p3,#p6{min-height:auto}
-  #p3 .section-inner{position:relative;top:auto}
+  #p3{min-height:auto!important}
+  #p3 .section-inner{position:relative;top:auto;padding-bottom:0}
+  #p6{min-height:auto!important;overflow:visible}
+  #p6 .section-inner{position:relative;inset:auto;justify-content:flex-start;padding-bottom:40px}
+  .section-tall .section-inner{padding-bottom:0}
 }
 
 /* ===== SECTIONS ===== */
