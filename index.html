@@ -1590,11 +1590,20 @@ function playAudio(id){
   // Only react to user-triggered play/pause for BGM
   v.addEventListener('play',function(){
     if(v._auto){v._auto=false;return}
-    if(!bgmEl.paused){bgmEl._origVol=bgmEl.volume;fadeVol(bgmEl,0.15)}
+    if(!bgmEl.paused){
+      var vol = isNaN(bgmEl.volume)?1:bgmEl.volume
+      if(vol<0.02) vol=1
+      bgmEl._origVol=vol
+      fadeVol(bgmEl,0.15)
+    }
   })
   v.addEventListener('pause',function(){
     if(v._auto){v._auto=false;return}
-    if(bgmEl._origVol!==undefined){fadeVol(bgmEl,bgmEl._origVol);delete bgmEl._origVol}
+    if(bgmEl._origVol!==undefined){
+      var orig = bgmEl._origVol
+      delete bgmEl._origVol
+      fadeVol(bgmEl,orig)
+    }
   })
 })()
 
