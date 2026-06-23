@@ -1436,13 +1436,13 @@ function updateAll(){
 window.addEventListener('scroll',()=>{
   if(!ticking){
     requestAnimationFrame(()=>{
-      updateAll()
+      if(++_frameSkip%3===0) updateAll()
       ticking = false
     })
     ticking = true
   }
 },{passive:true})
-
+var _frameSkip=0
 // Clone flip icons to bottom-right corner
 document.querySelectorAll('.flip-front .flip-icon, .flip-back .flip-icon').forEach(icon=>{
   const clone = icon.cloneNode(true)
