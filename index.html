@@ -17,7 +17,7 @@
 <link rel="preload" as="image" href="assets/p5.webp">
 <link rel="preload" as="image" href="assets/p6.webp">
 <link rel="preload" as="image" href="assets/p7.webp?v=2">
-<link rel="preload" as="audio" href="bgm.mp3" fetchpriority="high">
+<link rel="icon" href="data:,">
 <style>
 /* Loading overlay — blocks all interaction */
 body.loading{overflow:hidden;position:fixed;width:100%}
@@ -88,7 +88,7 @@ body{
 /* Content-heavy pages: allow growth beyond aspect-ratio */
 section.section-tall{aspect-ratio:auto;min-height:100vh;min-height:100dvh;overflow:visible}
 section.section-tall .section-inner{position:relative;min-height:auto;padding-bottom:12vw}
-#p1 .section-inner{justify-content:flex-start;padding-top:50px}
+#p1 .section-inner{justify-content:center;transform:translateY(-80px)}
 #p3 .section-inner{position:relative;top:auto;justify-content:flex-start;padding:20px 6vw 40px}
 #p3{min-height:100dvh;overflow:visible;z-index:1}
 #p3 .scroll-hint-inline{position:absolute;bottom:20px;left:0;right:0;text-align:center;z-index:10}
@@ -141,7 +141,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 /* Text backdrop — a dark semi-transparent shield behind all cover text */
 .section#p1 .section-bg::after{
   content:'';position:absolute;inset:0;z-index:1;
-  background:radial-gradient(ellipse at center,rgba(0,0,0,0.35) 25%,rgba(0,0,0,0.15) 65%);
+  background:none;
   pointer-events:none;
 }
 .cover .section-label{
@@ -163,12 +163,17 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   text-shadow:0 1px 4px rgba(0,0,0,0.5);
 }
 .cover .intro-text{
-  font-size:0.94rem;color:#ffffff;line-height:1.65;
-  max-width:320px;margin:0 auto;
+  font-family:var(--font-serif);
+  font-size:1.15rem;color:#fff;font-weight:600;line-height:1.5;
+  text-shadow:0 1px 4px rgba(0,0,0,0.85),0 2px 12px rgba(0,0,0,0.5);
+  max-width:340px;margin:0 auto;
 }
 .cover .cover-note{
-  font-size:0.86rem;color:#fff;margin-top:22px;
-  max-width:300px;margin-left:auto;margin-right:auto;
+  font-family:var(--font-serif);
+  font-size:1.05rem;color:#fff;font-weight:600;line-height:1.5;
+  text-shadow:0 1px 4px rgba(0,0,0,0.85),0 2px 12px rgba(0,0,0,0.5);
+  margin-top:22px;
+  max-width:320px;margin-left:auto;margin-right:auto;
   animation:breathe 3s ease-in-out infinite;
 }
 @keyframes breathe{
@@ -215,7 +220,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   position:absolute;bottom:30px;left:0;right:0;text-align:center;z-index:10;
 }
 #p6{min-height:calc(100vw*16/9 + 500px);overflow:visible}
-#p6 .section-heading{font-size:clamp(1.5rem,5.5vw,2rem);line-height:1.4}
+#p6 .section-heading{font-size:clamp(1.8rem,6.5vw,2.4rem);line-height:1.4}
 #p6 .comment-card{font-size:0.86rem}
 #p6 .comment-card .card-user{font-size:0.68rem}
 #p6 .comment-prompt{font-size:0.88rem}
@@ -248,7 +253,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 /* ===== SHARED TYPOGRAPHY ===== */
 .section-label{
   font-family:var(--font-en);
-  font-size:0.68rem;color:var(--gold);letter-spacing:0.16em;margin-bottom:4px;
+  font-size:0.78rem;color:var(--gold);letter-spacing:0.16em;margin-bottom:4px;
 }
 .section-heading{
   font-family:var(--font-serif);
@@ -260,8 +265,8 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 /* P5 text size */
 #p5 .section-inner{justify-content:center;padding-top:0;padding-bottom:0;transform:translateY(-20px)}
-#p5 .section-heading{font-size:clamp(1.5rem,5.5vw,2rem)}
-#p5 .section-subhead{font-size:0.9rem}
+#p5 .section-heading{font-size:clamp(1.65rem,6vw,2.2rem)}
+#p5 .section-subhead{font-size:1rem}
 
 /* ===== P2 · MAP-STYLE CITY MARKERS ===== */
 .p2-intro{
@@ -269,13 +274,16 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 .p2-intro .lead{
   font-family:var(--font-serif);
-  font-size:clamp(1.05rem,4.5vw,1.4rem);
+  font-size:clamp(1.2rem,5vw,1.6rem);
   color:#fff;font-weight:600;line-height:1.5;
   text-shadow:0 1px 4px rgba(0,0,0,0.85),0 2px 12px rgba(0,0,0,0.5);
   max-width:390px;margin:0 auto;
 }
 /* P4 intro — slightly lower than P2 */
 #p4 .p2-intro{top:calc(5% + 10px)}
+.p2-footer{margin:0;font-family:var(--font-serif);color:#fff;font-weight:600;line-height:1.5;text-align:right;text-shadow:0 1px 4px rgba(0,0,0,0.85),0 2px 12px rgba(0,0,0,0.5);animation:breathe 3s ease-in-out infinite;transform:translateX(10px)}
+.p2-footer-big{font-size:clamp(1.2rem,5vw,1.6rem)}
+.p2-footer-sm{font-size:clamp(0.9rem,3.5vw,1.15rem)}
 .p2-intro .hint{
   display:inline-block;
   font-size:0.68rem;color:var(--gold);font-weight:600;margin-top:8px;
@@ -334,15 +342,15 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   position:absolute;z-index:8;
   max-width:min(250px,64vw);
   padding:6px 9px;
-  background:rgba(253,251,247,0.96);
+  background:rgba(253,251,247,0.98);
   border-radius:7px;
   box-shadow:0 3px 14px rgba(0,0,0,0.18);
-  font-size:0.78rem;color:var(--text);line-height:1.35;text-align:justify;
+  font-size:0.88rem;color:var(--text);line-height:1.35;text-align:justify;
   opacity:0;pointer-events:none;transform:scale(0.96);
   transition:opacity 0.3s ease-out,transform 0.3s ease-out;
 }
-.map-popup strong{color:#2E7D32}
-.map-popup p{margin:0}
+.map-popup strong{color:var(--teal-deep)}
+.map-popup p{margin:0;font-family:var(--font-serif)}
 .map-popup p+p{margin-top:2px}
 .map-popup.open{opacity:1;pointer-events:auto;transform:scale(1)}
 .map-popup .close-btn{
@@ -352,15 +360,17 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 .map-popup .popup-title{
   font-family:var(--font-serif);font-weight:700;color:var(--teal-deep);margin-bottom:1px;
-  font-size:0.82rem;padding-right:12px;line-height:1.25;
+  font-size:0.95rem;padding-right:12px;line-height:1.25;
 }
+.map-popup .popup-city{background:var(--red);color:#fff;padding:1px 8px;border-radius:5px;margin-left:5px;}
+.map-popup .popup-subtitle{display:inline-block;background:linear-gradient(90deg,rgba(178,128,60,0.6),#B2803C);color:#fff;padding:2px 12px;border-radius:6px;margin-top:4px;}
 .map-popup .popup-quote{
   color:var(--red);margin-top:1px;font-size:0.64rem;line-height:1.25;
 }
 
 /* Offset specific popups */
 #popup-maanshan,#popup-suzhou{margin-top:-60px}
-#popup-wuhan,#popup-nanchang{margin-top:-40px}
+#popup-wuhan{margin-top:-40px}#popup-nanjing{margin-top:-15px}#popup-nanchang{margin-top:-50px}
 
 /* ===== P3 · FLIP CARDS ===== */
 .p3-header{
@@ -373,8 +383,8 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 .p3-header .report-title{
   font-family:var(--font-serif);
-  font-size:clamp(1.3rem,4.5vw,1.7rem);
-  color:var(--teal-deep);font-weight:700;
+  font-size:clamp(1.5rem,5.5vw,2rem);
+  color:var(--teal-deep);font-weight:600;line-height:1.5;
 }
 .p3-header .report-sub{
   font-size:0.78rem;color:var(--text-faint);margin-top:2px;
@@ -476,7 +486,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 .chat-msg .chat-bubble{
   display:inline-block;max-width:100%;
   padding:8px 12px;border-radius:12px 12px 12px 3px;
-  font-size:0.86rem;color:var(--text);line-height:1.45;
+  font-size:0.95rem;color:var(--text);line-height:1.45;
   transition:all 0.35s;
 }
 .chat-msg:nth-child(1) .chat-bubble{background:rgba(91,158,148,0.13)}
@@ -485,10 +495,10 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 .chat-msg:nth-child(4) .chat-bubble{background:rgba(91,141,158,0.13)}
 
 .chat-msg .chat-name{
-  font-size:0.82rem;font-weight:700;color:var(--teal-deep);margin-bottom:2px;
+  font-size:0.9rem;font-weight:700;color:var(--teal-deep);margin-bottom:2px;
 }
 .chat-msg .chat-quote{
-  font-size:0.96rem;color:var(--red);line-height:1.45;
+  font-size:1.05rem;color:var(--red);line-height:1.45;
 }
 
 .chat-msg .chat-story{
@@ -504,7 +514,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
 /* Typing dots hint */
 .chat-msg .tap-hint{
-  font-size:0.88rem;font-weight:600;color:var(--gold);margin-top:3px;
+  font-size:0.95rem;font-weight:600;color:var(--gold);margin-top:3px;
   display:inline-block;
   animation:breathe 2s ease-in-out infinite;
 }
@@ -559,7 +569,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 .ending{text-align:center}
 .ending-heading{
   font-family:var(--font-serif);
-  font-size:clamp(1.5rem,5.5vw,2rem);
+  font-size:clamp(1.65rem,6vw,2.2rem);
   color:var(--teal-deep);font-weight:700;line-height:1.35;
 }
 
@@ -571,6 +581,11 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   padding:10px 20px;border:none;border-radius:20px;
   background:linear-gradient(135deg,var(--teal-deep),var(--teal-soft));
   color:#fff;font-size:0.8rem;font-weight:600;cursor:pointer;
+  animation:promise-breathe 1.8s ease-in-out infinite;
+}
+@keyframes promise-breathe{
+  0%,100%{box-shadow:0 4px 16px rgba(20,82,67,0.25);transform:scale(1)}
+  50%{box-shadow:0 6px 36px rgba(212,163,89,0.7);transform:scale(1.1)}
 }
 .promise-input button:active{opacity:0.85;transform:scale(0.96)}
 
@@ -666,7 +681,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
 .ending-close{
   font-family:var(--font-serif);
-  font-size:0.92rem;font-weight:700;color:var(--red);
+  font-size:1.1rem;font-weight:700;color:var(--red);
   margin:16px 0 8px;line-height:1.5;
   opacity:0;transition:opacity 0.6s;
 }
@@ -725,16 +740,12 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 <section class="section" id="p1">
   <div class="section-bg"><img src="assets/p1.webp?v=2" alt="" fetchpriority="high"></div>
   <div class="section-inner cover">
-    <div class="reveal reveal-d1"><h1 class="main-title">长江十年：一份写在江水里的答卷</h1></div>
-    <div class="reveal reveal-d2"><p class="sub-title">2016 → 2026</p></div>
+    <div class="reveal reveal-d1" style="text-align:center"><img src="3.png" alt="长江十年：一份写在江水里的答卷" style="width:98%"></div>
     <div class="reveal reveal-d4" style="margin-top:20px">
-      <p class="intro-text">2016年1月5日，重庆。<br>“共抓大保护，不搞大开发。”<br>一句话，为长江锚定了新的方向。</p>
+      <p class="intro-text">2016年1月5日，重庆。<br>”共抓大保护，不搞大开发。”<br>一句话，为长江锚定了新的方向。</p>
     </div>
     <div class="reveal reveal-d5">
       <p class="cover-note">十年后，江豚逐浪，鱼儿洄游，岸绿景美。<br>答案，已经写在奔流的江水里。</p>
-    </div>
-    <div class="reveal reveal-d7" style="margin-top:5px;text-align:center">
-      <img data-src="动图.webp" alt="江豚逐浪" style="width:85%;max-width:400px;border-radius:10px">
     </div>
   </div>
   <div class="scroll-hint">
@@ -751,7 +762,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
   <!-- Intro overlay -->
   <div class="p2-intro reveal">
-    <p class="lead">十年间，四次高规格座谈会，从上游重庆到中游南昌，治江思路一步一个台阶。</p>
+    <p class="lead">十年，四次座谈会<br>每一次部署，都让长江治理向前一步。</p>
   </div>
 
   <!-- 重庆 · 朝天门位置 -->
@@ -780,24 +791,25 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
   <!-- Popup cards -->
   <div class="map-popup open" id="popup-chongqing">
-    <p class="popup-title">2016·01·05 · 重庆<br>推动长江经济带发展座谈会</p>
-    <p>首提<strong>“共抓大保护、不搞大开发”</strong>，将长江生态修复摆在压倒性位置。同年9月《长江经济带发展规划纲要》印发。</p>
+    <p class="popup-title"><span class="popup-year">2016</span><span class="popup-city">重庆</span><br><span class="popup-subtitle" style="white-space:nowrap">推动长江经济带发展座谈会</span></p>
+    <p><strong>首提”共抓大保护、不搞大开发”</strong><br>将长江生态修复摆在压倒性位置</p>
   </div>
 
   <div class="map-popup open" id="popup-wuhan">
-    <p class="popup-title">2018·04·26 · 武汉<br>深入推动长江经济带发展座谈会</p>
-    <p>提出正确把握<strong>“五个关系”</strong>：整体推进与重点突破、生态与经济、谋划与久功、破旧与育新、自身与协同。</p>
+    <p class="popup-title"><span class="popup-year">2018</span><span class="popup-city">武汉</span><br><span class="popup-subtitle">深入推动长江经济带发展座谈会</span></p>
+    <p><strong>提出”五个关系”</strong>，整体推进与重点突破、生态与经济、谋划与久功、破旧与育新、自身与协同</p>
   </div>
 
   <div class="map-popup open" id="popup-nanjing">
-    <p class="popup-title">2020·11·14 · 南京<br>全面推动长江经济带发展座谈会</p>
-    <p>赋予长江经济带<strong>三大定位</strong>：生态优先绿色发展主战场、畅通双循环主动脉、高质量发展主力军。</p>
+    <p class="popup-title"><span class="popup-year">2020</span><span class="popup-city">南京</span><br><span class="popup-subtitle">全面推动长江经济带发展座谈会</span></p>
+    <p><strong>赋予三大战略定位</strong>：生态优先绿色发展主战场、畅通双循环主动脉、高质量发展主力军</p>
   </div>
 
   <div class="map-popup open" id="popup-nanchang">
-    <p class="popup-title">2023·10·12 · 南昌<br>进一步推动长江经济带高质量发展座谈会</p>
-    <p>强调<strong>“谋长远之势、行长久之策、建久安之基”</strong>。提出<strong>高质量发展新格局</strong>：生态优先、创新引领、战略支撑、协同融通、安全发展。</p>
+    <p class="popup-title"><span class="popup-year">2023</span><span class="popup-city">南昌</span><br><span class="popup-subtitle">进一步推动长江经济带高质量发展座谈会</span></p>
+    <p><strong>强调”谋长远之势、行长久之策，建久安之基”</strong>，提出高质量发展新格局：生态优先、创新引领、战略支撑、协同融通安全发展</p>
   </div>
+  <div class="reveal reveal-d3" style="position:absolute;bottom:90px;left:6%;right:6%;z-index:10;text-align:right;margin:0;transform:translateX(10px)"><p class="p2-footer"><span class="p2-footer-big">从保护到发展</span><br><span class="p2-footer-sm">长江治理不断迈向更高水平！</span></p></div>
   <span class="scroll-hint-inline">↓ 向下滑动 ↓</span>
 </section>
 
@@ -807,8 +819,8 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <div class="section-inner">
     <div class="reveal"><div class="p3-header">
       <span class="report-tag">十年对比</span>
-      <h2 class="report-title">点击卡片，揭开长江的答案</h2>
-      <p class="report-sub">每一张灰色卡片背后，都藏着一个十年的变化</p>
+      <h2 class="report-title">十年蝶变，数字见证</h2>
+      <p class="report-sub">点击卡片，见证长江交出的每一份答卷</p>
     </div></div>
 
     <div class="flip-grid">
@@ -995,10 +1007,9 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
     <div class="reveal reveal-d2"><p class="p3-highlight">
       更令人欣喜的是，<br>
-	      <strong>2017年，</strong><br>
-      曾被宣布“野外灭绝”的<strong>长江鲟</strong>，<br>在赤水河首次观测到自然产卵。<br>
+      曾被宣布"野外灭绝"的<strong>长江鲟</strong>，<br>在赤水河首次观测到自然产卵。<br>
       中华鲟连续两年增殖放流突破<strong>100万尾</strong>！<br>
-      <strong style="font-size:1.1em">有长江鲟，也不止有长江鲟！</strong>
+      回来的不只是一种物种，<br>更是长江的生机！
     </p></div>
 
     <!-- 卡片滚动舞台 -->
@@ -1008,11 +1019,8 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
         <img src="卡片.webp" alt="">
       </div>
     </div></div>
-    <div class="reveal reveal-d3"><p class="p3-highlight" style="text-align:center;margin-top:8px">十张卡片是长江的体检报告，<br>这些城市的江边，<br>也正在给出它们自己的答案。<br>现在，看看它真实的样子。</p></div>
-    <div class="reveal reveal-d4" style="text-align:center;margin-top:0">
-      <video id="p3Video" src="video.mp4" controls playsinline preload="metadata" style="width:85%;max-width:280px;aspect-ratio:9/16;object-fit:contain;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.15)"></video>
-      <p style="text-align:center;font-size:0.72rem;color:var(--text-sub);margin-top:0">长江江边对比（来源：新闻联播微信视频号）</p>
-    </div>
+    <div class="reveal reveal-d3"><p class="p3-highlight" style="text-align:center;margin-top:8px">有些变化，藏在数字里，<br>更多变化，写在江岸上。<br>接下来，让我们沿江而下，<br>去看看长江现在的模样！</p></div>
+
   </div>
   <span class="scroll-hint-inline" style="position:absolute;bottom:20px;left:0;right:0;text-align:center;z-index:10">↓ 向下滑动 ↓</span>
 </section>
@@ -1052,25 +1060,25 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <!-- Popups -->
   <div class="map-popup open" id="popup-yichang">
     <p class="popup-title">宜昌 · 腾笼换鸟</p>
-    <p>134家化工企业关改搬转，GDP不降反升——2024年突破<strong>6191亿</strong>，较2016年<strong>翻了一番</strong>。</p>
+    <p>134家化工企业关改搬转，2024年GDP突破<strong>6191亿</strong>，较2016年<strong>翻了一番</strong>。</p>
   </div>
 
   <div class="map-popup open" id="popup-yueyang">
     <p class="popup-title">岳阳 · 化茧成蝶</p>
-    <p><strong>39处</strong>砂石码头全部拆除。江豚从几乎绝迹恢复至常年观测值<strong>近60头</strong>，麋鹿从65头增至<strong>320头以上</strong>。</p>
+    <p>君山660米岸线砂石码头清零，江豚常年观测值回升<strong>近60头</strong>，麋鹿增至<strong>320头以上</strong>。</p>
   </div>
 
   <div class="map-popup open" id="popup-maanshan">
     <p class="popup-title">马鞍山 · 还江于民</p>
-    <p>薛家洼<strong>986亩</strong>一夜整治，全市拆解渔船<strong>5651艘</strong>，全国率先全面禁捕。如今已成市民亲江打卡地。</p>
+    <p>薛家洼<strong>986亩</strong>长江畔苗区全面禁捕，非法码头全部拆除，再现清岸绿景。</p>
   </div>
 
   <div class="map-popup open" id="popup-suzhou">
     <p class="popup-title">苏州 · 科技护江</p>
-    <p>吴江区“天-空-地-水”立体水务系统，<strong>5万条</strong>数据实时监测。中水回用率<strong>85%</strong>，太浦河连续7年<strong>Ⅱ类水</strong>。入选全国<strong>“长江大保护优秀实践案例”</strong>。</p>
+    <p>吴江区构建“天空地水”监测体系，<strong>5万条</strong>数据实时监测，工业污水中水回用率<strong>85%</strong>，太浦河连续7年稳定达Ⅱ类水。</p>
   </div>
   <span class="scroll-hint-inline">↓ 向下滑动 ↓</span>
-  <div class="reveal reveal-d2" style="position:absolute;bottom:70px;left:0;right:0;text-align:center;z-index:10"><p style="font-family:var(--font-serif);font-size:clamp(0.9rem,4vw,1.15rem);color:#fff;font-weight:600;line-height:1.4;text-shadow:0 1px 4px rgba(0,0,0,0.85),0 2px 12px rgba(0,0,0,0.5);margin:0">上游转型、中游修复、下游禁捕、入海口智治，<br>四城四策，殊途同归。</p></div>
+  <div class="reveal reveal-d2" style="position:absolute;bottom:70px;left:0;right:0;text-align:center;z-index:10"><p style="font-family:var(--font-serif);font-size:clamp(1.05rem,4.5vw,1.35rem);color:#fff;font-weight:600;line-height:1.4;text-shadow:0 1px 4px rgba(0,0,0,0.85),0 2px 12px rgba(0,0,0,0.5);margin:0">上游转型、中游修复、下游禁捕、入海口智治，<br>四城四策，殊途同归。</p></div>
 </section>
 
 <!-- ======== P5 · CHAT BUBBLES ======== -->
@@ -1078,14 +1086,14 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <div class="section-bg"><img src="assets/p5.webp" alt="" loading="lazy" decoding="async"></div>
   <div class="section-inner">
     <div class="reveal"><div class="section-label">VOICES</div></div>
-    <div class="reveal reveal-d1"><h2 class="section-heading">这十年，他们在守护长江</h2></div>
-    <div class="reveal reveal-d1"><p class="section-subhead">点开每条留言，听听他们想说的话</p></div>
+    <div class="reveal reveal-d1"><h2 class="section-heading">他们，守护着长江</h2></div>
+    <div class="reveal reveal-d1"><p class="section-subhead">点开故事，听见十年的坚守</p></div>
 
     <div class="chat-list">
     <audio id="audio1" src="语音/曹文宣.mp3" preload="none"></audio>
     <audio id="audio2" src="语音/舒银安.mp3" preload="none"></audio>
-    <audio id="audio3" src="语音/陈兰香.mp3" preload="none"></audio>
-    <audio id="audio4" src="语音/刘飞.mp3" preload="none"></audio>
+    <audio id="audio3" src="陈兰香1.mp3" preload="none"></audio>
+    <audio id="audio4" src="刘飞1.mp3" preload="none"></audio>
       <!-- 曹文宣 -->
       <div class="reveal reveal-d1"><div class="chat-msg" onclick="playAudio('audio1')">
         <div class="chat-avatar">曹</div>
@@ -1116,7 +1124,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
       <div class="reveal reveal-d3"><div class="chat-msg" onclick="playAudio('audio3')">
         <div class="chat-avatar">陈</div>
         <div class="chat-body">
-          <div class="chat-name">陈兰香 · “三姑娘” · 退捕渔民创业者</div>
+          <div class="chat-name">陈兰香 · 52岁 · “三姑娘” · 退捕渔民创业者</div>
           <div class="chat-bubble">
             <span class="chat-quote">“党的好政策让我们上了岸能致富。”</span>
           </div>
@@ -1129,7 +1137,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
       <div class="reveal reveal-d4"><div class="chat-msg" onclick="playAudio('audio4')">
         <div class="chat-avatar">刘</div>
         <div class="chat-body">
-          <div class="chat-name">刘飞 · 中科院水生所副研究员</div>
+          <div class="chat-name">刘飞 · 42岁 · 中科院水生所副研究员</div>
           <div class="chat-bubble">
             <span class="chat-quote">“搞生态必须到野外去。”</span>
           </div>
@@ -1148,7 +1156,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <div class="section-bg"><img src="assets/p6.webp" alt="" loading="lazy" decoding="async"></div>
   <div class="section-inner">
     <div class="reveal"><div class="section-label">VOICES</div></div>
-    <div class="reveal reveal-d1"><h2 class="section-heading">十年蝶变，他们看到了什么？</h2></div>
+    <div class="reveal reveal-d1"><h2 class="section-heading">更多人讲述着长江</h2></div>
 
     <div class="reveal reveal-d1"><p class="comment-prompt">你在长江边长大吗？这十年间，你看到了什么变化？</p></div>
 
@@ -1171,14 +1179,55 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
       <div class="comment-card pos stage-item" data-delay="2.1">
         “去年在南京滨江亲眼看到了江豚！第一次！激动得差点掉水里。”<div class="card-user">—— 南京<span class="card-tag">🌱</span></div>
       </div>
+      <div class="comment-card pos stage-item" data-delay="1.8">
+        “武汉江滩越来越美了，芦苇荡里的候鸟一年比一年多。”<div class="card-user">—— 武汉市民<span class="card-tag">🌱</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="2.1">
+        “长江十年禁渔真的有效，我们渔民转产上岸，日子越过越踏实。”<div class="card-user">—— 重庆退捕渔民<span class="card-tag">🌱</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="2.4">
+        “在赤水河边散步，水质清澈见底，不敢相信这是十年间的变化。”<div class="card-user">—— 赤水市民<span class="card-tag">🌱</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="2.7">
+        “马鞍山滨江公园现在是网红打卡地，以前这里全是砂石码头。”<div class="card-user">—— 马鞍山<span class="card-tag">🌱</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="3">
+        “我是摄影爱好者，这几年拍到的江豚次数明显增多了。”<div class="card-user">—— 镇江摄影师<span class="card-tag">🌱</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="3.3">
+        “长江保护修复让洞庭湖重现了碧波万顷，候鸟回来了！”<div class="card-user">—— 岳阳网友<span class="card-tag">🌱</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="3.6">
+        “十年前江边不敢走近，气味难闻。现在在滨江栈道上晨跑成了习惯。”<div class="card-user">—— 九江<span class="card-tag">🌱</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="3.9">
+        “麋鹿种群从几十头增长到几百头，石首保护区的生态越来越好。”<div class="card-user">—— 石首巡护员<span class="card-tag">🌱</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="4.2">
+        “在崇明东滩看到了东方白鹳，数量比记忆中多了很多。”<div class="card-user">—— 上海观鸟人<span class="card-tag">🌱</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="4.5">
+        “宜昌化工企业搬迁后，空气质量好了，长江水也清了。”<div class="card-user">—— 宜昌市民<span class="card-tag">🌱</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="4.8">
+        “小时候爷爷说长江里的中华鲟快没了，现在又看到了希望。”<div class="card-user">—— 荆州<span class="card-tag">🌱</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="5.1">
+        “长江大保护不只是口号，我们身边的变化就是最好的答卷。”<div class="card-user">—— 重庆志愿者<span class="card-tag">🌱</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="5.4">
+        “从上游到入海口，长江重新有了生机勃勃的样子。”<div class="card-user">—— 南通网友<span class="card-tag">🌱</span></div>
+      </div>
+      <div class="comment-card pos stage-item" data-delay="5.7">
+        “十年来参与植树护岸，看着小树苗长成防护林，特别有成就感。”<div class="card-user">—— 泸州环保义工<span class="card-tag">🌱</span></div>
+      </div>
     </div>
 
     <div class="reveal reveal-d1"><div class="comment-input-area">
       <input type="text" id="commentInput" placeholder="写下我和长江的故事..." maxlength="200">
       <button id="commentBtn">发布</button>
     </div></div>
-    <div class="reveal reveal-d1"><p style="text-align:center;font-size:0.92rem;color:var(--teal-deep);margin-top:1px;font-weight:600">这些声音，有骄傲，有遗憾，也有期待。<br>从九旬院士到退捕渔民，<br>从巡护队长到青年科研者……<br>长江的十年，<br>是政策推动的十年，<br>更是每一个普通人用脚步丈量、用眼睛见证的十年。<br>每一个人，都是长江未来的一部分！</p></div>
-    <div class="reveal reveal-d2"><h2 class="section-heading" style="margin-top:10px;text-align:center">蝶变长江一览图</h2></div>
+    <div class="reveal reveal-d1"><p style="text-align:center;font-size:1.1rem;color:var(--teal-deep);margin-top:1px;font-weight:600">这些声音，有骄傲，有喜悦，也有期待。<br>长江的十年，<br>是政策推动的十年，<br>更是每一个普通人用脚步丈量、用眼睛见证的十年。<br>一张张照片就是答卷！</p></div>
     <div class="reveal reveal-d3"><div class="card-stage">
       <div class="card-scroll-track">
         <img src="拼图0.webp" alt="长江大保护成果一览">
@@ -1186,7 +1235,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
       </div>
     </div></div>
     <p style="text-align:center;font-size:0.65rem;color:var(--text-faint);margin-top:4px">（来源：中国三峡杂志微信公众号）</p>
-    <div class="reveal reveal-d2"><p style="text-align:center;font-size:0.92rem;color:var(--teal-deep);margin-top:8px;font-weight:600">每一条留言都是一双眼睛，<br>每一张照片都是一份答卷。<br>蝶变长江，一目了然。</p></div>
+    <div class="reveal reveal-d2"><p style="text-align:center;font-size:1.1rem;color:var(--teal-deep);margin-top:8px;font-weight:600">江水从不停歇，<br>长江的故事也没有写完，<br>下一个十年等待我们共同书写。</p></div>
     <span class="scroll-hint-inline">↓ 向下滑动 ↓</span>
   </div>
 </section>
@@ -1228,7 +1277,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
         <div class="vision-item" id="v3"><span class="v-icon">🐟</span><span class="v-text"><strong>中华鲟</strong> 实现稳定野外自然繁殖</span></div>
         <div class="vision-item" id="v4"><span class="v-icon">🌿</span><span class="v-text"><strong>GEP 核算</strong> 纳入政绩考核体系</span></div>
       </div>
-      <p class="ending-close" id="endingClose">十年前，一场座谈会为长江定下基调。<br>十年后，鱼跃鸟飞为答卷写下了注脚。</p>
+      <p class="ending-close" id="endingClose">这是下一个十年的期待，<br>愿这份答卷越写越好，<br>愿长江生生不息，</p>
     </div>
 
 
@@ -1264,10 +1313,21 @@ document.addEventListener('WeixinJSBridgeReady',function(){
 function startMusic(){
   if(bgmEl.paused || bgmEl.muted){
     bgmEl.currentTime = 0
+    bgmEl.volume = 0.6
     bgmEl.play().then(()=>{
       bgmBtnEl.innerHTML = '&#x1F3B5;'
     }).catch(()=>{})
   }
+}
+
+// Autoplay during preload — try immediately, fallback to canplay
+if(bgmEl.readyState >= 2){
+  startMusic()
+} else {
+  bgmEl.addEventListener('canplay',function autoStart(){
+    bgmEl.removeEventListener('canplay',autoStart)
+    startMusic()
+  })
 }
 
 function toggleBgm(){
@@ -1285,7 +1345,7 @@ function toggleBgm(){
 // === PRELOADER: wait for all assets, block interaction during loading ===
 (function(){
   document.body.classList.add('loading')
-  var assets = ['assets/p1.webp?v=2','assets/p2.webp?v=2','assets/p3.webp','assets/p4.webp?v=2','assets/p5.webp','assets/p6.webp','assets/p7.webp?v=2','bgm.mp3']
+  var assets = ['3.png','assets/p1.webp?v=2','assets/p2.webp?v=2','assets/p3.webp','assets/p4.webp?v=2','assets/p5.webp','assets/p6.webp','assets/p7.webp?v=2','bgm.mp3']
   var total = assets.length, loaded = 0
   var preloader = document.getElementById('preloader')
   var text = preloader.querySelector('.loader-text')
@@ -1298,20 +1358,15 @@ function toggleBgm(){
     document.body.classList.remove('loading')
     window.scrollTo(0,0)
     if(typeof updateAll === 'function') setTimeout(updateAll,200)
-    // Start music on first user interaction, but only after bgm is playable
-    function bindMusicStart(){
-      if(bgmEl.readyState >= 2){ // HAVE_CURRENT_DATA or better
-        document.addEventListener('touchstart',startMusic,{once:true,passive:true})
-        document.addEventListener('scroll',startMusic,{once:true,passive:true})
-      } else {
-        bgmEl.addEventListener('canplay',function onReady(){
-          bgmEl.removeEventListener('canplay',onReady)
-          document.addEventListener('touchstart',startMusic,{once:true,passive:true})
-          document.addEventListener('scroll',startMusic,{once:true,passive:true})
-        })
-      }
+    // Autoplay BGM as soon as it's ready — no user interaction required
+    if(bgmEl.readyState >= 2){
+      startMusic()
+    } else {
+      bgmEl.addEventListener('canplay',function onReady(){
+        bgmEl.removeEventListener('canplay',onReady)
+        startMusic()
+      })
     }
-    bindMusicStart()
   }
   assets.forEach(function(src){
     var isAudio = src.indexOf('.opus')>-1 || src.indexOf('.mp3')>-1
