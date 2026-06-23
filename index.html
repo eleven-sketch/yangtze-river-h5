@@ -46,7 +46,7 @@ body.loading{overflow:hidden;position:fixed;width:100%}
 
 img{-webkit-touch-callout:none;pointer-events:none;-webkit-user-select:none;user-select:none;max-width:100%;height:auto}
 *{-webkit-tap-highlight-color:transparent}
-body{word-break:break-word;overflow-wrap:break-word}
+body{word-break:break-word;overflow-wrap:break-word;overscroll-behavior:none;-webkit-overflow-scrolling:touch}
 /* ===== PHONE-FRAME LAYOUT ===== */
 html{background:var(--bg-ivory)}
 body{
@@ -59,7 +59,7 @@ body{
   padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
 #app{
   width:390px;margin:0 auto;position:relative;
-  transform-origin:top center;
+  transform-origin:top center;touch-action:pan-y;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
   backface-visibility:hidden;-webkit-backface-visibility:hidden;
 }
@@ -104,6 +104,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   aspect-ratio:390/844;
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;
+  content-visibility:auto;contain-intrinsic-size:390px 844px;
 }
 
 /* Seamless section overlap */
@@ -527,14 +528,14 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
 /* ===== P6 · COMMENT STAGE ===== */
 .comment-stage{
-  position:relative;width:100%;height:200px;
+  position:relative;width:100%;height:300px;
   overflow-y:auto;overflow-x:hidden;
   display:flex;flex-direction:column;gap:6px;
   padding:6px 0;margin:4px 0;
 }
 .stage-item{
   opacity:0;transform:translateY(40px);
-  transition:opacity 0.5s ease-out,transform 0.5s ease-out;
+  transition:opacity 3s ease-out,transform 3s ease-out;
 }
 .stage-item.in{opacity:1;transform:translateY(0)}
 .comment-card{padding:6px 12px;border-radius:6px;font-size:0.8rem;line-height:1.4}
@@ -730,7 +731,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 </head>
 <body>
 
-<audio id="bgm" src="bgm.mp3" loop playsinline preload="auto"></audio>
+<audio id="bgm" src="bgm.opus" loop playsinline preload="auto"></audio>
 <button class="bgm-btn" id="bgmBtn" onclick="toggleBgm()">🔴</button>
 
 <div id="app">
@@ -1230,11 +1231,11 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
     <div class="reveal reveal-d1"><p style="text-align:center;font-size:1.1rem;color:var(--teal-deep);margin-top:1px;font-weight:600">这些声音，有骄傲，有喜悦，也有期待。<br>长江的十年，<br>是政策推动的十年，<br>更是每一个普通人用脚步丈量、用眼睛见证的十年。<br>一张张照片就是答卷！</p></div>
     <div class="reveal reveal-d3"><div class="card-stage">
       <div class="card-scroll-track">
-        <img src="拼图0.webp" alt="长江大保护成果一览">
-        <img src="拼图0.webp" alt="">
+        <img src="拼图1.webp" alt="长江大保护成果一览">
+        <img src="拼图1.webp" alt="">
       </div>
     </div></div>
-    <p style="text-align:center;font-size:0.65rem;color:var(--text-faint);margin-top:4px">（来源：中国三峡杂志微信公众号）</p>
+    <p style="text-align:center;font-size:0.65rem;color:var(--text-faint);margin-top:4px">（来源：星球研究所微信公众号）</p>
     <div class="reveal reveal-d2"><p style="text-align:center;font-size:1.1rem;color:var(--teal-deep);margin-top:8px;font-weight:600">江水从不停歇，<br>长江的故事也没有写完，<br>下一个十年等待我们共同书写。</p></div>
     <span class="scroll-hint-inline">↓ 向下滑动 ↓</span>
   </div>
@@ -1342,15 +1343,20 @@ function toggleBgm(){
   }
 }
 
-// === PRELOADER: wait for all assets, block interaction during loading ===
+// === PRELOADER: BGM loads first → autoplay → then images ===
 (function(){
   document.body.classList.add('loading')
-  var assets = ['3.png','assets/p1.webp?v=2','assets/p2.webp?v=2','assets/p3.webp','assets/p4.webp?v=2','assets/p5.webp','assets/p6.webp','assets/p7.webp?v=2','bgm.mp3']
-  var total = assets.length, loaded = 0
   var preloader = document.getElementById('preloader')
   var text = preloader.querySelector('.loader-text')
+  var imgAssets = ['3.png','assets/p1.webp?v=2','assets/p2.webp?v=2','assets/p3.webp','assets/p4.webp?v=2','assets/p5.webp','assets/p6.webp','assets/p7.webp?v=2']
+  var total = imgAssets.length, loaded = 0
   var doneFlag = false
-  var fallback = setTimeout(function(){ done() },10000) // safety timeout
+  var fallback = setTimeout(function(){ done() },15000)
+  var bgmReady = false, imgsDone = false
+
+  function checkDone(){
+    if(bgmReady && imgsDone) done()
+  }
   function done(){
     if(doneFlag) return; doneFlag = true
     clearTimeout(fallback)
@@ -1358,24 +1364,32 @@ function toggleBgm(){
     document.body.classList.remove('loading')
     window.scrollTo(0,0)
     if(typeof updateAll === 'function') setTimeout(updateAll,200)
-    // Autoplay BGM as soon as it's ready — no user interaction required
-    if(bgmEl.readyState >= 2){
-      startMusic()
-    } else {
-      bgmEl.addEventListener('canplay',function onReady(){
-        bgmEl.removeEventListener('canplay',onReady)
-        startMusic()
-      })
-    }
   }
-  assets.forEach(function(src){
-    var isAudio = src.indexOf('.opus')>-1 || src.indexOf('.mp3')>-1
-    var el = isAudio ? new Audio() : new Image()
-    function mark(){ loaded++; text.textContent='长江奔涌，正在加载… ('+loaded+'/'+total+')'; if(loaded>=total) done() }
-    el.onload = el.onerror = mark
-    if(isAudio){ el.preload='auto'; el.oncanplaythrough=mark; el.onerror=mark }
-    el.src = src
-  })
+
+  // Phase 1: Wait for BGM to be playable, autoplay, then load images
+  text.textContent = '长江奔涌······'
+  if(bgmEl.readyState >= 2){
+    bgmReady = true
+    startMusic()
+    loadImages()
+  } else {
+    bgmEl.addEventListener('canplay',function onBgmReady(){
+      bgmEl.removeEventListener('canplay',onBgmReady)
+      bgmReady = true
+      startMusic()
+      loadImages()
+    })
+  }
+
+  function loadImages(){
+    text.textContent = '长江奔涌······ 0/' + total
+    imgAssets.forEach(function(src){
+      var img = new Image()
+      function mark(){ loaded++; text.textContent='长江奔涌······ '+loaded+'/'+total; if(loaded>=total){ imgsDone=true; checkDone() } }
+      img.onload = mark; img.onerror = mark
+      img.src = src
+    })
+  }
 })();
 
 // Map old delay classes to data attributes for scroll-driven stagger
@@ -1491,7 +1505,13 @@ function updateAll(){
 window.addEventListener('scroll',()=>{
   if(!ticking){
     requestAnimationFrame(()=>{
-      if(++_frameSkip%3===0) updateAll()
+      ++_frameSkip
+      if(_frameSkip%4===0){  // Every 4th frame: all updates
+        updateReveals();updateCards()
+      }
+      if(_frameSkip%2===0){  // Every 2nd frame: dots + popups
+        updateDots();updatePopups();updateStage()
+      }
       ticking = false
     })
     ticking = true
