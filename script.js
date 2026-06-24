@@ -293,9 +293,9 @@ function resetAll(){
   document.querySelectorAll('.stage-item').forEach(s=>s.classList.remove('in'))
   document.getElementById('commentInput').value = ''
   // Reset P7 auto-trigger
-  p7triggered = false
+  p7triggered = false; p7manual = false
   p7observer = new IntersectionObserver(function(entries){
-    if(entries[0].isIntersecting && !p7triggered){
+    if(entries[0].isIntersecting && !p7triggered && !p7manual){
       p7triggered = true
       makePromise(true)
       p7observer.disconnect()
@@ -495,9 +495,9 @@ const origUpdateAll = updateAll
 updateAll = function(){ origUpdateAll(); checkStage() }
 
 // Auto-trigger P7: when data source appears, show promise card → droplet → visions
-var p7triggered = false
+var p7triggered = false, p7manual = false
 var p7observer = new IntersectionObserver(function(entries){
-  if(entries[0].isIntersecting && !p7triggered){
+  if(entries[0].isIntersecting && !p7triggered && !p7manual){
     p7triggered = true
     makePromise(true)
     p7observer.disconnect()
