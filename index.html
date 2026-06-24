@@ -714,7 +714,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 /* ===== ANIMATIONS ===== */
 .reveal{
   opacity:0;transform:translateY(40px);
-  will-change:opacity,transform;
+  will-change:opacity,transform;contain:layout style;
 }
 </style>
 <!-- Background music -->
@@ -1415,27 +1415,23 @@ let ticking = false
 var _sectionCache=new Map()
 function updateReveals(){
   const vh = window.innerHeight
+  const threshold = vh * 2
   _sectionCache.clear()
-  revealEls.forEach(el=>{
-    if(p1Animating && el.closest('#p1')) return
-    var sr = el.closest('.section'); if(!sr) return
-    // Cache section rect per frame
+  var i=0,len=revealEls.length
+  for(;i<len;i++){
+    var el=revealEls[i]
+    if(p1Animating && el.closest('#p1')) continue
+    var sr = el.closest('.section'); if(!sr) continue
     var srTop = _sectionCache.get(sr)
     if(srTop===undefined){srTop=sr.getBoundingClientRect().top;_sectionCache.set(sr,srTop)}
-    if(srTop > vh*2 || srTop < -vh*3) return
+    if(srTop > threshold || srTop < -vh*3) continue
     const rect = el.getBoundingClientRect()
     const p = Math.max(0, Math.min(1, (vh*0.95 - rect.top) / (vh*0.5)))
     const delay = parseFloat(el.dataset.delay || '0')
     const fp = Math.max(0, Math.min(1, (p - delay) / (1 - delay)))
-    el.style.opacity = fp
-    el.style.transform = `translateY(${(1-fp)*40}px)`
-    if(fp>0.5 && !el._loaded){
-      el._loaded=true
-      el.querySelectorAll('img[data-src]').forEach(function(img){
-        img.src=img.getAttribute('data-src')+'?t='+Date.now()
-      })
-    }
-  })
+    el.style.opacity = fp;el.style.transform = `translateY(${(1-fp)*40}px)`
+    if(fp>0.5 && !el._loaded){el._loaded=true;el.querySelectorAll('img[data-src]').forEach(function(img){img.src=img.getAttribute('data-src')+'?t='+Date.now()})}
+  }
 }
 
 // P3 flip cards — scroll-linked row by row reveal
@@ -1510,11 +1506,9 @@ window.addEventListener('scroll',()=>{
     requestAnimationFrame(()=>{
       checkStage()
       ++_frameSkip
-      if(_frameSkip%4===0){  // Every 4th frame: all updates
-        updateReveals();updateCards()
-      }
-      if(_frameSkip%2===0){  // Every 2nd frame: dots + popups
-        updateDots();updatePopups();updateStage()
+      // Batch all updates every 3rd frame for smooth 20fps feel
+      if(_frameSkip%3===0){
+        updateReveals();updateCards();updateDots();updatePopups();updateStage()
       }
       ticking = false
     })
