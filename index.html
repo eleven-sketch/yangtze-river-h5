@@ -151,19 +151,6 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   font-size:0.72rem;font-weight:600;
   text-shadow:0 1px 6px rgba(0,0,0,0.6);
 }
-.cover .main-title{
-  font-family:"方正小标宋","方正小标宋_GBK",var(--font-serif);
-  font-size:clamp(2rem,7vw,3.2rem);
-  color:#fff;
-  font-weight:700;letter-spacing:0.04em;line-height:1.2;
-  text-shadow:0 2px 4px rgba(0,0,0,0.5),0 4px 20px rgba(0,0,0,0.4);
-}
-.cover .sub-title{
-  font-family:var(--font-serif);
-  font-size:clamp(0.95rem,3.5vw,1.25rem);
-  color:#EDE4D3;margin-top:16px;letter-spacing:0.06em;
-  text-shadow:0 1px 4px rgba(0,0,0,0.5);
-}
 .cover .intro-text{
   font-family:var(--font-serif);
   font-size:1.05rem;color:#fff;font-weight:600;line-height:1.5;
@@ -221,7 +208,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 #p5 .scroll-hint-inline{
   position:absolute;bottom:30px;left:0;right:0;text-align:center;z-index:10;
 }
-#p6{min-height:calc(100vw*16/9 + 550px);overflow:visible}
+#p6{min-height:calc(390px*16/9 + 550px);overflow:visible}
 #p6 .section-heading{font-size:clamp(1.8rem,6.5vw,2.4rem);line-height:1.4}
 #p6 .comment-card{font-size:0.86rem}
 #p6 .comment-card .card-user{font-size:0.68rem}
@@ -342,7 +329,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 /* Popup — positioned by JS next to clicked dot */
 .map-popup{
   position:absolute;z-index:8;
-  max-width:min(250px,64vw);
+  max-width:250px;
   padding:6px 9px;overflow:hidden;
   background:rgba(253,251,247,0.98);
   border-radius:7px;
@@ -1302,7 +1289,31 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 // === Fixed-width scaling: 390px design, scale to fit any screen ===
 (function(){
   var app=document.getElementById('app'), W=390
-  function scale(){var s=window.innerWidth/W; if(window.innerWidth>=1200){app.style.transform='';app.style.width='';app.style.margin='';document.documentElement.style.fontSize=''}else if(s<1){app.style.transform='scale('+s.toFixed(4)+')';app.style.width='390px';app.style.margin='0 0 0 '+((window.innerWidth-390)/2).toFixed(1)+'px';document.documentElement.style.fontSize=''}else if(window.innerWidth>540){app.style.transform='';app.style.width='540px';app.style.margin='';document.documentElement.style.fontSize=''}else{var sc=Math.min(s,1.15);app.style.transform='scale('+sc.toFixed(4)+')';app.style.width='390px';app.style.margin='';document.documentElement.style.fontSize=sc>1.125?(18/sc).toFixed(2)+'px':''}}
+  // 390px 设计稿等比缩放，适配全屏宽
+  function scale(){
+    var s = window.innerWidth / W
+    if (window.innerWidth >= 1200) {
+      // 桌面：CSS 接管，清除 JS 样式
+      app.style.transform = ''; app.style.width = ''; app.style.margin = ''
+      document.documentElement.style.fontSize = ''
+    } else if (s < 1) {
+      // <390px：等比缩小 + 负margin 居中，不调字号
+      app.style.transform = 'scale(' + s.toFixed(4) + ')'
+      app.style.width = '390px'
+      app.style.margin = '0 0 0 ' + ((window.innerWidth - 390) / 2).toFixed(1) + 'px'
+      document.documentElement.style.fontSize = ''
+    } else if (window.innerWidth > 540) {
+      // 541-1199px：锁540px宽，黑底，不缩放
+      app.style.transform = ''; app.style.width = '540px'; app.style.margin = ''
+      document.documentElement.style.fontSize = ''
+    } else {
+      // 390-540px：放大 ≤1.15倍，字号反向缩小补偿
+      var sc = Math.min(s, 1.15)
+      app.style.transform = 'scale(' + sc.toFixed(4) + ')'
+      app.style.width = '390px'; app.style.margin = ''
+      document.documentElement.style.fontSize = sc > 1.125 ? (18 / sc).toFixed(2) + 'px' : ''
+    }
+  }
   scale();window.addEventListener('resize',scale)
   // On orientation change, recalc after layout
   window.addEventListener('orientationchange',function(){setTimeout(scale,300)})
