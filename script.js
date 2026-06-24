@@ -292,6 +292,16 @@ function resetAll(){
   stageTriggered = false
   document.querySelectorAll('.stage-item').forEach(s=>s.classList.remove('in'))
   document.getElementById('commentInput').value = ''
+  // Reset P7 auto-trigger
+  p7triggered = false
+  p7observer = new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting && !p7triggered){
+      p7triggered = true
+      makePromise(true)
+      p7observer.disconnect()
+    }
+  },{threshold:0.2})
+  if(endingSrc) p7observer.observe(endingSrc)
   // Quick flip-back scroll animation
   const startY = window.scrollY, duration = 600, startT = performance.now()
   function flipBack(now){
@@ -305,13 +315,12 @@ function resetAll(){
   setTimeout(updateAll,100)
 }
 // P7 Plan A: Promise card
-function makePromise(){
+function makePromise(isAuto){
   const name = '长江守护者'
   document.getElementById('cardName').textContent = name
   const d = new Date()
   document.getElementById('cardDate').textContent = d.getFullYear()+' 年 '+(d.getMonth()+1)+' 月'
   document.getElementById('promiseCard').classList.add('show')
-  // Show droplet stage + dim visions + dim ending text
   setTimeout(()=>{
     document.getElementById('dropletStage').classList.add('show')
     var vs = [v1,v2,v3,v4]
@@ -322,8 +331,8 @@ function makePromise(){
     })
     document.getElementById('endingClose').style.opacity = '0.4'
     document.getElementById('endingNext').style.opacity = '0.35'
-    // Auto-trigger droplet after card appears
-    setTimeout(()=>{ lightUp() },200)
+    // Only auto-trigger droplet when called from scroll observer
+    if(isAuto) setTimeout(()=>{ lightUp() },200)
   },600)
 }
 
@@ -490,7 +499,7 @@ var p7triggered = false
 var p7observer = new IntersectionObserver(function(entries){
   if(entries[0].isIntersecting && !p7triggered){
     p7triggered = true
-    makePromise()
+    makePromise(true)
     p7observer.disconnect()
   }
 },{threshold:0.2})
