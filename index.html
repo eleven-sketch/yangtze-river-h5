@@ -88,7 +88,7 @@ body{
 /* Content-heavy pages: allow growth beyond aspect-ratio */
 section.section-tall{aspect-ratio:auto;min-height:100vh;min-height:100dvh;overflow:visible}
 section.section-tall .section-inner{position:relative;min-height:auto;padding-bottom:12vw}
-#p1 .section-inner{justify-content:center;transform:translateY(-80px)}
+#p1 .section-inner{justify-content:center;transform:translateY(-110px)}
 #p3 .section-inner{position:relative;top:auto;justify-content:flex-start;padding:20px 6vw 40px}
 #p3{min-height:100dvh;overflow:visible;z-index:1}
 #p3 .scroll-hint-inline{position:absolute;bottom:20px;left:0;right:0;text-align:center;z-index:10}
@@ -347,7 +347,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   background:rgba(253,251,247,0.98);
   border-radius:7px;
   box-shadow:0 3px 14px rgba(0,0,0,0.18);
-  font-size:0.78rem;color:var(--text);line-height:1.35;text-align:justify;
+  font-size:0.7rem;color:var(--text);line-height:1.35;text-align:justify;
   opacity:0;pointer-events:none;transform:scale(0.96);
   transition:opacity 0.3s ease-out,transform 0.3s ease-out;
 }
@@ -362,9 +362,9 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 .map-popup .popup-title{
   font-family:var(--font-serif);font-weight:700;color:var(--teal-deep);margin-bottom:1px;
-  font-size:0.85rem;padding-right:12px;line-height:1.25;
+  font-size:0.8rem;padding-right:12px;line-height:1.25;
 }
-.map-popup .popup-year{color:#B2803C;font-size:1.4rem}
+.map-popup .popup-year{color:#B2803C;font-size:1.125rem}
 .map-popup .popup-city{background:var(--red);color:#fff;padding:1px 8px;border-radius:5px;margin-left:5px;white-space:nowrap}
 .map-popup .popup-subtitle{display:inline-block;max-width:100%;background:linear-gradient(90deg,rgba(178,128,60,0.6),#B2803C);color:#fff;padding:2px 12px;border-radius:6px;margin-top:4px;}
 .map-popup .popup-subtitle strong{color:#fff}
@@ -592,6 +592,9 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   50%{box-shadow:0 6px 36px rgba(212,163,89,0.7);transform:scale(1.1)}
 }
 .promise-input button:active{opacity:0.85;transform:scale(0.96)}
+.poke-finger{font-size:2rem;display:inline-block;transform:rotate(90deg)}
+.poke-finger span{display:inline-block;animation:poke 0.8s ease-in-out infinite}
+@keyframes poke{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 
 /* Promise card */
 .promise-card{
@@ -744,7 +747,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 <section class="section" id="p1">
   <div class="section-bg"><img src="assets/p1.webp?v=2" alt="" fetchpriority="high"></div>
   <div class="section-inner cover">
-    <div class="reveal reveal-d1" style="text-align:center"><img src="4.png" alt="长江十年：一份写在江水里的答卷" style="width:98%"></div>
+    <div class="reveal reveal-d1" style="text-align:center"><img src="6.png" alt="长江十年：一份写在江水里的答卷" style="width:98%"></div>
     <div class="reveal reveal-d4" style="margin-top:20px">
       <p class="intro-text">2016年1月5日，重庆。<br>“共抓大保护，不搞大开发。”<br>一句话，为长江锚定了新的方向。</p>
     </div>
@@ -795,22 +798,22 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
   <!-- Popup cards -->
   <div class="map-popup open" id="popup-chongqing">
-    <p class="popup-title"><span class="popup-year">2016</span><br><span class="popup-city">重庆</span><br>推动长江经济带发展座谈会</p>
+    <p class="popup-title"><span class="popup-year">2016</span><span class="popup-city">重庆</span><br>推动长江经济带发展座谈会</p>
     <p><span class="popup-subtitle" style="padding:2px 6px"><strong>首提“共抓大保护、不搞大开发”</strong></span><br>将长江生态修复摆在压倒性位置</p>
   </div>
 
   <div class="map-popup open" id="popup-wuhan">
-    <p class="popup-title"><span class="popup-year">2018</span><br><span class="popup-city">武汉</span><br>深入推动长江经济带发展座谈会</p>
-    <p><span class="popup-subtitle"><strong>提出“五个关系”</strong></span>整体推进与重点突破、生态与经济、谋划与久功、破旧与育新、自身与协同</p>
+    <p class="popup-title"><span class="popup-year">2018</span><span class="popup-city">武汉</span><br>深入推动长江经济带发展座谈会</p>
+    <p><span class="popup-subtitle"><strong>提出“五个关系”</strong></span><br>整体推进与重点突破、生态与经济、谋划与久功、破旧与育新、自身与协同</p>
   </div>
 
   <div class="map-popup open" id="popup-nanjing">
-    <p class="popup-title"><span class="popup-year">2020</span><br><span class="popup-city">南京</span><br>全面推动长江经济带发展座谈会</p>
+    <p class="popup-title"><span class="popup-year">2020</span><span class="popup-city">南京</span><br>全面推动长江经济带发展座谈会</p>
     <p><span class="popup-subtitle"><strong>赋予三大战略定位</strong></span>生态优先绿色发展主战场、畅通双循环主动脉、高质量发展主力军</p>
   </div>
 
   <div class="map-popup open" id="popup-nanchang">
-    <p class="popup-title"><span class="popup-year">2023</span><br><span class="popup-city">南昌</span><br>进一步推动长江经济带高质量发展座谈会</p>
+    <p class="popup-title"><span class="popup-year">2023</span><span class="popup-city">南昌</span><br>进一步推动长江经济带高质量发展座谈会</p>
     <p><span class="popup-subtitle"><strong>强调“谋长远之势、行长久之策，建久安之基”</strong></span>提出高质量发展新格局：生态优先、创新引领、战略支撑、协同融通安全发展</p>
   </div>
   <div class="reveal reveal-d3" style="position:absolute;bottom:90px;left:6%;right:6%;z-index:10;text-align:right;margin:0;transform:translateX(10px)"><p class="p2-footer"><span class="p2-footer-big">从保护到发展</span><br><span class="p2-footer-sm">长江治理不断迈向更高水平！</span></p></div>
@@ -1160,7 +1163,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <div class="section-bg"><img src="assets/p6.webp" alt="" loading="lazy" decoding="async"></div>
   <div class="section-inner">
     <div class="reveal"><div class="section-label">VOICES</div></div>
-    <div class="reveal reveal-d1"><h2 class="section-heading">更多人讲述着长江</h2></div>
+    <div class="reveal reveal-d1"><h2 class="section-heading">更多人，讲述着长江</h2></div>
 
     <div class="reveal reveal-d1"><p class="comment-prompt">你在长江边长大吗？这十年间，你看到了什么变化？</p></div>
 
@@ -1231,7 +1234,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
       <input type="text" id="commentInput" placeholder="写下我和长江的故事..." maxlength="200">
       <button id="commentBtn">发布</button>
     </div></div>
-    <div class="reveal reveal-d1"><p style="text-align:center;font-size:1.1rem;color:var(--teal-deep);margin-top:1px;font-weight:600">这些声音，有骄傲，有喜悦，也有期待。<br>长江的十年，<br>是政策推动的十年，<br>更是每一个普通人用脚步丈量、用眼睛见证的十年。<br>一张张照片就是答卷！</p></div>
+    <div class="reveal reveal-d1"><p style="text-align:center;font-size:1.1rem;color:var(--teal-deep);margin-top:1px;font-weight:600">这些声音，有骄傲，有喜悦，也有期待。<br>长江的十年，<br>是政策推动的十年，<br>更是每一个普通人用脚步丈量、用眼睛见证的十年。<br>一张张照片，就是答卷！</p></div>
     <div class="reveal reveal-d3"><div class="card-stage">
       <div class="card-scroll-track">
         <img src="拼图1.webp" alt="长江大保护成果一览">
@@ -1239,7 +1242,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
       </div>
     </div></div>
     <p style="text-align:center;font-size:0.65rem;color:var(--text-faint);margin-top:4px">（来源：星球研究所微信公众号）</p>
-    <div class="reveal reveal-d2"><p style="text-align:center;font-size:1.1rem;color:var(--teal-deep);margin-top:8px;font-weight:600">江水从不停歇，<br>长江的故事也没有写完，<br>下一个十年等待我们共同书写。</p></div>
+    <div class="reveal reveal-d2"><p style="text-align:center;font-size:1.1rem;color:var(--teal-deep);margin-top:8px;font-weight:600">江水，从不停歇，<br>长江的故事，也没有写完，<br>下一个十年，等待我们共同书写。</p></div>
     <span class="scroll-hint-inline">↓ 向下滑动 ↓</span>
   </div>
 </section>
@@ -1256,6 +1259,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
     <!-- Plan A: Promise card -->
     <div class="reveal reveal-d2"><div class="promise-input">
+      <span class="poke-finger"><span>👆</span></span>
       <button onclick="makePromise()">生成我的承诺卡</button>
     </div></div>
 
@@ -1281,14 +1285,14 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
         <div class="vision-item" id="v3"><span class="v-icon">🐟</span><span class="v-text"><strong>中华鲟</strong> 实现稳定野外自然繁殖</span></div>
         <div class="vision-item" id="v4"><span class="v-icon">🌿</span><span class="v-text"><strong>GEP 核算</strong> 纳入政绩考核体系</span></div>
       </div>
-      <p class="ending-close" id="endingClose">这是下一个十年的期待，<br>愿这份答卷越写越好，<br>愿长江生生不息，</p>
+      <p class="ending-close" id="endingClose">这是下一个十年的期待，<br>愿这份答卷，越写越好，<br>愿长江，生生不息，</p>
     </div>
 
 
     <p style="font-size:1.1rem;font-weight:700;color:var(--teal-deep);opacity:0;transition:opacity 0.6s" id="endingNext">我们下一个十年见！</p>
 
     <button class="back-top-btn" id="backTopBtn" style="opacity:0;pointer-events:none" onclick="resetAll()">💧 回到开端</button>
-    <p class="ending-source">
+    <p class="ending-source" id="endingSource">
       数据来源：国务院新闻办公室、农业农村部、国家发展和改革委员会、长江水利委员会等
     </p>
   </div>
@@ -1351,7 +1355,7 @@ function toggleBgm(){
   document.body.classList.add('loading')
   var preloader = document.getElementById('preloader')
   var text = preloader.querySelector('.loader-text')
-  var imgAssets = ['4.png','assets/p1.webp?v=2','assets/p2.webp?v=2','assets/p3.webp','assets/p4.webp?v=2','assets/p5.webp','assets/p6.webp','assets/p7.webp?v=2','卡片1.webp','拼图1.webp']
+  var imgAssets = ['6.png','assets/p1.webp?v=2','assets/p2.webp?v=2','assets/p3.webp','assets/p4.webp?v=2','assets/p5.webp','assets/p6.webp','assets/p7.webp?v=2','卡片1.webp','拼图1.webp']
   var total = imgAssets.length, loaded = 0
   var doneFlag = false
   var fallback = setTimeout(function(){ done() },15000)
@@ -1595,6 +1599,8 @@ function makePromise(){
     })
     document.getElementById('endingClose').style.opacity = '0.4'
     document.getElementById('endingNext').style.opacity = '0.35'
+    // Auto-trigger droplet after card appears
+    setTimeout(()=>{ lightUp() },200)
   },600)
 }
 
@@ -1755,6 +1761,18 @@ function checkStage(){
 // Hook into existing scroll
 const origUpdateAll = updateAll
 updateAll = function(){ origUpdateAll(); checkStage() }
+
+// Auto-trigger P7: when data source appears, show promise card → droplet → visions
+var p7triggered = false
+var p7observer = new IntersectionObserver(function(entries){
+  if(entries[0].isIntersecting && !p7triggered){
+    p7triggered = true
+    makePromise()
+    p7observer.disconnect()
+  }
+},{threshold:0.2})
+var endingSrc = document.getElementById('endingSource')
+if(endingSrc) p7observer.observe(endingSrc)
 
 // User comment posting
 document.getElementById('commentBtn').addEventListener('click',postComment)
