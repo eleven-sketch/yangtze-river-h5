@@ -342,7 +342,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 .map-popup{
   position:absolute;z-index:8;
   max-width:min(250px,64vw);
-  padding:6px 9px;
+  padding:6px 9px;overflow:hidden;
   background:rgba(253,251,247,0.98);
   border-radius:7px;
   box-shadow:0 3px 14px rgba(0,0,0,0.18);
@@ -363,15 +363,17 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   font-family:var(--font-serif);font-weight:700;color:var(--teal-deep);margin-bottom:1px;
   font-size:0.95rem;padding-right:12px;line-height:1.25;
 }
+.map-popup .popup-year{color:#B2803C;font-size:1.6rem}
 .map-popup .popup-city{background:var(--red);color:#fff;padding:1px 8px;border-radius:5px;margin-left:5px;}
-.map-popup .popup-subtitle{display:inline-block;background:linear-gradient(90deg,rgba(178,128,60,0.6),#B2803C);color:#fff;padding:2px 12px;border-radius:6px;margin-top:4px;}
+.map-popup .popup-subtitle{display:inline-block;max-width:100%;background:linear-gradient(90deg,rgba(178,128,60,0.6),#B2803C);color:#fff;padding:2px 12px;border-radius:6px;margin-top:4px;}
+.map-popup .popup-subtitle strong{color:#fff}
 .map-popup .popup-quote{
   color:var(--red);margin-top:1px;font-size:0.64rem;line-height:1.25;
 }
 
 /* Offset specific popups */
 #popup-maanshan,#popup-suzhou{margin-top:-60px}
-#popup-wuhan{margin-top:-40px}#popup-nanjing{margin-top:-15px}#popup-nanchang{margin-top:-50px}
+#popup-chongqing{margin-left:-5px}#popup-wuhan{margin-top:-40px}#popup-nanjing{margin-top:-15px}#popup-nanchang{margin-top:-50px}
 
 /* ===== P3 · FLIP CARDS ===== */
 .p3-header{
@@ -792,23 +794,23 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
   <!-- Popup cards -->
   <div class="map-popup open" id="popup-chongqing">
-    <p class="popup-title"><span class="popup-year">2016</span><span class="popup-city">重庆</span><br><span class="popup-subtitle" style="white-space:nowrap">推动长江经济带发展座谈会</span></p>
-    <p><strong>首提“共抓大保护、不搞大开发”</strong><br>将长江生态修复摆在压倒性位置</p>
+    <p class="popup-title"><span class="popup-year">2016</span><span class="popup-city">重庆</span><br>推动长江经济带发展座谈会</p>
+    <p><span class="popup-subtitle" style="white-space:nowrap"><strong>首提“共抓大保护、不搞大开发”</strong></span><br>将长江生态修复摆在压倒性位置</p>
   </div>
 
   <div class="map-popup open" id="popup-wuhan">
-    <p class="popup-title"><span class="popup-year">2018</span><span class="popup-city">武汉</span><br><span class="popup-subtitle">深入推动长江经济带发展座谈会</span></p>
-    <p><strong>提出“五个关系”</strong>，整体推进与重点突破、生态与经济、谋划与久功、破旧与育新、自身与协同</p>
+    <p class="popup-title"><span class="popup-year">2018</span><span class="popup-city">武汉</span><br>深入推动长江经济带发展座谈会</p>
+    <p><span class="popup-subtitle"><strong>提出“五个关系”</strong></span>整体推进与重点突破、生态与经济、谋划与久功、破旧与育新、自身与协同</p>
   </div>
 
   <div class="map-popup open" id="popup-nanjing">
-    <p class="popup-title"><span class="popup-year">2020</span><span class="popup-city">南京</span><br><span class="popup-subtitle">全面推动长江经济带发展座谈会</span></p>
-    <p><strong>赋予三大战略定位</strong>：生态优先绿色发展主战场、畅通双循环主动脉、高质量发展主力军</p>
+    <p class="popup-title"><span class="popup-year">2020</span><span class="popup-city">南京</span><br>全面推动长江经济带发展座谈会</p>
+    <p><span class="popup-subtitle"><strong>赋予三大战略定位</strong></span>生态优先绿色发展主战场、畅通双循环主动脉、高质量发展主力军</p>
   </div>
 
   <div class="map-popup open" id="popup-nanchang">
-    <p class="popup-title"><span class="popup-year">2023</span><span class="popup-city">南昌</span><br><span class="popup-subtitle">进一步推动长江经济带高质量发展座谈会</span></p>
-    <p><strong>强调“谋长远之势、行长久之策，建久安之基”</strong>，提出高质量发展新格局：生态优先、创新引领、战略支撑、协同融通安全发展</p>
+    <p class="popup-title"><span class="popup-year">2023</span><span class="popup-city">南昌</span><br>进一步推动长江经济带高质量发展座谈会</p>
+    <p><span class="popup-subtitle"><strong>强调“谋长远之势、行长久之策，建久安之基”</strong></span>提出高质量发展新格局：生态优先、创新引领、战略支撑、协同融通安全发展</p>
   </div>
   <div class="reveal reveal-d3" style="position:absolute;bottom:90px;left:6%;right:6%;z-index:10;text-align:right;margin:0;transform:translateX(10px)"><p class="p2-footer"><span class="p2-footer-big">从保护到发展</span><br><span class="p2-footer-sm">长江治理不断迈向更高水平！</span></p></div>
   <span class="scroll-hint-inline">↓ 向下滑动 ↓</span>
@@ -1008,7 +1010,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 
     <div class="reveal reveal-d2"><p class="p3-highlight">
       更令人欣喜的是，<br>
-      曾被宣布"野外灭绝"的<strong>长江鲟</strong>，<br>在赤水河首次观测到自然产卵。<br>
+      曾被宣布“野外灭绝”的<strong>长江鲟</strong>，<br>在赤水河首次观测到自然产卵。<br>
       中华鲟连续两年增殖放流突破<strong>100万尾</strong>！<br>
       回来的不只是一种物种，<br>更是长江的生机！
     </p></div>
@@ -1769,7 +1771,7 @@ function postComment(){
   const card = document.createElement('div')
   card.className = 'comment-card pos stage-item in'
   card.style.cssText = 'background:linear-gradient(135deg,rgba(91,158,148,0.18),rgba(212,163,89,0.12));border-left:3px solid var(--gold)'
-  card.innerHTML = '"'+text+'"<div class="card-user">—— 刚刚<span class="card-tag">&#x1F331;</span></div>'
+  card.innerHTML = '“'+text+'”<div class="card-user">—— 刚刚<span class="card-tag">&#x1F331;</span></div>'
   stage.appendChild(card)
   stage.scrollTop = stage.scrollHeight
   input.value = ''
