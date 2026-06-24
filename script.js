@@ -78,7 +78,7 @@ function toggleBgm(){
   document.body.classList.add('loading')
   var preloader = document.getElementById('preloader')
   var text = preloader.querySelector('.loader-text')
-  var imgAssets = ['6.png','assets/p1.webp?v=2','assets/p2.webp?v=2','assets/p3.webp','assets/p4.webp?v=2','assets/p5.webp','assets/p6.webp','assets/p7.webp?v=2','卡片1.webp','拼图1.webp']
+  var imgAssets = ['6.png','assets/p1.webp?v=2','assets/p2.webp?v=2']
   var total = imgAssets.length, loaded = 0
   var doneFlag = false
   var fallback = setTimeout(function(){ done() },15000)
