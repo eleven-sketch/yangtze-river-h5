@@ -166,13 +166,13 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 .cover .intro-text{
   font-family:var(--font-serif);
-  font-size:1.15rem;color:#fff;font-weight:600;line-height:1.5;
+  font-size:1.05rem;color:#fff;font-weight:600;line-height:1.5;
   text-shadow:0 1px 4px rgba(0,0,0,0.85),0 2px 12px rgba(0,0,0,0.5);
   max-width:340px;margin:0 auto;
 }
 .cover .cover-note{
   font-family:var(--font-serif);
-  font-size:1.05rem;color:#fff;font-weight:600;line-height:1.5;
+  font-size:0.95rem;color:#fff;font-weight:600;line-height:1.5;
   text-shadow:0 1px 4px rgba(0,0,0,0.85),0 2px 12px rgba(0,0,0,0.5);
   margin-top:22px;
   max-width:320px;margin-left:auto;margin-right:auto;
@@ -221,7 +221,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 #p5 .scroll-hint-inline{
   position:absolute;bottom:30px;left:0;right:0;text-align:center;z-index:10;
 }
-#p6{min-height:calc(100vw*16/9 + 500px);overflow:visible}
+#p6{min-height:calc(100vw*16/9 + 700px);overflow:visible}
 #p6 .section-heading{font-size:clamp(1.8rem,6.5vw,2.4rem);line-height:1.4}
 #p6 .comment-card{font-size:0.86rem}
 #p6 .comment-card .card-user{font-size:0.68rem}
@@ -276,7 +276,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 .p2-intro .lead{
   font-family:var(--font-serif);
-  font-size:clamp(1.2rem,5vw,1.6rem);
+  font-size:clamp(1.1rem,4.5vw,1.4rem);
   color:#fff;font-weight:600;line-height:1.5;
   text-shadow:0 1px 4px rgba(0,0,0,0.85),0 2px 12px rgba(0,0,0,0.5);
   max-width:390px;margin:0 auto;
@@ -347,7 +347,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   background:rgba(253,251,247,0.98);
   border-radius:7px;
   box-shadow:0 3px 14px rgba(0,0,0,0.18);
-  font-size:0.88rem;color:var(--text);line-height:1.35;text-align:justify;
+  font-size:0.78rem;color:var(--text);line-height:1.35;text-align:justify;
   opacity:0;pointer-events:none;transform:scale(0.96);
   transition:opacity 0.3s ease-out,transform 0.3s ease-out;
 }
@@ -362,9 +362,9 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 .map-popup .popup-title{
   font-family:var(--font-serif);font-weight:700;color:var(--teal-deep);margin-bottom:1px;
-  font-size:0.95rem;padding-right:12px;line-height:1.25;
+  font-size:0.85rem;padding-right:12px;line-height:1.25;
 }
-.map-popup .popup-year{color:#B2803C;font-size:1.6rem}
+.map-popup .popup-year{color:#B2803C;font-size:1.4rem}
 .map-popup .popup-city{background:var(--red);color:#fff;padding:1px 8px;border-radius:5px;margin-left:5px;white-space:nowrap}
 .map-popup .popup-subtitle{display:inline-block;max-width:100%;background:linear-gradient(90deg,rgba(178,128,60,0.6),#B2803C);color:#fff;padding:2px 12px;border-radius:6px;margin-top:4px;}
 .map-popup .popup-subtitle strong{color:#fff}
@@ -744,7 +744,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 <section class="section" id="p1">
   <div class="section-bg"><img src="assets/p1.webp?v=2" alt="" fetchpriority="high"></div>
   <div class="section-inner cover">
-    <div class="reveal reveal-d1" style="text-align:center"><img src="3.png" alt="长江十年：一份写在江水里的答卷" style="width:98%"></div>
+    <div class="reveal reveal-d1" style="text-align:center"><img src="4.png" alt="长江十年：一份写在江水里的答卷" style="width:98%"></div>
     <div class="reveal reveal-d4" style="margin-top:20px">
       <p class="intro-text">2016年1月5日，重庆。<br>“共抓大保护，不搞大开发。”<br>一句话，为长江锚定了新的方向。</p>
     </div>
@@ -796,7 +796,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <!-- Popup cards -->
   <div class="map-popup open" id="popup-chongqing">
     <p class="popup-title"><span class="popup-year">2016</span><br><span class="popup-city">重庆</span><br>推动长江经济带发展座谈会</p>
-    <p><span class="popup-subtitle" style="white-space:nowrap"><strong>首提“共抓大保护、不搞大开发”</strong></span><br>将长江生态修复摆在压倒性位置</p>
+    <p><span class="popup-subtitle" style="padding:2px 6px"><strong>首提“共抓大保护、不搞大开发”</strong></span><br>将长江生态修复摆在压倒性位置</p>
   </div>
 
   <div class="map-popup open" id="popup-wuhan">
@@ -1064,22 +1064,22 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
   <!-- Popups -->
   <div class="map-popup open" id="popup-yichang">
     <p class="popup-title">宜昌 · 腾笼换鸟</p>
-    <p>134家化工企业关改搬转，2024年GDP突破<strong>6191亿</strong>，较2016年<strong>翻了一番</strong>。</p>
+    <p>134家化工企业关改搬转，<br>2024年GDP突破<strong>6191亿</strong>，<br>较2016年<strong>翻了一番</strong>。</p>
   </div>
 
   <div class="map-popup open" id="popup-yueyang">
     <p class="popup-title">岳阳 · 化茧成蝶</p>
-    <p>君山660米岸线砂石码头清零，江豚常年观测值回升<strong>近60头</strong>，麋鹿增至<strong>320头以上</strong>。</p>
+    <p>君山660米岸线砂石码头清零，<br>江豚常年观测值回升<strong>近60头</strong>，<br>麋鹿增至<strong>320头以上</strong>。</p>
   </div>
 
   <div class="map-popup open" id="popup-maanshan">
     <p class="popup-title">马鞍山 · 还江于民</p>
-    <p>薛家洼<strong>986亩</strong>长江畔苗区全面禁捕，非法码头全部拆除，再现清岸绿景。</p>
+    <p>薛家洼<strong>986亩</strong>长江畔苗区全面禁捕，<br>非法码头全部拆除，<br>再现清岸绿景。</p>
   </div>
 
   <div class="map-popup open" id="popup-suzhou">
     <p class="popup-title">苏州 · 科技护江</p>
-    <p>吴江区构建“天空地水”监测体系，<strong>5万条</strong>数据实时监测，工业污水中水回用率<strong>85%</strong>，太浦河连续7年稳定达Ⅱ类水。</p>
+    <p>吴江区构建”天空地水”监测体系，<br><strong>5万条</strong>数据实时监测，<br>工业污水中水回用率<strong>85%</strong>，<br>太浦河连续7年稳定达Ⅱ类水。</p>
   </div>
   <span class="scroll-hint-inline">↓ 向下滑动 ↓</span>
   <div class="reveal reveal-d2" style="position:absolute;bottom:70px;left:0;right:0;text-align:center;z-index:10"><p style="font-family:var(--font-serif);font-size:clamp(1.05rem,4.5vw,1.35rem);color:#fff;font-weight:600;line-height:1.4;text-shadow:0 1px 4px rgba(0,0,0,0.85),0 2px 12px rgba(0,0,0,0.5);margin:0">上游转型、中游修复、下游禁捕、入海口智治，<br>四城四策，殊途同归。</p></div>
@@ -1351,7 +1351,7 @@ function toggleBgm(){
   document.body.classList.add('loading')
   var preloader = document.getElementById('preloader')
   var text = preloader.querySelector('.loader-text')
-  var imgAssets = ['3.png','assets/p1.webp?v=2','assets/p2.webp?v=2','assets/p3.webp','assets/p4.webp?v=2','assets/p5.webp','assets/p6.webp','assets/p7.webp?v=2','卡片1.webp','拼图1.webp']
+  var imgAssets = ['4.png','assets/p1.webp?v=2','assets/p2.webp?v=2','assets/p3.webp','assets/p4.webp?v=2','assets/p5.webp','assets/p6.webp','assets/p7.webp?v=2','卡片1.webp','拼图1.webp']
   var total = imgAssets.length, loaded = 0
   var doneFlag = false
   var fallback = setTimeout(function(){ done() },15000)
