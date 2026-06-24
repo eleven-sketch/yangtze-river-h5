@@ -221,7 +221,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 #p5 .scroll-hint-inline{
   position:absolute;bottom:30px;left:0;right:0;text-align:center;z-index:10;
 }
-#p6{min-height:calc(100vw*16/9 + 700px);overflow:visible}
+#p6{min-height:calc(100vw*16/9 + 550px);overflow:visible}
 #p6 .section-heading{font-size:clamp(1.8rem,6.5vw,2.4rem);line-height:1.4}
 #p6 .comment-card{font-size:0.86rem}
 #p6 .comment-card .card-user{font-size:0.68rem}
@@ -229,7 +229,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 #p6 .comment-input-area input{font-size:0.8rem}
 #p6 .comment-input-area button{font-size:0.8rem}
 #p6 .scroll-hint-inline{
-  position:absolute;bottom:14px;left:0;right:0;text-align:center;z-index:10;
+  position:absolute;bottom:44px;left:0;right:0;text-align:center;z-index:10;
   font-size:1.15rem;
 }
 /* All inline hints — unified styling */
@@ -564,7 +564,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 .comment-input-area button:active{transform:scale(0.95);opacity:0.85}
 /* P6 layout override */
-#p6 .section-inner{justify-content:center}
+#p6 .section-inner{justify-content:flex-start;padding-top:25px}
 #p6 .comment-input-area{padding-bottom:12px}
 #p7 .section-inner{justify-content:flex-start;transform:translateY(-30px)}
 .comment-prompt{font-size:0.68rem;color:var(--text-faint);text-align:center;margin-top:12px;margin-bottom:6px}
@@ -1243,7 +1243,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
     </div></div>
     <p style="text-align:center;font-size:0.65rem;color:var(--text-faint);margin-top:4px">（来源：星球研究所微信公众号）</p>
     <div class="reveal reveal-d2"><p style="text-align:center;font-size:1.1rem;color:var(--teal-deep);margin-top:8px;font-weight:600">江水，从不停歇，<br>长江的故事，也没有写完，<br>下一个十年，等待我们共同书写。</p></div>
-    <span class="scroll-hint-inline">↓ 向下滑动 ↓</span>
+    <span class="scroll-hint-inline" style="position:relative;bottom:auto;margin-top:30px">↓ 向下滑动 ↓</span>
   </div>
 </section>
 
