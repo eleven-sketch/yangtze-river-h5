@@ -294,14 +294,6 @@ function resetAll(){
   document.getElementById('commentInput').value = ''
   // Reset P7 auto-trigger
   p7triggered = false; p7manual = false
-  p7observer = new IntersectionObserver(function(entries){
-    if(entries[0].isIntersecting && !p7triggered && !p7manual){
-      p7triggered = true
-      makePromise(true)
-      p7observer.disconnect()
-    }
-  },{threshold:0.2})
-  if(endingSrc) p7observer.observe(endingSrc)
   // Quick flip-back scroll animation
   const startY = window.scrollY, duration = 600, startT = performance.now()
   function flipBack(now){
@@ -500,7 +492,6 @@ var p7observer = new IntersectionObserver(function(entries){
   if(entries[0].isIntersecting && !p7triggered && !p7manual){
     p7triggered = true
     makePromise(true)
-    p7observer.disconnect()
   }
 },{threshold:0.2})
 var endingSrc = document.getElementById('endingSource')
