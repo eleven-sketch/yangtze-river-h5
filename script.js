@@ -156,7 +156,8 @@ function updateReveals(){
     const p = Math.max(0, Math.min(1, (vh*0.95 - rect.top) / (vh*0.5)))
     const delay = parseFloat(el.dataset.delay || '0')
     const fp = Math.max(0, Math.min(1, (p - delay) / (1 - delay)))
-    el.style.opacity = fp;el.style.transform = `translateY(${(1-fp)*40}px)`
+    var t = (1-fp)*40
+    if(el._fp !== fp){ el._fp = fp; el.style.opacity = fp; el.style.transform = 'translate3d(0,'+t.toFixed(1)+'px,0)' }
     if(fp>0.5 && !el._loaded){el._loaded=true;el.querySelectorAll('img[data-src]').forEach(function(img){img.src=img.getAttribute('data-src')+'?t='+Date.now()})}
   }
 }
@@ -233,10 +234,10 @@ window.addEventListener('scroll',()=>{
     requestAnimationFrame(()=>{
       checkStage()
       ++_frameSkip
-      // Batch all updates every 3rd frame for smooth 20fps feel
       if(_frameSkip%3===0){
-        updateReveals();updateCards();updateDots();updatePopups();updateStage()
+        updateReveals();updateCards();updateDots();updatePopups()
       }
+      if(_frameSkip%2===0){ updateStage() }
       ticking = false
     })
     ticking = true
