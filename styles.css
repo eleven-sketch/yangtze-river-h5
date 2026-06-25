@@ -495,7 +495,7 @@ section.section-tall .section-inner{position:relative;min-height:auto;padding-bo
 }
 .stage-item{
   opacity:0;transform:translateY(40px);
-  transition:opacity 3s ease-out,transform 3s ease-out;
+  transition:opacity 0.8s ease-out,transform 0.8s ease-out;
 }
 .stage-item.in{opacity:1;transform:translateY(0)}
 .comment-card{padding:6px 12px;border-radius:6px;font-size:0.8rem;line-height:1.4}
